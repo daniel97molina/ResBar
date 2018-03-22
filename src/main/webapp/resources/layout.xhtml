@@ -42,7 +42,8 @@ and open the template in the editor.
             </div>
         </nav>
 
-        <div class="col-sm-12 col-md-11 mx-auto bg-light">
+        <div class="col-sm-12 col-lg-11 mx-auto bg-light p-0">
+            <div class="bg-navbar p-1"> <h3 class="text-center"><ui:insert name="titulo"></ui:insert></h3></div>
             <ui:insert name="body">Sin contenido</ui:insert>
         </div>
          <h:outputScript name="js/bootstrap.min.js" />
