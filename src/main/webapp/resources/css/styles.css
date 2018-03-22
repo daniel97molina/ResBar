@@ -1,6 +1,11 @@
 .bg-navbar{
     background-color: #eef3f9;
 }
+.list-group-item-action:hover{
+    cursor: pointer;
+    background-color: #4A97F3 !important;
+    color:#fff !important;
+}
 .lista-categoria{
     overflow: hidden;
 }
