@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="resources/layout.xhtml">
+        <ui:define name="titulo">Administrar Menu</ui:define>
+        <ui:define name="body">
+
+            <p:layout style="width:auto;height:100%;max-height:530px;" styleClass="mt-3 mx-4">
+                <p:layoutUnit position="west" styleClass="text-center" size="auto" maxSize="250">
+                    <p:commandButton value="Bebidas" styleClass="w-75 size25 mx-2 my-3 ui-priority-primary" />
+                    <p:commandButton value="Económicos" styleClass="w-75 mx-2 size25 my-3 ui-priority-primary" />
+                    <p:commandButton value="Ensaladas" styleClass="w-75 mx-2 my-3 size25 ui-priority-primary" />
+                    <p:commandButton value="Mariscos" styleClass="w-75 mx-2 my-3 size25 ui-priority-primary" />
+                    <p:commandButton value="Carnes" styleClass="w-75 mx-2 my-3 size25 ui-priority-primary" />
+                    <p:commandButton value="Aves" styleClass="w-75 mx-2 my-3 size25 ui-priority-primary" />
+                    <p:commandButton value="Entradas" styleClass="w-75 mx-2 my-3 size25 ui-priority-primary" />
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <p:dataTable var="car" value="">
+                        <p:column headerText="Id">
+                            <h:outputText value="001" />
+                        </p:column>
+
+                        <p:column headerText="Nombre">
+                            <h:outputText value="Nombre del platillo" />
+                        </p:column>
+
+                        <p:column headerText="Descripcion">
+                            <h:outputText value="Ingredientes necesarios" />
+                        </p:column>
+
+                        <p:column headerText="Tiempo de espera">
+                            <h:outputText value="Tiempo aproximado de cocción y/o preparación" />
+                        </p:column>
+                        <p:column headerText="Precio">
+                            <h:outputText value="$25" />
+                        </p:column>
+                    </p:dataTable>
+                </p:layoutUnit>
+
+            </p:layout>
+            <p:toolbar styleClass="mt-4 mx-4 border-0 "> 
+                <f:facet name="left">
+                    <p:commandButton value="Nuevo" styleClass="size20" icon="" type="button"/>
+                </f:facet>
+            </p:toolbar>
+
+        </ui:define>
+    </ui:composition>
+</html>
+
