@@ -9,14 +9,15 @@
     <ui:composition template="resources/layout.xhtml">
         <ui:define name="titulo">Inicio</ui:define>
         <ui:define name="body">
-            <div class="container">
-                <div >
-                    <p:button  value="Ingresar Orden" icon="ui-icon-star">
-                        
-                    </p:button>
 
-                </div>
+            <h:outputStylesheet name="css/styles.css" />
 
+            <div class="container" id="contenedorInicio">
+                <p:button  value="Ingresar Orden" class="btnInicio" href="IngresarOrden.jsf" id="btnIngresarOrden"></p:button>
+                <p:button  value="Modificar Orden" class="btnInicio" href="" id="btnModificarOrden"></p:button>
+                <p:button  value="Registrar Venta" class="btnInicio" href="" id="btnRegistrarVenta"></p:button>
+                <p:button  value="Estadísticas" class="btnInicio" href="" id="btnEstadisticas"></p:button>
+                <p:button  value="Administrar menú" class="btnInicio" href="" id="btnAministrarMenu"></p:button>
             </div>
         </ui:define>
     </ui:composition>
