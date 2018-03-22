@@ -8,49 +8,77 @@
     <ui:composition template="resources/layout.xhtml">
         <ui:define name="titulo">Administrar Menu</ui:define>
         <ui:define name="body">
+                        <div class="container-fluid">
 
-            <p:layout style="width:auto;height:100%;max-height:530px;" styleClass="mt-3 mx-4">
-                <p:layoutUnit position="west" styleClass="text-center" size="auto" maxSize="250">
-                    <p:commandButton value="Bebidas" styleClass="w-75 size25 mx-2 my-3 ui-priority-primary" />
-                    <p:commandButton value="Económicos" styleClass="w-75 mx-2 size25 my-3 ui-priority-primary" />
-                    <p:commandButton value="Ensaladas" styleClass="w-75 mx-2 my-3 size25 ui-priority-primary" />
-                    <p:commandButton value="Mariscos" styleClass="w-75 mx-2 my-3 size25 ui-priority-primary" />
-                    <p:commandButton value="Carnes" styleClass="w-75 mx-2 my-3 size25 ui-priority-primary" />
-                    <p:commandButton value="Aves" styleClass="w-75 mx-2 my-3 size25 ui-priority-primary" />
-                    <p:commandButton value="Entradas" styleClass="w-75 mx-2 my-3 size25 ui-priority-primary" />
+             <div class="row">
+                    <div class="col-2 list-group lista-categoria pr-0">
+                        <a class="list-group-item list-group-item-secondary ">Categoría:</a>
+                        <a class="list-group-item list-group-item-action">Bebidas</a>
+                        <a class="list-group-item list-group-item-action">Entradas</a>
+                        <a class="list-group-item list-group-item-action">Postres</a>
+                        <a class="list-group-item list-group-item-action">Bebidas</a>
+                        <a class="list-group-item list-group-item-action">Entradas</a>
+                    </div>
 
-                </p:layoutUnit>
-
-                <p:layoutUnit position="center">
-                    <p:dataTable var="car" value="">
-                        <p:column headerText="Id">
-                            <h:outputText value="001" />
-                        </p:column>
-
-                        <p:column headerText="Nombre">
-                            <h:outputText value="Nombre del platillo" />
-                        </p:column>
-
-                        <p:column headerText="Descripcion">
-                            <h:outputText value="Ingredientes necesarios" />
-                        </p:column>
-
-                        <p:column headerText="Tiempo de espera">
-                            <h:outputText value="Tiempo aproximado de cocción y/o preparación" />
-                        </p:column>
-                        <p:column headerText="Precio">
-                            <h:outputText value="$25" />
-                        </p:column>
-                    </p:dataTable>
-                </p:layoutUnit>
-
-            </p:layout>
-            <p:toolbar styleClass="mt-4 mx-4 border-0 "> 
-                <f:facet name="left">
-                    <p:commandButton value="Nuevo" styleClass="size20" icon="" type="button"/>
-                </f:facet>
-            </p:toolbar>
-
+                    <div class="col-10 pl-3 pr-0">
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead class="table-dark">
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                            </thead>
+                            <tr>
+                                <td>1</td>
+                                <td>Bebida 1</td>
+                                <td>Descripcion</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Bebida 1</td>
+                                <td>Descripcion</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Bebida 1</td>
+                                <td>Descripcion</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Bebida 1</td>
+                                <td>Descripcion</td>
+                                <td>2.3</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Bebida 1</td>
+                                <td>Descripcion</td>
+                                <td>2.3</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Bebida 1</td>
+                                <td>Descripcion</td>
+                                <td>2.3</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Bebida 1</td>
+                                <td>Descripcion</td>
+                                <td>2.3</td>
+                            </tr>
+                        </table>                   
+                    </div>
+                    <p:toolbar styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
+                        <f:facet name="left" >
+                            <p:button value="Nuevo platillo" styleClass="btn btn-primary "></p:button>
+                        </f:facet>
+                    </p:toolbar>
+                </div>
+                        </div>
         </ui:define>
     </ui:composition>
 </html>
