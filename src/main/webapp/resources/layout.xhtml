@@ -14,50 +14,40 @@ and open the template in the editor.
         <title>
             <ui:insert name="titulo">ResBar</ui:insert>
         </title>    
-        
-        <h:outputStylesheet name="css/styles.css" />
-        <h:outputStylesheet name="css/bootstrap.min.css" />
+
+
     </h:head>
     <h:body>
+
+        <h:outputStylesheet name="css/styles.css" />
+        <h:outputStylesheet name="css/bootstrap.min.css" />
         
-        <h:form>
-            <p:menubar styleClass="mt-3 mx-4" >
-            <p:submenu label="File" icon="ui-icon-document">
-                <p:submenu label="New" icon="ui-icon-contact">
-                    <p:menuitem value="Project" url="#" />
-                    <p:menuitem value="Other" url="#" />
-                </p:submenu>
-                <p:menuitem value="Open" url="#" />
-                <p:separator />
-                <p:menuitem value="Quit" url="#" />
-            </p:submenu>
+        
+        <nav class="navbar navbar-expand-lg navbar-light bg-navbar mb-4">
+            <p:button value="Home" icon="ui-icon-home" class="btn btn-outline-primary"></p:button>
+            <a class="navbar-brand ml-4" href="#">ResBar0.1</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <p:submenu label="Edit" icon="ui-icon-pencil">
-                <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />
-                <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
-            </p:submenu>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mr-4">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Usuario <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
 
-            <p:submenu label="Help" icon="ui-icon-help">
-                <p:menuitem value="Contents" url="#" />
-                <p:submenu label="Search" icon="ui-icon-search">
-                    <p:submenu label="Text">
-                        <p:menuitem value="Workspace" url="#" />
-                    </p:submenu>
-                    <p:menuitem value="File" url="#" />
-                </p:submenu>
-            </p:submenu>
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Cerrar Sesión</button>
 
+            </div>
+        </nav>
 
-            <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
-
-            <f:facet name="options">
-                <p:inputText style="margin-right:10px" placeholder="Search"/>
-                <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
-            </f:facet>
-        </p:menubar>
-
-        </h:form>
-
-        <ui:insert name="body">Sin contenido</ui:insert>
+        <div class="col-sm-12 col-lg-11 mx-auto bg-light p-0 mb-5">
+            <div class="p-2 mb-1"> <h4 class="text-center mt-3 mb-0"><ui:insert name="titulo"></ui:insert></h4></div>
+            <div class="p-3">
+                <ui:insert name="body">Sin contenido</ui:insert>
+            </div>
+        </div>
+         <h:outputScript name="js/bootstrap.min.js" />
     </h:body>
 </html>
