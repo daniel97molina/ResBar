@@ -26,15 +26,13 @@
 .btnInicio, .btnEstadisticas{
     height: 130px ; 
     width: 180px;
-    margin-top: 20px;
-    /*margin-right: 20px;*/
+    margin-top: 10px;
     box-shadow:  1px 1px 15px 1px #ccc;
     color: teal;
     font-weight: bold;
     border: 1px solid #ccc;
     font-size: 20px;
     border-radius: 10px;
-    display: inline-block;
 }
 #btnIngresarOrden, #btnEstadisticaDiaria{
     margin-right: 25%;
@@ -45,7 +43,7 @@
 }
 #btnRegistrarVenta, #btnCierreCaja{
     display: block;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 10px;
     margin-left: 42%;
     background-color: lightskyblue;
