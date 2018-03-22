@@ -22,10 +22,16 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-    <groupId>org.primefaces</groupId>
-    <artifactId>primefaces</artifactId>
-    <version>5.3</version>
-</dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.adminfaces</groupId>
+            <artifactId>admin-theme</artifactId>
+            <version>1.0.0-RC12</version>
+            <!--<classifier>dev</classifier> uncompressed theme.css-->
+        </dependency>
     </dependencies>
 
     <build>
