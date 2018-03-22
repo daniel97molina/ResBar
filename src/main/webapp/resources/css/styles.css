@@ -1,35 +1,35 @@
 .bg-navbar{
     background-color: #eef3f9;
 }
-#contenedorInicio{
+#contenedorInicio, #contenedorEstadisticas{
     text-align: center;
+    padding-bottom: 20px;
 }
-.btnInicio{
+.btnInicio, .btnEstadisticas{
     height: 130px ; 
     width: 180px;
     margin-top: 20px;
-    margin-right: 20px;
+    /*margin-right: 20px;*/
     box-shadow:  1px 1px 15px 1px #ccc;
     color: teal;
     font-weight: bold;
-    /*border: 0.5px solid rgba(165,227,222,0.7);*/
     border: 1px solid #ccc;
     font-size: 20px;
     border-radius: 10px;
+    display: inline-block;
 }
-#btnIngresarOrden{
+#btnIngresarOrden, #btnEstadisticaDiaria{
     margin-right: 25%;
     background-color: lightcoral;
 }
-#btnModificarOrden{
+#btnModificarOrden, #btnResumen{
     background-color: lightsalmon;
-
 }
-#btnRegistrarVenta{
+#btnRegistrarVenta, #btnCierreCaja{
     display: block;
     margin-top: 30px;
     margin-bottom: 10px;
-    margin-left: 40%;
+    margin-left: 42%;
     background-color: lightskyblue;
 }
 #btnEstadisticas{
@@ -41,7 +41,6 @@
 }
 .btnInicio:hover{
     color: whitesmoke;
-    /*background-color: lightblue;*/
     border: 1px solid rgba(165,227,222,0.7);
     transform: scale(1.05);
     cursor: pointer;
