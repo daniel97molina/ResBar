@@ -16,11 +16,13 @@ and open the template in the editor.
     <h:body>
         
         <h:outputStylesheet name="css/bootstrap.min.css" />
+
         <h:outputStylesheet name="css/styles.css" />
         
-        
+
         <nav class="navbar navbar-expand-lg navbar-light bg-navbar mb-4">
-            <p:button value="Home" icon="ui-icon-home" class="btn btn-outline-primary"></p:button>
+
+            <a href="/ResBar"><p:button value="Home" icon="ui-icon-home" class="btn btn-outline-primary"></p:button></a>
             <a class="navbar-brand ml-4" href="#">ResBar0.1</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -44,6 +46,6 @@ and open the template in the editor.
                 <ui:insert name="body">Sin contenido</ui:insert>
             </div>
         </div>
-         <h:outputScript name="js/bootstrap.min.js" />
+        <h:outputScript name="js/bootstrap.min.js" />
     </h:body>
 </html>
