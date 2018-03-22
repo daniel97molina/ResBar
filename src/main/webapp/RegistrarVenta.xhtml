@@ -6,10 +6,10 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="resources/layout.xhtml">
-        <ui:define name="titulo">ResBar 0.1</ui:define>
+        <ui:define name="titulo">Registrar Venta</ui:define>
         <ui:define name="body" class="mx-3"> 
             <p:panel id="basic"  style="margin-bottom:20px">
-            <center> <p:outputLabel value="Registar Venta"/> </center>  
+<!--            <center> <p:outputLabel value="Registar Venta"/> </center>  -->
             <table class="table table-striped table-hover" border="2">
                 <thead class="table-dark">
                     <th>ID Cuenta</th>
@@ -67,15 +67,14 @@
 
                 </tr>
             </table>
-            <p:panelGrid columns="2">
-                <p:selectOneMenu id="TipoPago" effect="fold" >
+            <div>
+                <p:selectOneMenu id="TipoPago" effect="fold" class="align-middle" >
                     <f:selectItem itemLabel="Efectivo" itemValue=""  />
                     <f:selectItem itemLabel="Otra forma de pago" itemValue="" />
 
                 </p:selectOneMenu>
-                <p:commandButton value="Efectuar cobro" image="ui-icon-cart"/>
-
-            </p:panelGrid>
+                <p:commandButton value="Efectuar cobro" image="ui-icon-cart" styleClass="btn btn-primary align-middle ml-3"/>
+            </div>
             </p:panel>
         </ui:define>
     </ui:composition>
