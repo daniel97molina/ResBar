@@ -1,1 +1,4 @@
-target/
+target/*
+target
+*.war
+*.jar
