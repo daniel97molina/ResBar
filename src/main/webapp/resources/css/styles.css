@@ -35,48 +35,25 @@ navbar-brand{
     background: #007bff!important;
 }
 
-/*Para inicio y estadisticas*/
-#contenedorInicio, #contenedorEstadisticas{
+/*Para modalAgregarProductos*/
+#idToolbar{
+    background-color: white; 
+    border-color: white;
+}
+.spinner{
     text-align: center;
-    padding-bottom: 20px;
 }
-.btnInicio, .btnEstadisticas{
-    height: 130px ; 
-    width: 180px;
-    margin-top: 10px;
-    box-shadow:  1px 1px 15px 1px #ccc;
-    color: teal;
-    font-weight: bold;
-    border: 1px solid #ccc;
-    font-size: 20px;
-    border-radius: 10px;
+.spinner button, .spinner label {
+    margin-right: 15px;
+    height: 30px;
+    padding-top: 0px;
 }
-#btnIngresarOrden, #btnEstadisticaDiaria{
-    margin-right: 25%;
-    background-color: lightcoral;
+.divSearch{
+    text-align: center;
+    margin-bottom: 20px;
 }
-#btnModificarOrden, #btnResumen{
-    background-color: lightsalmon;
+.ui-widget-overlay{
+    background: #032b42;
+    opacity: 0.6;
 }
-#btnRegistrarVenta, #btnCierreCaja{
-    display: block;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    margin-left: 42%;
-    background-color: lightskyblue;
-}
-#btnEstadisticas{
-    margin-right: 25%;
-    background-color: royalblue;
-}
-#btnAministrarMenu{
-    background-color: lightgreen;
-}
-.btnInicio:hover{
-    color: whitesmoke;
-    border: 1px solid rgba(165,227,222,0.7);
-    transform: scale(1.05);
-    cursor: pointer;
-    opacity: 50%;
 
-}
