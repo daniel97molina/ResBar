@@ -14,40 +14,48 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    
+
 
                     <div class="col-4">
-                    <table class="tabla-datos">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Mesa:
-                                </td>
-                                <td>
-                                    <p:inputText styleClass="form-control"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Mesero:
-                                </td>
-                                <td>
-                                    <p:inputText styleClass="form-control"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Cliente:
-                                </td>
-                                <td>
-                                    <p:inputText styleClass="form-control"/>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        <table class="tabla-datos">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Mesa:
+                                    </td>
+                                    <td>
+                                        <p:inputText styleClass="form-control"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Mesero:
+                                    </td>
+                                    <td>
+                                        <p:inputText styleClass="form-control"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Cliente:
+                                    </td>
+                                    <td>
+                                        <p:inputText styleClass="form-control"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Fecha:
+                                    </td>
+                                    <td>
+                                        2/4/2018 3:50 PM
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    
+
                     <table class="table table-striped table-hover table-bordered col-8">
                         <thead class="table-dark">
                             <th>Producto</th>
@@ -57,9 +65,9 @@
                         <tr>
                             <td>Jugo de naranja</td>
                             <td>
-                                <div class="spinner">
+                                <div class="spinner" >
                                     <button class="btn btn-outline-info">-</button>
-                                    <label>2</label>
+                                    <label>0</label>
                                     <button class="btn btn-outline-info">+</button>
                                 </div>
                             </td>
@@ -120,92 +128,181 @@
                             </td>
                             <td class="icono align-middle"><img src="resources/images/delete.ico" alt="delete"/></td>
                         </tr>
-                        
+
                     </table>
 
-                    
-                    
-                    
+
+
+
                     <p:toolbar styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
                         <f:facet name="right" >
-                            <p:button icon="ui-icon-plus" value="Agregar" styleClass="ml-3 btn btn-success "></p:button>
+                            <p:commandButton icon="ui-icon-plus" value="Agregar" onclick="PF('dialogo').show();" styleClass="ml-3 btn btn-success "></p:commandButton>
                             <p:button icon="ui-icon-check" value="Confirmar" styleClass="ml-3 btn btn-primary "></p:button>
                             <p:button icon="ui-icon-close" value="Cancelar" styleClass="ml-3 btn btn-secondary "></p:button>
                         </f:facet>
-                        <f:facet name="left">
+                        <f:facet name="left" >
                             Total: $<p:inputText disabled="true" label="$12"></p:inputText>
                         </f:facet>
                     </p:toolbar>
                 </div>
             </div>
 
+            
+            
+            <p:dialog header="Agregar Productos" widgetVar="dialogo" modal="true" width="75%" height="480px">
+                
+                <div class="divSearch">
+                    <p:inputText></p:inputText>
+                    <button class="btn btn-info">Buscar</button>
+                </div>
+                
+                <div class="container-fluid">
 
-<!--            <div class="row">
-                <div class="col-2 list-group lista-categoria pr-0">
-                    <a class="list-group-item list-group-item-secondary ">Categoría:</a>
-                    <a class="list-group-item list-group-item-action">Bebidas</a>
-                    <a class="list-group-item list-group-item-action">Entradas</a>
-                    <a class="list-group-item list-group-item-action">Postres</a>
-                    <a class="list-group-item list-group-item-action">Bebidas</a>
-                    <a class="list-group-item list-group-item-action">Entradas</a>
+
+                    <div class="row">
+                        <div class="col-2 list-group lista-categoria pr-0">
+                            <a class="list-group-item list-group-item-secondary ">Categoría:</a>
+                            <a class="list-group-item list-group-item-action">Bebidas</a>
+                            <a class="list-group-item list-group-item-action">Entradas</a>
+                            <a class="list-group-item list-group-item-action">Postres</a>
+                            <a class="list-group-item list-group-item-action">Platlillos</a>
+                            <a class="list-group-item list-group-item-action">Bocas</a>
+                        </div>
+
+                        <div class="col-10 pl-3 pr-0">
+                            <table class="table table-striped table-hover table-bordered">
+                                <thead class="table-dark">
+                                    <th>Nombre</th>
+                                    <th class="text-center">Precio</th>
+                                    <th class="text-center">Cantidad</th>
+                                </thead>
+                                <tr>
+                                    <td>Cocacola</td>
+                                    <td class="text-center">$ 0.50</td>
+                                    <td>
+                                        <div class="spinner" >
+                                            <button class="btn btn-outline-info">-</button>
+                                            <label>0</label>
+                                            <button class="btn btn-outline-info">+</button>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                                <tr>
+                                    <td>Colachampan</td>
+                                    <td class="text-center">$ 0.50</td>
+                                    <td>
+                                        <div class="spinner" >
+                                            <button class="btn btn-outline-info">-</button>
+                                            <label>0</label>
+                                            <button  class="btn btn-outline-info">+</button>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                                <tr>
+                                    <td>Seven Up</td>
+                                    <td class="text-center">$ 0.75</td>
+                                    <td>
+                                        <div class="spinner" >
+                                            <button class="btn btn-outline-info">-</button>
+                                            <label>0</label>
+                                            <button class="btn btn-outline-info">+</button>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                                <tr>
+                                    <td>Café</td>
+                                    <td class="text-center">$ 0.25</td>
+                                    <td>
+                                        <div class="spinner" >
+                                            <button class="btn btn-outline-info">-</button>
+                                            <label>0</label>
+                                            <button  class="btn btn-outline-info">+</button>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                            </table>                   
+                        </div>
+                        <p:toolbar id="idToolbar" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
+                            <f:facet name="right" >
+                                <button class="btn btn-info">OK</button>
+                            </f:facet>
+                        </p:toolbar>
+                    </div>
                 </div>
 
-                <div class="col-10 pl-3 pr-0">
-                    <table class="table table-striped table-hover table-bordered">
-                        <thead class="table-dark">
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                        </thead>
-                        <tr>
-                            <td>1</td>
-                            <td>Bebida 1</td>
-                            <td>Descripcion</td>
-                            <td>3</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Bebida 1</td>
-                            <td>Descripcion</td>
-                            <td>4</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Bebida 1</td>
-                            <td>Descripcion</td>
-                            <td>5</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Bebida 1</td>
-                            <td>Descripcion</td>
-                            <td>2.3</td>
-                        </tr>
-                    </table>
-                        <p:dataTable var="car" value="#{dtScrollView.cars1}" styleClass="table table-striped" scrollable="true" scrollHeight="150">
-                        <p:column headerText="Id" footerText="Id">
-                            <h:outputText value="#{car.id}" />
-                        </p:column>
-                        <p:column headerText="Year" footerText="Year">
-                            <h:outputText value="#{car.year}" />
-                        </p:column>
-                        <p:column headerText="Brand" footerText="Brand">
-                            <h:outputText value="#{car.brand}" />
-                        </p:column>
-                        <p:column headerText="Color" footerText="Color">
-                            <h:outputText value="#{car.color}" />
-                        </p:column>
-                    </p:dataTable>
-                </div>
-                <p:toolbar styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
-                    <f:facet name="left" >
-                        Cantidad:
-                        <p:inputText styleClass="d-inline-block"></p:inputText>
-                        <p:button icon="ui-icon-check" value="Agregar" styleClass="ml-3 btn btn-primary "></p:button>
-                    </f:facet>
-                </p:toolbar>
-            </div>-->
+            </p:dialog>
+            
+            
+            
+            
+            
+
+            <!--            <div class="row">
+                            <div class="col-2 list-group lista-categoria pr-0">
+                                <a class="list-group-item list-group-item-secondary ">Categoría:</a>
+                                <a class="list-group-item list-group-item-action">Bebidas</a>
+                                <a class="list-group-item list-group-item-action">Entradas</a>
+                                <a class="list-group-item list-group-item-action">Postres</a>
+                                <a class="list-group-item list-group-item-action">Bebidas</a>
+                                <a class="list-group-item list-group-item-action">Entradas</a>
+                            </div>
+            
+                            <div class="col-10 pl-3 pr-0">
+                                <table class="table table-striped table-hover table-bordered">
+                                    <thead class="table-dark">
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Precio</th>
+                                    </thead>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Bebida 1</td>
+                                        <td>Descripcion</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Bebida 1</td>
+                                        <td>Descripcion</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Bebida 1</td>
+                                        <td>Descripcion</td>
+                                        <td>5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Bebida 1</td>
+                                        <td>Descripcion</td>
+                                        <td>2.3</td>
+                                    </tr>
+                                </table>
+                                    <p:dataTable var="car" value="#{dtScrollView.cars1}" styleClass="table table-striped" scrollable="true" scrollHeight="150">
+                                    <p:column headerText="Id" footerText="Id">
+                                        <h:outputText value="#{car.id}" />
+                                    </p:column>
+                                    <p:column headerText="Year" footerText="Year">
+                                        <h:outputText value="#{car.year}" />
+                                    </p:column>
+                                    <p:column headerText="Brand" footerText="Brand">
+                                        <h:outputText value="#{car.brand}" />
+                                    </p:column>
+                                    <p:column headerText="Color" footerText="Color">
+                                        <h:outputText value="#{car.color}" />
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                            <p:toolbar styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
+                                <f:facet name="left" >
+                                    Cantidad:
+                                    <p:inputText styleClass="d-inline-block"></p:inputText>
+                                    <p:button icon="ui-icon-check" value="Agregar" styleClass="ml-3 btn btn-primary "></p:button>
+                                </f:facet>
+                            </p:toolbar>
+                        </div>-->
 
 
         </ui:define>

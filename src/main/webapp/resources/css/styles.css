@@ -43,42 +43,28 @@ navbar-brand{
     background: #007bff!important;
 }
 
-/*Para inicio y estadisticas*/
-#contenedorInicio, #contenedorEstadisticas{
+/*Para modalAgregarProductos*/
+#idToolbar{
+    background-color: white; 
+    border-color: white;
+}
+.spinner{
     text-align: center;
-    padding-bottom: 20px;
 }
-.btnInicio, .btnEstadisticas{
-    height: 130px ; 
-    width: 180px;
-    margin-top: 10px;
-    box-shadow:  1px 1px 15px 1px #ccc;
-    color: teal;
-    font-weight: bold;
-    border: 1px solid #ccc;
-    font-size: 20px;
-    border-radius: 10px;
+.spinner button, .spinner label {
+    vertical-align: middle;
+    margin-right: 15px;
+    height: 30px;
+    padding-top: 0px !important;
+    margin-bottom: 0;
 }
-#btnIngresarOrden, #btnEstadisticaDiaria{
-    margin-right: 25%;
-    background-color: lightcoral;
+.divSearch{
+    text-align: center;
+    margin-bottom: 20px;
 }
-#btnModificarOrden, #btnResumen{
-    background-color: lightsalmon;
-}
-#btnRegistrarVenta, #btnCierreCaja{
-    display: block;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    margin-left: 42%;
-    background-color: lightskyblue;
-}
-#btnEstadisticas{
-    margin-right: 25%;
-    background-color: royalblue;
-}
-#btnAministrarMenu{
-    background-color: lightgreen;
+.ui-widget-overlay{
+    background: #032b42;
+    opacity: 0.6;
 }
 .btnInicio:hover{
     color: whitesmoke;
@@ -115,4 +101,21 @@ navbar-brand{
 .icono{
     width: 34px;
     padding: 0 !important;
+}
+body{
+    height: 100%;
+    background-image: url("#{resource['images/:bar-background.jpg']}");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+html{
+    height: 100%;
+}
+.contenedor{
+    background-color: rgba(255,255,255,0.8);
+    box-shadow: 0px 0px 20px #000 ;
+}
+.table{
+    background-color: #fff;
 }
