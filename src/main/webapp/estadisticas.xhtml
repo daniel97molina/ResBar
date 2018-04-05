@@ -7,8 +7,9 @@
     <ui:composition template="resources/layout.xhtml">
         <ui:define name="titulo">Estadisticas</ui:define>
         <ui:define name="body">
-            <p:chart type="line" style="height:300px;"/>
+            <p:chart type="line" model="#{chartView.model}" style="height: 500px;"/>
         </ui:define>
     </ui:composition>
+
 </html>
 
