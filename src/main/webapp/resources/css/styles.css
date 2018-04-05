@@ -211,14 +211,15 @@ html{
     width: 100%;
     background: url("#{resource['images:bar-background.jpg']}") fixed center center no-repeat;
     background-size: cover;
-    filter: contrast(50%) brightness(30%) grayscale(30%);
+    filter: contrast(60%) brightness(30%) grayscale(30%);
 }
 .ui-dialog-titlebar{
+    margin-bottom: 10px;
     color: white;
-   background: #436577;
-background: -moz-linear-gradient(left, #436577 17%, #e5c372 100%);
-background: -webkit-linear-gradient(left, #436577 17%,#e5c372 100%);
-background: linear-gradient(to right, #436577 17%,#e5c372 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#436577', endColorstr='#e5c372',GradientType=1 );
+   background: #4e83b2;
+background: -moz-linear-gradient(left, #4e83b2 0%, #cecb6f 100%);
+background: -webkit-linear-gradient(left, #4e83b2 0%,#cecb6f 100%);
+background: linear-gradient(to right, #4e83b2 0%,#cecb6f 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e83b2', endColorstr='#cecb6f',GradientType=1 );
 }
 
