@@ -20,24 +20,26 @@ and open the template in the editor.
 
         <h:outputStylesheet name="css/styles.css" />
 
+        <div class="background"/>
 
-        <div class="mx-auto text-center col-sm-12 col-lg-11">   
+        <div class="mx-auto mb-3 text-center col-12 header">
             <div class="headerButton d-inline-block"  onclick="location.href='Ordenes.jsf'">
-                <img src="resources/images/home-icon.png" alt="No se encontro la imagen en resources/images"/>
+                <img src="resources/images/icon-home.png" alt="No se encontro la imagen en resources/images"/>
+                <h5 class="d-inline-block">Inicio</h5>
             </div>
-            <div class="headerButton d-inline-block" onclick="location.href='estadisticas.jsf'">
-                <img class="icon" src="resources/images/estadistica-icon.png" alt="No se encontro la imagen en resources/images"/>
-
+            <div class="headerButton bg-2 d-inline-block" onclick="location.href='estadisticas.jsf'">
+                <img class="icon" src="resources/images/icon-estadistica.png" alt="No se encontro la imagen en resources/images"/>
+                <h5 class="d-inline-block">Estadísticas</h5>
             </div>
-            <div class="headerButton d-inline-block" style="background-color: #D484B3;" onclick="location.href='manejoMenu.jsf'">
-                <img src="resources/images/menu-icon.png" alt="No se encontro la imagen en resources/images"/>
-
+            <div class="headerButton d-inline-block bg-3" onclick="location.href='manejoMenu.jsf'">
+                <img src="resources/images/icon-menu.png" alt="No se encontro la imagen en resources/images"/>
+                <h5 class="d-inline-block">Menú</h5>
             </div>
         </div>
 
 
-        <div class="col-sm-12 col-lg-11 mx-auto bg-light p-0">
-            <div class="pt-2"> <h3 class="text-center"><ui:insert name="titulo"></ui:insert></h3></div>
+        <div class="col-sm-12 col-lg-11 mx-auto mb-3 p-0 contenedor">
+            <div class="pb-1 titulo"> <h3 class="text-center"><ui:insert name="titulo"></ui:insert></h3></div>
 
             <div class="px-3 py-2">
                 <ui:insert name="body">Sin contenido</ui:insert>

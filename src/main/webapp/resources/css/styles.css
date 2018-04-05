@@ -1,29 +1,64 @@
 
 .headerButton{
-    width: 5.5em;
-    height: 5.5em;
-    border-radius: 50%;
-    margin: 0.5em 6em;
-    background-color: greenyellow;
+    width: 230px;
+    height: 50px;
+    border-radius: 20px;
+    margin: 8px 2%;
+    background-color: #4CB5F5;
     border:none;
+    color: #fff;
+    text-align: left;
+}
+.bg-2{
+    background-color: #fda322;
+}
+.bg-3{
+    background-color: #15f28e;
+}
+.headerButton  img{
+    border-radius: 50%;
+    box-shadow: rgba(0,0,0,0.2) 0 0 10px;
+    width: 50px;
+    height: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
     
-    
 }
-.headerButton  img:not(.icon){
-    width: 85%;
-    height: 85%;
-      
+.header h5{
+    position: absolute;
+    margin-top: 14px;
+    font-weight: normal;
 }
-.icon{
-    width: 100%;
-    height: 100%;
-}
+/*.icon{
+    margin-left: 0;
+    width: 50px;
+    height: 50px;
+}*/
 .headerButton:hover{
     cursor: pointer;
+     -webkit-filter: brightness(120%); /* Safari 6.0 - 9.0 */
+    filter: brightness(120%);
+    transform: scale(1.10,1.10);
+}
+.header{
+    box-shadow: rgba(0,0,0,0.2) 0 0 15px ;
+    background-color: rgba(233,233,233,0.9);
+    
 }
 
-h3.text-center{
+/*h3.text-center{
     background-color: #64BBCD;
+    color: #fff;
+}*/
+
+.titulo{
+    margin-bottom: 12px;
+    padding-top: 13px;
+    background: #1e5799;
+background: -moz-linear-gradient(left, #1e5799 0%, #e8bd53 51%, #6fce4a 100%);
+background: -webkit-linear-gradient(left, #1e5799 0%,#e8bd53 51%,#6fce4a 100%);
+background: linear-gradient(to right, #1e5799 0%,#e8bd53 51%,#6fce4a 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#6fce4a',GradientType=1 );
     color: #fff;
 }
 
@@ -108,8 +143,9 @@ navbar-brand{
     margin-bottom: 20px;
 }
 .ui-widget-overlay{
-    background: #032b42;
-    opacity: 0.6;
+    
+    background: #43505e;
+    opacity: 0.85;
 }
 .btnInicio:hover{
     color: whitesmoke;
@@ -142,6 +178,7 @@ navbar-brand{
     margin-left: 5px;
     width: 24px;
     height: 24px;
+    cursor: pointer;
 }
 .icono{
     width: 34px;
@@ -149,17 +186,39 @@ navbar-brand{
 }
 body{
     height: 100%;
-    background: url("#{resource['images:bar-background.jpg']}") fixed center center no-repeat;
-    background-size: cover;
+    /*background: url("#{resource['images:bar-background.jpg']}") fixed center center no-repeat;*/
+    /*background-size: cover;*/
+    /*font-family: BlinkMacSystemFont, "Segoe UI","Roboto",  "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";*/
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    
 }
 
 html{
     height: 100%;
 }
 .contenedor{
-    background-color: rgba(255,255,255,0.8);
-    box-shadow: 0px 0px 20px #000 ;
+    background-color: rgba(255,255,255,0.9);
+    box-shadow: 0px 0px 30px rgba(0,0,0,0.5) ;
 }
 .table{
     background-color: #fff;
 }
+
+.background{
+    position: fixed;
+    z-index: -1000;
+    height: 100%;
+    width: 100%;
+    background: url("#{resource['images:bar-background.jpg']}") fixed center center no-repeat;
+    background-size: cover;
+    filter: contrast(50%) brightness(30%) grayscale(30%);
+}
+.ui-dialog-titlebar{
+    color: white;
+   background: #436577;
+background: -moz-linear-gradient(left, #436577 17%, #e5c372 100%);
+background: -webkit-linear-gradient(left, #436577 17%,#e5c372 100%);
+background: linear-gradient(to right, #436577 17%,#e5c372 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#436577', endColorstr='#e5c372',GradientType=1 );
+}
+
