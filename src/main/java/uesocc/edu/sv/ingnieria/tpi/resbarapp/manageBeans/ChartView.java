@@ -40,7 +40,7 @@ public class ChartView implements Serializable{
     private void createModels(){
         Axis yAxis;
         model=initModel();
-        model.setTitle("Ventas dede el 2010");
+        model.setTitle("Ventas en el mes seleccionado");
         model.setLegendPosition("e");
         model.setShowPointLabels(true);
         model.getAxes().put(AxisType.X, new CategoryAxis("Años"));
@@ -49,20 +49,42 @@ public class ChartView implements Serializable{
         yAxis.setMin(0);
         yAxis.setMax(10000);
     }
-    
+
     private LineChartModel initModel(){
         LineChartModel modelo = new LineChartModel();
         ChartSeries ventas = new ChartSeries();
         ventas.setLabel("Ventas");
-        ventas.set("2010", 2000);
-        ventas.set("2011", 4000);
-        ventas.set("2012", 3000);
-        ventas.set("2013", 1000);
-        ventas.set("2014", 7000);
-        ventas.set("2015", 2000);
-        ventas.set("2016", 4000);
-        ventas.set("2017", 5000);
-        ventas.set("2018", 1000);
+        ventas.set("1", 2000);
+        ventas.set("2", 4000);
+        ventas.set("2", 3000);
+        ventas.set("3", 1000);
+        ventas.set("4", 7000);
+        ventas.set("5", 2000);
+        ventas.set("6", 4000);
+        ventas.set("7", 5000);
+        ventas.set("8", 3400);
+        ventas.set("9", 5600);
+        ventas.set("10", 7700);
+        ventas.set("11", 4500);
+        ventas.set("12", 3000);
+        ventas.set("13", 2300);
+        ventas.set("14", 3400);
+        ventas.set("15", 5600);
+        ventas.set("16", 4503);
+        ventas.set("17", 4400);
+        ventas.set("18", 5400);
+        ventas.set("19", 2300);
+        ventas.set("20", 4560);
+        ventas.set("21", 3450);
+        ventas.set("22", 3780);
+        ventas.set("23", 2330);
+        ventas.set("24", 3000);
+        ventas.set("25", 5000);
+        ventas.set("26", 7000);
+        ventas.set("27", 8000);
+        ventas.set("28", 9000);
+        ventas.set("29", 1000);
+        ventas.set("30", 1000);
         
         modelo.addSeries(ventas);
         

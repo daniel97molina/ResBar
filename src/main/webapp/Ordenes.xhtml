@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="resources/layout.xhtml">
-        <ui:define name="titulo">Ordenes</ui:define>
+        <ui:define name="titulo">Órdenes</ui:define>
         <ui:define name="body" class="mx-3"> 
             <div id="basic">
                 <div class="divSearch">
@@ -76,15 +76,99 @@
                         <p:outputLabel value="Nombre Cliente: "/> <p:outputLabel value="Alexander "/><br></br>
                         <p:outputLabel value="Monto: "/> <p:outputLabel value=" $44.50 "/>
                         <p:panel  >
-                            <p:button value="Agregar productos"/>
+                            <p:commandButton value="Agregar productos" onclick="PF('dialogo').show()"/>
                             <p:commandButton value="Imprimir cuenta"/>
                             <p:commandButton value="Modificar cuenta"/>
                             <p:commandButton value="Cobrar" image="ui-icon-cart"/>
 
                         </p:panel>
                     </p:dialog> 
+                    
                     <p:commandButton style="font-size: 30" value="+" onclick="location.href='IngresarOrden.jsf'" styleClass="btn btn-primary align-middle ml-3"/>
-                    <p:commandButton style="font-size: 30" value="-"  styleClass="btn btn-primary align-middle ml-3"/>
+                    
+                    <p:dialog header="Agregar Productos" widgetVar="dialogo"  modal="true" width="75%" height="480px">
+
+                <div class="divSearch">
+                    <p:inputText></p:inputText>
+                    <button class="btn btn-info">Buscar</button>
+                </div>
+
+                <div class="container-fluid">
+
+
+                    <div class="row">
+                        <div class="col-2 list-group lista-categoria pr-0">
+                            <a class="list-group-item list-group-item-secondary ">Categoría:</a>
+                            <a class="list-group-item list-group-item-action">Bebidas</a>
+                            <a class="list-group-item list-group-item-action">Entradas</a>
+                            <a class="list-group-item list-group-item-action">Postres</a>
+                            <a class="list-group-item list-group-item-action">Platlillos</a>
+                            <a class="list-group-item list-group-item-action">Bocas</a>
+                        </div>
+
+                        <div class="col-10 pl-3 pr-0">
+                            <table class="table table-striped table-hover table-bordered">
+                                <thead class="table-dark">
+                                    <th>Nombre</th>
+                                    <th class="text-center">Precio</th>
+                                    <th class="text-center">Cantidad</th>
+                                </thead>
+                                <tr>
+                                    <td>Cocacola</td>
+                                    <td class="text-center">$ 0.50</td>
+                                    <td>
+                                        <div class="spinner" >
+                                            <button class="btn btn-outline-info">-</button>
+                                            <label>0</label>
+                                            <button class="btn btn-outline-info">+</button>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                                <tr>
+                                    <td>Colachampan</td>
+                                    <td class="text-center">$ 0.50</td>
+                                    <td>
+                                        <div class="spinner" >
+                                            <button class="btn btn-outline-info">-</button>
+                                            <label>0</label>
+                                            <button  class="btn btn-outline-info">+</button>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                                <tr>
+                                    <td>Seven Up</td>
+                                    <td class="text-center">$ 0.75</td>
+                                    <td>
+                                        <div class="spinner" >
+                                            <button class="btn btn-outline-info">-</button>
+                                            <label>0</label>
+                                            <button class="btn btn-outline-info">+</button>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                                <tr>
+                                    <td>Café</td>
+                                    <td class="text-center">$ 0.25</td>
+                                    <td>
+                                        <div class="spinner" >
+                                            <button class="btn btn-outline-info">-</button>
+                                            <label>0</label>
+                                            <button  class="btn btn-outline-info">+</button>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                            </table>                   
+                        </div>
+                        <p:toolbar id="idToolbar" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
+                            <f:facet name="right" >
+                                <button class="btn btn-info" type="submit">OK</button>
+                            </f:facet>
+                        </p:toolbar>
+                    </div>
+                </div>
+
+            </p:dialog>
+                    
                 </div>
             </div>
         </ui:define>
