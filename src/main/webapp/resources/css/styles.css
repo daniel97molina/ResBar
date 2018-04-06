@@ -230,3 +230,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e83b2', end
 .comentario{
     margin-top: 20px;
 }
+
+
+/*manejo de Menu*/
+.ui-selectoneradio label{
+    margin-right: 20px;
+}
+/*.btnAdmin{
+    align-items: right;
+}*/
+.botonesModal{
+    display: block;
+    margin: 5px;
+    width: 100%;
+}
+
+div .hasDatepicker{
+    padding: 0 1px !important;
+    
+}
