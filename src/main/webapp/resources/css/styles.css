@@ -249,3 +249,11 @@ div .hasDatepicker{
     padding: 0 1px !important;
     
 }
+.ui-corner-top > a{
+    font-size: 12px !important;
+
+}
+li.ui-corner-top{
+
+    border:none !important;
+}
