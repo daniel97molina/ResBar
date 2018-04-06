@@ -245,3 +245,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e83b2', end
     width: 100%;
 }
 
+div .hasDatepicker{
+    padding: 0 1px !important;
+    
+}
