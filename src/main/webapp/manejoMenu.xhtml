@@ -42,19 +42,7 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Seven Up</td>
-                                <td>Descripcion</td>
-                                <td>$ 0.60</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
                                 <td>Fanta</td>
-                                <td>Descripcion</td>
-                                <td>$ 0.50</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Pepsi</td>
                                 <td>Descripcion</td>
                                 <td>$ 0.60</td>
                             </tr>
@@ -62,11 +50,23 @@
                                 <td>4</td>
                                 <td>Golden</td>
                                 <td>Descripcion</td>
+                                <td>$ 0.50</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Pepsi</td>
+                                <td>Descripcion</td>
+                                <td>$ 0.60</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Pilsener</td>
+                                <td>Descripcion</td>
                                 <td>$ 1.50</td>
                             </tr>
                             <tr>
-                                <td>4</td>
-                                <td>Pilsener</td>
+                                <td>7</td>
+                                <td>Seven Up</td>
                                 <td>Descripcion</td>
                                 <td>$ 1.00</td>
                             </tr>
@@ -90,7 +90,7 @@
                     <p:commandButton value="Modificar una categoria" class="botonesModal btn btn-outline-info" onclick="PF('modalModificarCategoria').show();"/>
                     <p:commandButton value="Eliminar una categoria" class="botonesModal btn btn-outline-info" onclick="PF('modalEliminarCategoria').show();"/>
                 </p:panel>
-                <button class="btn btn-info mt-2">Cancelar</button>
+                <button class="btn btn-info mt-2" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
             </p:dialog>
 
 
@@ -99,7 +99,7 @@
                     <label for="txtNombre">Nombre:</label>
                     <p:inputText type="text" class="form-control" id="txtNombre" placeholder="Nombre" required ="true" />
                     <button class="btn btn-info mt-3" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
-                    <button class="btn btn-info mt-3" onclick="location.href = 'manejoMenu.jsf'">OK</button>
+                    <button class="btn btn-info mt-3" onclick="location.href = 'manejoMenu.jsf'">Guardar</button>
                 </div>
             </p:dialog>
 
@@ -119,7 +119,7 @@
                     <p:inputText type="text" class="form-control" id="txtNombre" placeholder="Nuevo Nombre" required ="true" />
 
                     <button class="btn btn-info mt-3" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
-                    <button class="btn btn-info mt-3" onclick="location.href = 'manejoMenu.jsf'">OK</button>
+                    <button class="btn btn-info mt-3" onclick="location.href = 'manejoMenu.jsf'">Guardar</button>
 
                 </div>
             </p:dialog>
@@ -135,7 +135,7 @@
                         <f:selectItem itemLabel="Platlillos" itemValue="4" />
                         <f:selectItem itemLabel="Bocas" itemValue="5" />
                     </h:selectOneMenu><br/>
-                    <label class="mt-2">Nota: Se eliminarán los prodcutos de esta categoria</label><br/>
+                    <label class="mt-2">Nota: Se eliminarán los productos de esta categoria.</label><br/>
 
                     <button class="btn btn-info mt-3" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
                     <button class="btn btn-info mt-3" onclick="location.href = 'manejoMenu.jsf'">Eliminar</button>
@@ -150,7 +150,7 @@
                     <p:commandButton value="Modificar un producto" class="botonesModal btn btn-outline-info" onclick="PF('modalModificarProducto').show();"/>
                     <p:commandButton value="Eliminar un producto" class="botonesModal btn btn-outline-info" onclick="PF('modalEliminarProducto').show();"/>
                 </p:panel>
-                <button class="btn btn-info mt-2">Cancelar</button>
+                <button class="btn btn-info mt-2" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
             </p:dialog>
 
             <p:dialog header="Nuevo producto" widgetVar="modalNuevoProducto" modal="true" width="500px" height="480px" showEffect="fade" hideEffect="fade">
