@@ -68,9 +68,9 @@
                                 <th></th>
                             </thead>
                             <tr>
-                                <td>Jugo de naranja</td>
+                                <td>Coca Cola</td>
                                 <td>
-                                    <div class="spinner" >
+                                    <div class="spinner">
                                         <button class="btn btn-outline-info">-</button>
                                         <label>2</label>
                                         <button class="btn btn-outline-info">+</button>
@@ -90,7 +90,7 @@
                                 <td class="icono align-middle"><img src="resources/images/delete.ico" alt="delete"/></td>
                             </tr>
                             <tr>
-                                <td>Coca Cola</td>
+                                <td>Cuba libre</td>
                                 <td>
                                     <div class="spinner">
                                         <button class="btn btn-outline-info">-</button>
@@ -101,7 +101,7 @@
                                 <td class="icono align-middle"><img src="resources/images/delete.ico" alt="delete"/></td>
                             </tr>
                             <tr>
-                                <td>Cuba libre</td>
+                                <td>Jugo de manzana</td>
                                 <td>
                                     <div class="spinner">
                                         <button class="btn btn-outline-info">-</button>
@@ -114,7 +114,7 @@
                             <tr>
                                 <td>Jugo de naranja</td>
                                 <td>
-                                    <div class="spinner">
+                                    <div class="spinner" >
                                         <button class="btn btn-outline-info">-</button>
                                         <label>2</label>
                                         <button class="btn btn-outline-info">+</button>
@@ -123,7 +123,7 @@
                                 <td class="icono align-middle"><img src="resources/images/delete.ico" alt="delete"/></td>
                             </tr>
                             <tr>
-                                <td>Coca Cola</td>
+                                <td>Seven Up</td>
                                 <td>
                                     <div class="spinner">
                                         <button class="btn btn-outline-info">-</button>
@@ -142,7 +142,7 @@
                     <p:toolbar styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
                         <f:facet name="right" >
                             <p:commandButton icon="ui-icon-plus" value="Agregar" onclick="PF('dialogo').show();" styleClass="ml-3 btn btn-success "></p:commandButton>
-                            <p:button icon="ui-icon-check" value="Confirmar" styleClass="ml-3 btn btn-primary "></p:button>
+                            <p:button icon="ui-icon-check" value="Confirmar" href="Ordenes.jsf" styleClass="ml-3 btn btn-primary "></p:button>
                             <p:button icon="ui-icon-close" value="Cancelar" href="Ordenes.jsf" styleClass="ml-3 btn btn-secondary "></p:button>
                         </f:facet>
                         <f:facet name="left" >
@@ -255,6 +255,17 @@
                                     <th class="text-center">Cantidad</th>
                                 </thead>
                                 <tr>
+                                    <td>Café</td>
+                                    <td class="text-center">$ 0.25</td>
+                                    <td>
+                                        <div class="spinner" >
+                                            <button class="btn btn-outline-info">-</button>
+                                            <label>0</label>
+                                            <button  class="btn btn-outline-info">+</button>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                                <tr>
                                     <td>Cocacola</td>
                                     <td class="text-center">$ 0.50</td>
                                     <td>
@@ -287,22 +298,12 @@
                                         </div>
                                     </td>
                                 </tr>                                
-                                <tr>
-                                    <td>Café</td>
-                                    <td class="text-center">$ 0.25</td>
-                                    <td>
-                                        <div class="spinner" >
-                                            <button class="btn btn-outline-info">-</button>
-                                            <label>0</label>
-                                            <button  class="btn btn-outline-info">+</button>
-                                        </div>
-                                    </td>
-                                </tr>                                
                             </table>                   
                         </div>
                         <p:toolbar id="idToolbar" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
                             <f:facet name="right" >
-                                <button class="btn btn-info" type="submit">OK</button>
+                                <button class="btn btn-secondary" type="submit" onclick="location.href='Ordenes.jsf'">Cancelar</button>
+                                <button class="btn btn-info" type="submit" onclick="location.href='Ordenes.jsf'">OK</button>
                             </f:facet>
                         </p:toolbar>
                     </div>

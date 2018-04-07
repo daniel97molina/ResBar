@@ -25,8 +25,8 @@
                         <td>001</td>
                         <td>003</td>
                         <td>ALICIA</td>
-                        <td>Shobe</td>
-                        <td>$54.50</td>
+                        <td>Roberto</td>
+                        <td>$ 54.50</td>
 
                     </tr>
                     <tr>
@@ -34,7 +34,7 @@
                         <td>006</td>
                         <td>JUAN</td>
                         <td>Carlos</td>
-                        <td>34.50</td>
+                        <td>$ 34.50</td>
 
                     </tr>
                     <tr >                <!--            <center> <p:outputLabel value="Registar Venta"/> </center>  -->
@@ -43,7 +43,7 @@
                         <td>001</td>
                         <td>JUAN</td>
                         <td>Alexander</td>
-                        <td>44.50</td>
+                        <td>$ 44.50</td>
 
                     </tr>
                     <tr>
@@ -51,7 +51,7 @@
                         <td>007</td>
                         <td>JOSÉ</td>
                         <td>Erick</td>
-                        <td>$14.50</td>
+                        <td>$ 14.50</td>
 
                     </tr>
                     <tr>
@@ -59,7 +59,7 @@
                         <td>002</td>
                         <td>ALICIA</td>
                         <td>Josue</td>
-                        <td>$10.50</td>
+                        <td>$ 10.50</td>
 
                     </tr>
                     <tr>
@@ -67,7 +67,7 @@
                         <td>010</td>
                         <td>JOSÉ</td>
                         <td>Alejandra</td>
-                        <td>$23.50</td>
+                        <td>$ 23.50</td>
 
                     </tr>
                 </table>
@@ -86,6 +86,8 @@
 
 
                     <p:dialog header="Efectuar Cobro" widgetVar="dialogoCobro" modal="true" width="500px" height="320px" showEffect="fade" hideEffect="fade">
+                        
+                        <!--  ESTE FORM ESTA REPETIDO???????? -->
                         <form>
                             <div class="mb-3">
                                 <label for="txtNombre">Nombre:</label>
@@ -138,7 +140,7 @@
                         </form>
                     </p:dialog>
 
-                    <p:commandButton style="font-size: 30" value="+" onclick="location.href = 'IngresarOrden.jsf'" styleClass="btn btn-primary align-middle ml-3"/>
+                    <!--<p:commandButton style="font-size: 30" value="+" onclick="location.href = 'IngresarOrden.jsf'" styleClass="btn btn-primary align-middle ml-3"/>-->
 
                     <p:dialog header="Cuenta Detallada" widgetVar="dialogoDetalles"  modal="true" width="75%" height="480px">
 
@@ -166,32 +168,32 @@
                                         <tr>
                                             <td>2</td>
                                             <td>Cuba Libre</td>
-                                            <td>$2.50</td>
-                                            <td>$5.00</td>
+                                            <td>$ 2.50</td>
+                                            <td>$ 5.00</td>
                                         </tr>                                
                                         <tr>
                                             <td>2</td>
                                             <td>Carnitas</td>
-                                            <td>$5.00</td>
-                                            <td>$10.00</td>
+                                            <td>$ 5.00</td>
+                                            <td>$ 10.00</td>
                                         </tr>                                 
                                         <tr>
                                             <td>3</td>
                                             <td>Pilsener</td>
-                                            <td>$1.00</td>
-                                            <td>$3.00</td>
+                                            <td>$ 1.00</td>
+                                            <td>$ 3.00</td>
                                         </tr>                               
                                         <tr>
                                             <td>1</td>
                                             <td>soda Fanta</td>
-                                            <td>$0.50</td>
-                                            <td>$0.50</td>
+                                            <td>$ 0.50</td>
+                                            <td>$ 0.50</td>
                                         </tr>                               
                                     </table>  
                                     <p:toolbar id="idToolbar" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
                                     <f:facet name="right">
                                     <label>SubTotal:</label>
-                                    <p:inputText/>
+                                    <label> $ 18.50 </label>
                                     </f:facet>
                                     </p:toolbar>    
                                 </div>
@@ -255,6 +257,17 @@
                                         <th class="text-center">Cantidad</th>
                                     </thead>
                                     <tr>
+                                        <td>Café</td>
+                                        <td class="text-center">$ 0.25</td>
+                                        <td>
+                                            <div class="spinner" >
+                                                <button class="btn btn-outline-info">-</button>
+                                                <label>0</label>
+                                                <button  class="btn btn-outline-info">+</button>
+                                            </div>
+                                        </td>
+                                    </tr>                                
+                                    <tr>
                                         <td>Cocacola</td>
                                         <td class="text-center">$ 0.50</td>
                                         <td>
@@ -287,22 +300,12 @@
                                             </div>
                                         </td>
                                     </tr>                                
-                                    <tr>
-                                        <td>Café</td>
-                                        <td class="text-center">$ 0.25</td>
-                                        <td>
-                                            <div class="spinner" >
-                                                <button class="btn btn-outline-info">-</button>
-                                                <label>0</label>
-                                                <button  class="btn btn-outline-info">+</button>
-                                            </div>
-                                        </td>
-                                    </tr>                                
                                 </table>                   
                             </div>
                             <p:toolbar id="idToolbar" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
                                 <f:facet name="right" >
-                                    <button class="btn btn-info" type="submit">OK</button>
+                                    <button class="btn btn-secondary" type="submit" onclick="location.href='Ordenes.jsf'">Cancelar</button>
+                                    <button class="btn btn-info" type="submit" onclick="location.href='Ordenes.jsf'">OK</button>
                                 </f:facet>
                             </p:toolbar>
                         </div>
