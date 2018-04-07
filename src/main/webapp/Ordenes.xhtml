@@ -6,6 +6,10 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="resources/layout.xhtml">
+        <ui:define name="meta">
+            <!--Para el inicio en moviles y tablets-->
+            <link rel="manifest" href="resources/manifest.json"/>
+        </ui:define>
         <ui:define name="titulo">Órdenes</ui:define>
         <ui:define name="body" class="mx-3"> 
             <div id="basic">
@@ -304,7 +308,7 @@
                             </div>
                             <p:toolbar id="idToolbar" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
                                 <f:facet name="right" >
-                                    <button class="btn btn-secondary" type="submit" onclick="location.href='Ordenes.jsf'">Cancelar</button>
+                                    <button class="btn btn-secondary" type="submit" onclick="location.reload();">Cancelar</button>
                                     <button class="btn btn-info" type="submit" onclick="location.href='Ordenes.jsf'">OK</button>
                                 </f:facet>
                             </p:toolbar>
