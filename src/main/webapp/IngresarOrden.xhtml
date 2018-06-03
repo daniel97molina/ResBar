@@ -5,7 +5,12 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:metadata>
+        <f:viewParam name="id" value="#{ordenView.id}" />
+    </f:metadata>
     <ui:composition template="resources/layout.xhtml">
+
+
         <ui:define name="titulo">Orden</ui:define>
         <ui:define name="body">
 
@@ -15,7 +20,7 @@
 
                 <div class="row">
 
-
+                    
                     <div class="col-4">
                         <table class="tabla-datos">
                             <tbody>
@@ -24,7 +29,7 @@
                                         Mesa:
                                     </td>
                                     <td>
-                                        <p:inputText styleClass="form-control"/>
+                                        <p:inputText styleClass="form-control" value="#{ordenView.id}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -32,7 +37,7 @@
                                         Mesero:
                                     </td>
                                     <td>
-                                        <p:inputText styleClass="form-control"/>
+                                        <p:inputText styleClass="form-control" value="#{ordenView.orden.mesero}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -40,7 +45,7 @@
                                         Cliente:
                                     </td>
                                     <td>
-                                        <p:inputText styleClass="form-control"/>
+                                        <p:inputText styleClass="form-control" value="#{ordenView.orden.cliente}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -48,17 +53,18 @@
                                         Fecha:
                                     </td>
                                     <td>
-                                        2/4/2018 3:50 PM
+                                        <p:outputLabel value="#{ordenView.orden.fecha.toString}"/>
                                     </td>
                                 </tr>
-                                
+
                             </tbody>
                         </table>
                         <div class="comentario">
-                        <h6>Comentario:</h6>
-                        <p:inputTextarea rows="6" autoResize="false"/>
+                            <h6>Comentario:</h6>
+                            <p:inputTextarea rows="6" autoResize="false" value="#{ordenView.orden.comentario}"/>
                         </div>
                     </div>
+                
 
                     <div class="col-8">
                         <table class="table-striped table-hover table-bordered table">

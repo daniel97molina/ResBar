@@ -24,7 +24,7 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>5.3</version>
+            <version>6.2</version>
         </dependency>
         <dependency>
             <groupId>com.github.adminfaces</groupId>
@@ -32,6 +32,16 @@
             <version>1.0.0-RC12</version>
             <!--<classifier>dev</classifier> uncompressed theme.css-->
         </dependency>
+        <dependency>
+            <groupId>disenio</groupId>
+            <artifactId>resbarlib</artifactId>
+            <version>1</version>
+        </dependency>
+<!--        <dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>6.0.5</version>
+</dependency>-->
     </dependencies>
 
     <build>
