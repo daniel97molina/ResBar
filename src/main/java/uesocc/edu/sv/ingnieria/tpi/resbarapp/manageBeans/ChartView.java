@@ -43,7 +43,7 @@ public class ChartView implements Serializable{
         model.setTitle("Ventas en el mes seleccionado");
         model.setLegendPosition("e");
         model.setShowPointLabels(true);
-        model.getAxes().put(AxisType.X, new CategoryAxis("Años"));
+        model.getAxes().put(AxisType.X, new CategoryAxis("Dias"));
         yAxis=model.getAxis(AxisType.Y);
         yAxis.setLabel("Monto en dolares");
         yAxis.setMin(0);

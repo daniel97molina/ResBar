@@ -11,17 +11,17 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-2 list-group lista-categoria pr-0">
+                    <div class="col-2 list-group lista-categoria pr-0" >
                         <a class="list-group-item list-group-item-secondary ">Categoría:</a>
                         <a class="list-group-item list-group-item-action">Bebidas</a>
                         <a class="list-group-item list-group-item-action">Entradas</a>
                         <a class="list-group-item list-group-item-action">Postres</a>
-                        <a class="list-group-item list-group-item-action">Bebidas</a>
-                        <a class="list-group-item list-group-item-action">Entradas</a>
+                        <a class="list-group-item list-group-item-action">Platillos</a>
+                        <a class="list-group-item list-group-item-action">Bocas</a>
                     </div>
 
                     <div class="col-10 pl-3 pr-0">
-                        <table class="table table-striped table-hover table-bordered" >
+                        <table class="table table-striped table-hover table-bordered" onclick="PF('modalAdminProductos').show();">
                             <thead class="table-dark">
                                 <th>Id</th>
                                 <th>Nombre</th>
@@ -30,59 +30,143 @@
                             </thead>
                             <tr>
                                 <td>1</td>
-                                <td>Bebida 1</td>
+                                <td>Cocacola</td>
                                 <td>Descripcion</td>
-                                <td>3</td>
+                                <td>$ 0.50</td>
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Bebida 1</td>
+                                <td>Colachampan</td>
                                 <td>Descripcion</td>
-                                <td>4</td>
+                                <td>$ 0.35</td>
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>Bebida 1</td>
+                                <td>Fanta</td>
                                 <td>Descripcion</td>
+                                <td>$ 0.60</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Golden</td>
+                                <td>Descripcion</td>
+                                <td>$ 0.50</td>
+                            </tr>
+                            <tr>
                                 <td>5</td>
+                                <td>Pepsi</td>
+                                <td>Descripcion</td>
+                                <td>$ 0.60</td>
                             </tr>
                             <tr>
-                                <td>4</td>
-                                <td>Bebida 1</td>
+                                <td>6</td>
+                                <td>Pilsener</td>
                                 <td>Descripcion</td>
-                                <td>2.3</td>
+                                <td>$ 1.50</td>
                             </tr>
                             <tr>
-                                <td>4</td>
-                                <td>Bebida 1</td>
+                                <td>7</td>
+                                <td>Seven Up</td>
                                 <td>Descripcion</td>
-                                <td>2.3</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Bebida 1</td>
-                                <td>Descripcion</td>
-                                <td>2.3</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Bebida 1</td>
-                                <td>Descripcion</td>
-                                <td>2.3</td>
+                                <td>$ 1.00</td>
                             </tr>
                         </table>                   
                     </div>
-                    <p:toolbar styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
+                    <p:toolbar styleClass="bg-override bg-secundary mt-3 pl-3 col-12">
                         <f:facet name="left" >
-                            <p:commandButton value="Nuevo Item" class="btn btn-primary" onclick="PF('dialogoItems').show();" ></p:commandButton>
+                            <p:commandButton value="Administrar Categorias" class="btn btn-primary btnAdmin" onclick="PF('modalAdminCategoria').show();"></p:commandButton>
+                            <p:commandButton value="Administrar Productos" class="btn btn-primary btnAdmin ml-3" onclick="PF('modalAdminProductos').show();"></p:commandButton>
+                            <!--<p:commandButton value="Nuevo Item" class="btn btn-primary" onclick="PF('dialogoItems').show();" ></p:commandButton>-->
                         </f:facet>
                     </p:toolbar>
                 </div>
             </div>
 
+            <!--**********************Administrar categorias****************************-->
 
-            <p:dialog header="Item" widgetVar="dialogoItems" modal="true" width="500px" height="420px" showEffect="fade" hideEffect="fade">
+            <p:dialog header="Administrar Categorias" widgetVar="modalAdminCategoria" modal="true" height="240">
+                <p:panel >
+                    <p:commandButton value="Nueva categoria" class="botonesModal btn btn-outline-info" onclick="PF('modalNuevaCategoria').show();"/>
+                    <p:commandButton value="Modificar una categoria" class="botonesModal btn btn-outline-info" onclick="PF('modalModificarCategoria').show();"/>
+                    <p:commandButton value="Eliminar una categoria" class="botonesModal btn btn-outline-info" onclick="PF('modalEliminarCategoria').show();"/>
+                </p:panel>
+                <button class="btn btn-info mt-2" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
+            </p:dialog>
+
+
+            <p:dialog header="Nueva Categoria" widgetVar="modalNuevaCategoria" modal="true" height="160" width="350">
+                <div class="mb-3">
+                    <label for="txtNombre">Nombre:</label>
+                    <p:inputText type="text" class="form-control" id="txtNombre" placeholder="Nombre" required ="true" />
+                    <button class="btn btn-secondary mt-3" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
+                    <button class="btn btn-info mt-3" onclick="location.href = 'manejoMenu.jsf'">Guardar</button>
+                </div>
+            </p:dialog>
+
+            <p:dialog header="Modificar Categoria" widgetVar="modalModificarCategoria" modal="true" height="210">
+                <div class="mb-3">
+                    <label for="listCategoria" >Categoria:</label>
+                    <h:selectOneMenu id="listCategoriay" required="true" class="btn btn-outline-info ml-4" >
+                        <f:selectItem itemLabel="Seleccione una categoria" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="Bebidas" itemValue="1" />
+                        <f:selectItem itemLabel="Entradas" itemValue="2" />
+                        <f:selectItem itemLabel="Postres" itemValue="3" />
+                        <f:selectItem itemLabel="Platlillos" itemValue="4" />
+                        <f:selectItem itemLabel="Bocas" itemValue="5" />
+                    </h:selectOneMenu><br/><br/>
+
+                    <label for="txtNombre">Nuevo Nombre:</label>
+                    <p:inputText type="text" class="form-control" id="txtNombre" placeholder="Nuevo Nombre" required ="true" />
+
+                    <button class="btn btn-secondary mt-3" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
+                    <button class="btn btn-info mt-3" onclick="location.href = 'manejoMenu.jsf'">Guardar</button>
+
+                </div>
+            </p:dialog>
+
+            <p:dialog header="Eliminar Categoria" widgetVar="modalEliminarCategoria" modal="true" height="160">
+                <div class="mb-3">
+                    <label for="listCategoria" >Categoria:</label>
+                    <h:selectOneMenu id="listCategoriay" required="true" class="btn btn-outline-info ml-4" >
+                        <f:selectItem itemLabel="Seleccione una categoria" itemValue="" noSelectionOption="true" />
+                        <f:selectItem itemLabel="Bebidas" itemValue="1" />
+                        <f:selectItem itemLabel="Entradas" itemValue="2" />
+                        <f:selectItem itemLabel="Postres" itemValue="3" />
+                        <f:selectItem itemLabel="Platlillos" itemValue="4" />
+                        <f:selectItem itemLabel="Bocas" itemValue="5" />
+                    </h:selectOneMenu><br/>
+                    <label class="mt-2">Nota: Se eliminarán los productos de esta categoria.</label><br/>
+
+                    <button class="btn btn-secondary mt-3" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
+                    <button class="btn btn-info mt-3" onclick="location.href = 'manejoMenu.jsf'">Eliminar</button>
+                </div>
+            </p:dialog>
+
+            <!--**********************Administrar Productos****************************-->
+
+            <p:dialog header="Administrar Productos" widgetVar="modalAdminProductos" modal="true" height="240">
+                <p:panel  >
+                    <p:commandButton value="Nueva producto" class="botonesModal btn btn-outline-info" onclick="PF('modalNuevoProducto').show();"/>
+                    <p:commandButton value="Modificar un producto" class="botonesModal btn btn-outline-info" onclick="PF('modalModificarProducto').show();"/>
+                    <p:commandButton value="Eliminar un producto" class="botonesModal btn btn-outline-info" onclick="PF('modalEliminarProducto').show();"/>
+                </p:panel>
+                <button class="btn btn-info mt-2" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
+            </p:dialog>
+
+            <p:dialog header="Nuevo producto" widgetVar="modalNuevoProducto" modal="true" width="500px" height="480px" showEffect="fade" hideEffect="fade">
                 <form>
+                    <div class="mb-3">
+                        <label for="listCategoria" >Categoria:</label>
+                        <h:selectOneMenu id="listCategoriay" required="true" class="btn btn-outline-info ml-4" >
+                            <f:selectItem itemLabel="Seleccione una categoria" itemValue="" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Bebidas" itemValue="1" />
+                            <f:selectItem itemLabel="Entradas" itemValue="2" />
+                            <f:selectItem itemLabel="Postres" itemValue="3" />
+                            <f:selectItem itemLabel="Platlillos" itemValue="4" />
+                            <f:selectItem itemLabel="Bocas" itemValue="5" />
+                        </h:selectOneMenu>
+                    </div>
+
                     <div class="mb-3">
                         <label for="txtNombre">Nombre:</label>
                         <p:inputText type="text" class="form-control" id="txtNombre" placeholder="Nombre" required ="true" />
@@ -98,13 +182,118 @@
                                 <span class="input-group-text" id="inputGroupPrepend">$</span>
                             </div>
                             <p:inputText type="number" class="form-control" id="validationCustomUsername" 
-                                    required="true"/>
-                                <div class="invalid-feedback">
-                                    Please choose a username.
-                                </div>
+                                         required="true"/>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="submit">Guardar</button>
+
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel for="console" value="Enviar a:"/>
+                        <p:selectOneRadio id="console" >
+                            <f:selectItem itemLabel="Cocina" itemValue="cocina" class="radioButton"/>
+                            <f:selectItem itemLabel="Bebida" itemValue="bebida" class="radioButton "/>
+                        </p:selectOneRadio>
+                    </h:panelGrid>
+
+
+                    <button class="btn btn-secondary mt-2" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
+                    <button class="btn btn-info mt-2" onclick="location.href = 'manejoMenu.jsf'">Guardar</button>
+                </form>
+            </p:dialog>
+
+
+            <p:dialog header="Modificar producto" widgetVar="modalModificarProducto" modal="true" width="520px" height="530px" showEffect="fade" hideEffect="fade">
+                <form>
+                    <div class="mb-3">
+                        <label for="listCategoria" >Categoria:</label>
+                        <h:selectOneMenu id="listCategoriay" required="true" class="btn btn-outline-info ml-4" >
+                            <f:selectItem itemLabel="Seleccione una categoria" itemValue="" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Bebidas" itemValue="1" />
+                            <f:selectItem itemLabel="Entradas" itemValue="2" />
+                            <f:selectItem itemLabel="Postres" itemValue="3" />
+                            <f:selectItem itemLabel="Platlillos" itemValue="4" />
+                            <f:selectItem itemLabel="Bocas" itemValue="5" />
+                        </h:selectOneMenu>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label for="listCategoria" >Producto:</label>
+                            <h:selectOneMenu id="listCategoriay" required="true" class="btn btn-outline-info ml-4" >
+                                <f:selectItem itemLabel="Seleccione una producto" itemValue="" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Cocacola" itemValue="1" />
+                                <f:selectItem itemLabel="Colachampan" itemValue="2" />
+                                <f:selectItem itemLabel="Seven Up" itemValue="3" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtNombre">Nombre:</label>
+                        <p:inputText type="text" class="form-control" id="txtNombre" placeholder="Nombre" required ="true" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="validationCustom02">Descripción</label>
+                        <p:inputTextarea autoResize="true"  class="form-control" id="validationCustom02" placeholder="Descripción" required="true"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="validationCustomUsername">Precio</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">$</span>
+                            </div>
+                            <p:inputText type="number" class="form-control" id="validationCustomUsername" 
+                                         required="true"/>
+                            <div class="invalid-feedback">
+                                Please choose a username.
+                            </div>
+                        </div>
+                    </div>
+
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <p:outputLabel for="console" value="Enviar a:"/>
+                        <p:selectOneRadio id="console" >
+                            <f:selectItem itemLabel="Cocina" itemValue="cocina" class="radioButton"/>
+                            <f:selectItem itemLabel="Bebida" itemValue="bebida" class="radioButton "/>
+                        </p:selectOneRadio>
+                    </h:panelGrid>
+
+
+                    <button class="btn btn-secondary mt-1" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
+                    <button class="btn btn-info mt-1" onclick="location.href = 'manejoMenu.jsf'">Guardar</button>
+                </form>
+            </p:dialog>
+
+
+            <p:dialog header="Eliminar producto" widgetVar="modalEliminarProducto" modal="true" width="400px" height="180px" showEffect="fade" hideEffect="fade">
+                <form>
+                    <div class="mb-3">
+                        <label for="listCategoria" >Categoria:</label>
+                        <h:selectOneMenu id="listCategoriay" required="true" class="btn btn-outline-info ml-4" >
+                            <f:selectItem itemLabel="Seleccione una categoria" itemValue="" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Bebidas" itemValue="1" />
+                            <f:selectItem itemLabel="Entradas" itemValue="2" />
+                            <f:selectItem itemLabel="Postres" itemValue="3" />
+                            <f:selectItem itemLabel="Platlillos" itemValue="4" />
+                            <f:selectItem itemLabel="Bocas" itemValue="5" />
+                        </h:selectOneMenu>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="mb-3">
+                            <label for="listCategoria" >Producto:</label>
+                            <h:selectOneMenu id="listCategoriay" required="true" class="btn btn-outline-info ml-4" >
+                                <f:selectItem itemLabel="Seleccione una producto" itemValue="" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Cocacola" itemValue="1" />
+                                <f:selectItem itemLabel="Colachampan" itemValue="2" />
+                                <f:selectItem itemLabel="Seven Up" itemValue="3" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-secondary mt-1" onclick="location.href = 'manejoMenu.jsf'">Cancelar</button>
+                    <button class="btn btn-info mt-1" onclick="location.href = 'manejoMenu.jsf'">Eliminar</button>
                 </form>
             </p:dialog>
 
