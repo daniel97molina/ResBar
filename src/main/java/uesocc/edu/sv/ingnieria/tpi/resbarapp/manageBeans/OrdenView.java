@@ -7,6 +7,7 @@ package uesocc.edu.sv.ingnieria.tpi.resbarapp.manageBeans;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.Objects;
 import javax.annotation.PostConstruct;
@@ -31,7 +32,7 @@ public class OrdenView implements Serializable {
 
     private int id;
     private Orden orden;
-    private boolean creando=true;
+    private boolean creandoNuevo = true;
 
     public OrdenView() {
     }
@@ -40,42 +41,62 @@ public class OrdenView implements Serializable {
     protected void init() {
         id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().getOrDefault("id", "0"));
         if (id == 0) {
-            creando = true;
+            creandoNuevo = true;
             orden = new Orden();
             orden.fecha = new Date();
         } else {
             try {
                 orden = ManejadorOrdenes.Obtener(id);
-                creando = true;
-            }catch (Exception e){
+                creandoNuevo = false;
+            } catch (Exception e) {
                 orden = new Orden();
-                creando = false;
-            }
+                creandoNuevo = true;
             }
         }
-    
+    }
 
-    public void reducirDetalle(int id){
-        System.out.println("id"+id);
+    public void confirmar() {
+        
+        //this.calcularTotalLocal();
+        try {
+            System.out.println("CREANDO" + creandoNuevo);
+            if (creandoNuevo) {
+                this.orden.idOrden = ManejadorOrdenes.ObtenerId();
+                ManejadorOrdenes.Insertar(this.orden);
+            } else {
+                ManejadorOrdenes.Actualizar(this.orden);
+            }
+            FacesContext.getCurrentInstance().getExternalContext().redirect("Ordenes.jsf");
+        } catch (Exception e) {
+            //TODO mostrar mensaje de error growl
+        }
+    }
+
+    public void reducirDetalle(int id) {
+        System.out.println("id" + id);
         for (DetalleOrden d : this.orden.detalle) {
             if (Objects.equals(d.producto.idProducto, id)) {
-                //TODO si es mayor a uno
-                d.cantidad = d.cantidad.subtract(new BigDecimal(1));
-                System.out.println("reduciendo");
+                if (d.cantidad.compareTo(BigDecimal.ONE) > 0) {
+                    d.cantidad = d.cantidad.subtract(new BigDecimal(1));
+                    System.out.println("reduciendo");
+                    this.calcularTotalLocal();
+                }
             }
         }
-        soutDetalle();
+        soutDetalle();   
     }
     
-    private void soutDetalle(){
-        System.out.println("Cantidades *********");
-        for(DetalleOrden d : this.orden.detalle){
-            System.out.println(d.cantidad);
+    public void eliminarDetalle(int id){
+        for(int i =0 ; i<this.orden.detalle.size(); i++){
+            if(this.orden.detalle.get(i).producto.idProducto.equals(id)){
+                this.orden.detalle.remove(i);
+                break;
+            }
         }
     }
-
-    public void agregarDetalle(int id, int cantidad){
-        System.out.println("id"+id);
+    
+    public void agregarDetalle(int id, int cantidad) {
+        System.out.println("id" + id);
         boolean encontrado = false;
         for (DetalleOrden d : this.orden.detalle) {
             if (Objects.equals(d.producto.idProducto, id)) {
@@ -93,7 +114,29 @@ public class OrdenView implements Serializable {
             System.out.println("creando detalle");
         }
         soutDetalle();
+        this.calcularTotalLocal();
     }
+    
+    private void calcularTotalLocal(){
+        BigDecimal dec = new BigDecimal(BigInteger.ZERO);
+        for(DetalleOrden d: this.orden.detalle){
+            dec = d.cantidad.add(dec);
+        }
+        this.orden.setTotal(dec);
+    }
+
+    private void soutDetalle() {
+        System.out.println("Cantidades *********");
+        for (DetalleOrden d : this.orden.detalle) {
+            System.out.println(d.cantidad);
+        }
+        System.out.println("TOTAL "+this.orden.total);
+    }
+
+    
+    
+    
+    
 
     public int getId() {
         return id;
