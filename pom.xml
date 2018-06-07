@@ -37,11 +37,19 @@
             <artifactId>resbarlib</artifactId>
             <version>1</version>
         </dependency>
-<!--        <dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>6.0.5</version>
-</dependency>-->
+        <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            
+        </dependency>
+
+        <!--        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.5</version>
+        </dependency>-->
     </dependencies>
 
     <build>
