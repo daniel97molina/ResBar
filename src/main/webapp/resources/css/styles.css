@@ -210,7 +210,8 @@ html{
     z-index: -1000;
     height: 100%;
     width: 100%;
-    background: url("#{resource['images:bar-background.jpg']}") fixed center center no-repeat;
+    background-color: #495a66;
+    /*background: url("#{resource['images:bar-background.jpg']}") fixed center center no-repeat;*/
     background-size: cover;
     filter: contrast(60%) brightness(30%) grayscale(30%);
 }
