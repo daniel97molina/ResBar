@@ -71,6 +71,10 @@ public class OrdenView implements Serializable {
             System.out.println("CREANDO" + creandoNuevo);
             if (creandoNuevo) {
                 this.orden.idOrden = ManejadorOrdenes.ObtenerId();
+                this.orden.detalle.forEach( d ->{
+                    d.orden = this.orden;
+                    d.detalleOrdenPK.idOrden = this.orden.idOrden;
+                });
                 ManejadorOrdenes.Insertar(this.orden);
                 crearMensaje("Exito", "Orden creada",true);
             } else {
@@ -130,6 +134,7 @@ public class OrdenView implements Serializable {
     }
 
     public void eliminarDetalle(int id, List<DetalleOrden> detalle) {
+        System.out.println("id eliminar: "+id);
         for (int i = 0; i < detalle.size(); i++) {
             if (detalle.get(i).producto.idProducto.equals(id)) {
                 detalle.remove(i);
@@ -150,7 +155,7 @@ public class OrdenView implements Serializable {
         }
         if (!encontrado) {
             DetalleOrden det = new DetalleOrden();
-            det.orden = this.orden;
+            //det.orden = this.orden;
             det.producto = ManejadorProductos.Obtener(id);
             det.cantidad = new BigDecimal(cantidad);
 
