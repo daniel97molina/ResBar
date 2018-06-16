@@ -7,13 +7,13 @@
     <ui:composition template="resources/layout.xhtml">
         <ui:define name="titulo">Estadisticas</ui:define>
         <ui:define name="body">
-            
- 
+
+
             <p:tabView style="border: none;">
                 <p:tab title="Tabuladas">
                     <div class="text-center col-6 mx-auto mb-3">
-                <p:calendar id="popup" placeholder="Ingrese la fecha para filtrar"/>
-            </div>
+                        <p:calendar id="popup" placeholder="Ingrese la fecha para filtrar"/>
+                    </div>
                     <table class="table table-striped table-bordered table-hover" onclick="PF('dlg2').show();">
                         <thead class="table-dark">
                             <th>ID_cuenta</th>

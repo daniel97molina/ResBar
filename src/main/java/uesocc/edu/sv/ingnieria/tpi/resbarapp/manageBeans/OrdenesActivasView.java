@@ -5,6 +5,7 @@
  */
 package uesocc.edu.sv.ingnieria.tpi.resbarapp.manageBeans;
 
+import java.io.Serializable;
 import java.util.Map;
 import org.primefaces.model.SortOrder;
 import java.util.ArrayList;
@@ -28,29 +29,25 @@ import sv.edu.uesocc.disenio2018.resbar.backend.entities.Orden;
 @ManagedBean
 @Named(value = "ordenesActivasView")
 @ViewScoped
-public class OrdenesActivasView {
+public class OrdenesActivasView implements Serializable{
 
     private LazyDataModel<Orden> modelo;
     private Orden registro;
+    private double total;
 
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
     /**
      * Creates a new instance of OrdenesActivasview
      */
     public OrdenesActivasView() {
     }
 
-// @EJB
-//    private TipoDocumentoFacadeLocal tdfl;
-//    private LazyDataModel<TipoDocumento> modelo; //encapsualarlo
-//    private TipoDocumento registro; //encapsularlo
-//    private boolean btnadd= true; //encapsualrlo
-//    public TipoDocumentoFacadeLocal getTdfl() {
-//        return tdfl;
-//    }
-//
-//    public void setTdfl(TipoDocumentoFacadeLocal tdfl) {
-//        this.tdfl = tdfl;
-//    }
     public LazyDataModel<Orden> getModelo() {
         return modelo;
     }
@@ -68,7 +65,7 @@ public class OrdenesActivasView {
     }
 
     @PostConstruct
-    private void inicio() {
+    private void init() {
         try {
             this.modelo = new LazyDataModel<Orden>() {
                 @Override
@@ -100,10 +97,6 @@ public class OrdenesActivasView {
                 public List<Orden> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
                     List<Orden> salida = new ArrayList();
                     try {
-//                        if (tdfl != null) {
-//                            this.setRowCount(tdfl.count());
-//                            salida = tdfl.findRange(first, pageSize);
-//                        }
                         this.setRowCount(ManejadorOrdenes.ObtenerActivas().size());        
                         salida= ManejadorOrdenes.ObtenerActivas();
                     } catch (Exception e) {
@@ -118,21 +111,5 @@ public class OrdenesActivasView {
         }
     }
 
-//    public void btnNuevo() {
-//        this.registro = new TipoDocumento();
-//        this.btnadd = !this.btnadd;
-//    }
-//
-//    public void guardarRegistro() {
-//        try {
-//            if (this.registro != null && this.tdfl != null) {
-//                if (this.tdfl.create(registro)) {
-//                    this.btnadd = !this.btnadd;
-//                }
-//            }
-//        } catch (Exception e) {
-//            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
-//        }
-//    }
 
 }
