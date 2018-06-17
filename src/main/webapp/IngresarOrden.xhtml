@@ -3,15 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:composition template="resources/layout.xhtml">
 
-
+      
         <ui:define name="titulo">Orden</ui:define>
         <ui:define name="body">
 
-
+            <p:growl id="growl" showDetail="true"/>
 
             <div class="container-fluid">
 
@@ -19,64 +20,52 @@
                     <div class="row">
 
                         <div class="col-4">
-                            <table class="tabla-datos">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Mesa:
-                                        </td>
-                                        <td>
-                                            <p:inputText styleClass="form-control" value="#{ordenView.orden.mesa}" required="true"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Mesero:
-                                        </td>
-                                        <td>
-                                            <p:inputText styleClass="form-control" value="#{ordenView.orden.mesero}" required="true"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Cliente:
-                                        </td>
-                                        <td>
-                                            <p:inputText styleClass="form-control" value="#{ordenView.orden.cliente}" required="true"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Fecha:
-                                        </td>
-                                        <td>
-                                            <p:outputLabel value="#{ordenView.orden.fecha}"/>
-                                        </td>
-                                    </tr>
 
-                                </tbody>
-                            </table>
+                            <h:panelGrid id="grid" columns="3" width="100%" >
+                                <p:outputLabel for="txtmesa" value="Mesa:"/>
+                                <p:inputText style="width: 100%" id="txtmesa" value="#{ordenView.orden.mesa}" required="true" requiredMessage="Ingrese el número de mesa"/>
+                                <p:message for="txtmesa" display="icon"/>
+
+                                <p:outputLabel for="txtmesero" value="Mesero:"/>
+                                <p:inputText style="width: 100%" id="txtmesero" value="#{ordenView.orden.mesero}" required="true" requiredMessage="Ingrese el nombre del mesero"/>
+                                <p:message for="txtmesero" display="icon"/>
+                                
+                                <p:outputLabel for="txtcliente" value="Cliente:"/>
+                                <p:inputText style="width: 100%" id="txtcliente" value="#{ordenView.orden.cliente}" required="true" requiredMessage="Ingrese el nombre del Cliente"/>
+                                <p:message for="txtcliente" display="icon"/>
+                                
+                                <p:outputLabel value="Fecha:"/>
+                                <p:outputLabel value="#{ordenView.orden.fecha}"/>
+                                <p:outputLabel />
+                                
+                            </h:panelGrid>
                             <div class="comentario">
-                                <h6>Comentario:</h6>
-                                <p:inputTextarea rows="6" autoResize="false" value="#{ordenView.orden.comentario}"/>
-                            </div>
+                                    <h6>Comentario:</h6>
+                                    <p:inputTextarea rows="6" autoResize="false" value="#{ordenView.orden.comentario}"/>
+                                </div>
                         </div>
 
 
                         <div class="col-8">
-                            <p:dataTable style="width: 100%" id="tabla" value="#{ordenView.orden.detalle}" var="detalle" scrollable="true" scrollHeight="400">
+                            <p:dataTable style="width: 100%" id="tabla" value="#{ordenView.orden.detalle}" var="detalle" scrollable="true" scrollHeight="430px" emptyMessage="Orden vacía">
                                 <p:column headerText="Producto" style="width: 200px">
                                     <h:outputText value="#{detalle.producto.nombre}"/>
                                 </p:column>
                                 <p:column headerText="Cantidad" style="width: 100px">
                                     <div class="spinner">
-                                        <p:commandButton class="btn btn-outline-info pl-0" style="width: 38px;" update="tabla formulario:botones" value="-" action="#{ordenView.reducirDetalle(detalle.producto.idProducto)}"></p:commandButton>
+                                        <p:commandButton class="btn btn-outline-info pl-0" style="width: 38px;" update="tabla formulario:botones" 
+                                                         value="-" action="#{ordenView.reducirDetalle(detalle.producto.idProducto, ordenView.orden.detalle)}"
+                                                         process="tabla formulario:botones"></p:commandButton>
                                         <h:outputText value="#{detalle.cantidad}"/>
-                                        <p:commandButton class="btn btn-outline-info ml-3 mr-0 pl-0" style="width: 38px" update="tabla formulario:botones" value="+" actionListener="#{ordenView.agregarDetalle(detalle.producto.idProducto, 1)}"></p:commandButton>
+                                        <p:commandButton class="btn btn-outline-info ml-3 mr-0 pl-0" style="width: 38px" update="tabla formulario:botones" value="+" 
+                                                         actionListener="#{ordenView.agregarDetalle(detalle.producto.idProducto, 1,ordenView.orden.detalle)}"
+                                                         process="tabla formulario:botones"></p:commandButton>
                                     </div>
                                 </p:column>
                                 <p:column style="width:25px;text-align: center">
-                                    <p:commandButton update="tabla formulario:botones" style="background-color: #ff6666;border: 0;color: white;" icon="ui-icon-closethick" actionListener="#{ordenView.eliminarDetalle(detalle.producto.idProducto)}"/>
+                                    <p:commandButton update="tabla formulario:botones" style="background-color: #ff6666;border: 0;color: white;" icon="ui-icon-closethick" 
+                                                     actionListener="#{ordenView.eliminarDetalle(detalle.producto.idProducto, ordenView.orden.detalle)}"
+                                                     process="tabla formulario:botones"/>
                                 </p:column>
                             </p:dataTable>
                         </div>
@@ -85,8 +74,8 @@
 
                         <p:toolbar id="botones" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
                             <f:facet name="right" >
-                                <p:commandButton icon="ui-icon-plus" value="Agregar" onclick="PF('dialogo').show();" styleClass="ml-3 btn btn-success "></p:commandButton>
-                                <p:commandButton icon="ui-icon-check" value="Confirmar" actionListener="#{ordenView.confirmar()}" styleClass="ml-3 btn btn-primary "></p:commandButton>
+                                <p:commandButton icon="ui-icon-plus" value="Agregar Productos" update=":formProductos:prodTable" onclick="PF('dialogo').show();" styleClass="ml-3 btn btn-success "></p:commandButton>
+                                <p:commandButton icon="ui-icon-check" value="Confirmar" actionListener="#{ordenView.confirmar()}" update="formulario:grid growl" styleClass="ml-3 btn btn-primary "></p:commandButton>
                                 <p:commandButton icon="ui-icon-close" value="Cancelar" action="Ordenes.jsf?faces-redirect=true" styleClass="ml-3 btn btn-secondary "></p:commandButton>
                             </f:facet>
                             <f:facet name="left" >
@@ -99,162 +88,53 @@
                 </h:form>
             </div>
 
-
-
-
-
-
-
-
-
-
-            <!--            <div class="row">
-                            <div class="col-2 list-group lista-categoria pr-0">
-                                <a class="list-group-item list-group-item-secondary ">Categoría:</a>
-                                <a class="list-group-item list-group-item-action">Bebidas</a>
-                                <a class="list-group-item list-group-item-action">Entradas</a>
-                                <a class="list-group-item list-group-item-action">Postres</a>
-                                <a class="list-group-item list-group-item-action">Bebidas</a>
-                                <a class="list-group-item list-group-item-action">Entradas</a>
-                            </div>
-            
-                            <div class="col-10 pl-3 pr-0">
-                                <table class="table table-striped table-hover table-bordered">
-                                    <thead class="table-dark">
-                                        <th>Id</th>
-                                        <th>Nombre</th>
-                                        <th>Descripción</th>
-                                        <th>Precio</th>
-                                    </thead>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Bebida 1</td>
-                                        <td>Descripcion</td>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Bebida 1</td>
-                                        <td>Descripcion</td>
-                                        <td>4</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Bebida 1</td>
-                                        <td>Descripcion</td>
-                                        <td>5</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Bebida 1</td>
-                                        <td>Descripcion</td>
-                                        <td>2.3</td>
-                                    </tr>
-                                </table>
-                                    <p:dataTable var="car" value="#{dtScrollView.cars1}" styleClass="table table-striped" scrollable="true" scrollHeight="150">
-                                    <p:column headerText="Id" footerText="Id">
-                                        <h:outputText value="#{car.id}" />
-                                    </p:column>
-                                    <p:column headerText="Year" footerText="Year">
-                                        <h:outputText value="#{car.year}" />
-                                    </p:column>
-                                    <p:column headerText="Brand" footerText="Brand">
-                                        <h:outputText value="#{car.brand}" />
-                                    </p:column>
-                                    <p:column headerText="Color" footerText="Color">
-                                        <h:outputText value="#{car.color}" />
-                                    </p:column>
-                                </p:dataTable>
-                            </div>
-                            <p:toolbar styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
-                                <f:facet name="left" >
-                                    Cantidad:
-                                    <p:inputText styleClass="d-inline-block"></p:inputText>
-                                    <p:button icon="ui-icon-check" value="Agregar" styleClass="ml-3 btn btn-primary "></p:button>
-                                </f:facet>
-                            </p:toolbar>
-                        </div>-->
             <p:dialog header="Agregar Productos" widgetVar="dialogo"  modal="true" width="75%" height="480px">
-
-                <div class="divSearch">
-                    <p:inputText></p:inputText>
-                    <button class="btn btn-info">Buscar</button>
-                </div>
 
                 <div class="container-fluid">
 
+                    <h:form id="formProductos" class="row">
 
-                    <div class="row">
-                        <div class="col-2 list-group lista-categoria pr-0">
-                            <a class="list-group-item list-group-item-secondary ">Categoría:</a>
-                            <a class="list-group-item list-group-item-action">Bebidas</a>
-                            <a class="list-group-item list-group-item-action">Entradas</a>
-                            <a class="list-group-item list-group-item-action">Postres</a>
-                            <a class="list-group-item list-group-item-action">Platlillos</a>
-                            <a class="list-group-item list-group-item-action">Bocas</a>
+                        <p:dataTable id="catgrid" var="cat" value="#{manejoMenu.modeloCategoria}" class="col-2 list-group lista-categoria pr-0" 
+                                     selectionMode="single" selection="#{manejoMenu.registroCategoria}"
+                                     rowKey="#{cat.idCategoria}">
+                            <p:ajax update="formProductos:prodTable" event="rowSelect" listener="#{manejoMenu.filtroCategoria}"/>
+                            <p:column headerText="Categorías">
+                                <h:outputLabel value="#{cat.nombre}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                        <div class="col-10 pl-2 pr-0">
+                            <p:dataTable style="width: 100%" id="prodTable"  value="#{manejoMenu.modeloProducto}" var="pro" 
+                                         class="able table-striped table-hover table-bordered"
+                                         rowKey="#{pro.idProducto}" scrollable="true" scrollHeight="350">
+                                <p:column style="width: 200px" headerText="Nombre">
+                                    <p:outputLabel value="#{pro.nombre}"/>
+                                </p:column>
+
+                                <p:column headerText="Cantidad" style="width: 100px">
+                                    <div class="spinner">
+                                        <p:commandButton class="btn btn-outline-info pl-0" style="width: 38px;" update="prodTable" value="-" action="#{ordenView.reducirDetalle(pro.idProducto,ordenView.detallesAgregar)}"></p:commandButton>
+                                        <h:outputText value="#{ordenView.obtenerCantidadAgregar(pro.idProducto)}"/>
+                                        <p:commandButton class="btn btn-outline-info ml-3 mr-0 pl-0" style="width: 38px" update="prodTable" value="+" actionListener="#{ordenView.agregarDetalle(pro.idProducto, 1,ordenView.detallesAgregar)}"></p:commandButton>
+                                    </div>
+                                </p:column>
+
+                            </p:dataTable>
+
+                            <p:toolbar id="idToolbar" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
+                                <f:facet name="right" >
+                                    <p:commandButton class="btn btn-secondary" actionListener="#{ordenView.confirmarAgregarProductos()}" update=":formulario:tabla :formulario:botones" 
+                                                     onclick="PF('dialogo').hide();" value="Agregar" ></p:commandButton>
+                                    <p:commandButton class="btn btn-info" actionListener="#{ordenView.cancelarAgregarProductos()}" update=":formulario:tabla :formulario:botones" 
+                                                     onclick="PF('dialogo').hide();" value="Cancelar"></p:commandButton>
+                                </f:facet>
+                            </p:toolbar>
+
                         </div>
 
-                        <div class="col-10 pl-3 pr-0">
-                            <table class="table table-striped table-hover table-bordered">
-                                <thead class="table-dark">
-                                    <th>Nombre</th>
-                                    <th class="text-center">Precio</th>
-                                    <th class="text-center">Cantidad</th>
-                                </thead>
-                                <tr>
-                                    <td>Café</td>
-                                    <td class="text-center">$ 0.25</td>
-                                    <td>
-                                        <div class="spinner" >
-                                            <button class="btn btn-outline-info">-</button>
-                                            <label>0</label>
-                                            <button  class="btn btn-outline-info">+</button>
-                                        </div>
-                                    </td>
-                                </tr>                                
-                                <tr>
-                                    <td>Cocacola</td>
-                                    <td class="text-center">$ 0.50</td>
-                                    <td>
-                                        <div class="spinner" >
-                                            <button class="btn btn-outline-info">-</button>
-                                            <label>0</label>
-                                            <button class="btn btn-outline-info">+</button>
-                                        </div>
-                                    </td>
-                                </tr>                                
-                                <tr>
-                                    <td>Colachampan</td>
-                                    <td class="text-center">$ 0.50</td>
-                                    <td>
-                                        <div class="spinner" >
-                                            <button class="btn btn-outline-info">-</button>
-                                            <label>0</label>
-                                            <button  class="btn btn-outline-info">+</button>
-                                        </div>
-                                    </td>
-                                </tr>                                
-                                <tr>
-                                    <td>Seven Up</td>
-                                    <td class="text-center">$ 0.75</td>
-                                    <td>
-                                        <div class="spinner" >
-                                            <button class="btn btn-outline-info">-</button>
-                                            <label>0</label>
-                                            <button class="btn btn-outline-info">+</button>
-                                        </div>
-                                    </td>
-                                </tr>                                
-                            </table>                   
-                        </div>
-                        <p:toolbar id="idToolbar" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
-                            <f:facet name="right" >
-                                <button class="btn btn-secondary" type="submit" onclick="location.href = 'Ordenes.jsf'">Cancelar</button>
-                                <button class="btn btn-info" type="submit" onclick="location.href = 'Ordenes.jsf'">OK</button>
-                            </f:facet>
-                        </p:toolbar>
-                    </div>
+                    </h:form>
                 </div>
+
 
             </p:dialog>
 

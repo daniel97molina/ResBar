@@ -2,320 +2,277 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <ui:composition template="resources/layout.xhtml">
+
         <ui:define name="meta">
             <!--Para el inicio en moviles y tablets-->
             <link rel="manifest" href="resources/manifest.json"/>
         </ui:define>
+
         <ui:define name="titulo">Órdenes</ui:define>
+        
         <ui:define name="body" class="mx-3"> 
             <div id="basic">
                 <div class="divSearch">
-                    <p:inputText/>
-                    <button class="btn btn-info">Buscar</button>
+                    <h:form>
+                        <p:inputText value="#{ordenesActivasView.dato}" placeholder="Escriba su búsqueda"/>
+                        <p:commandButton value="Buscar" class="btn btn-primary btnBuscarOrdenes">
+                            <p:ajax update=":form:tablaOrdenesActivas" listener="#{ordenesActivasView.buscarOrdenes(ordenesActivasView.dato)}"/>
+                        </p:commandButton>
+                    </h:form>
                 </div>
-                <table class="table table-striped table-bordered table-hover" onclick="PF('dlg2').show();">
-                    <thead class="table-dark">
-                        <th>ID</th>
-                        <th>Mesa</th>
-                        <th>Mesero</th>
-                        <th>Cliente</th>
-                        <th>Total</th>
-                    </thead>
-                    <tr>
-                        <td>001</td>
-                        <td>003</td>
-                        <td>ALICIA</td>
-                        <td>Roberto</td>
-                        <td>$ 54.50</td>
 
-                    </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>006</td>
-                        <td>JUAN</td>
-                        <td>Carlos</td>
-                        <td>$ 34.50</td>
+                <h:form id="form">
+                    <p:dataTable var="reg" value="#{ordenesActivasView.modelo}"
+                                 class="table estiloHeader"
+                                 id="tablaOrdenesActivas"
+                                 selectionMode="single"
+                                 selection="#{ordenesActivasView.registro}"
+                                 lazy="true"
+                                 rows="1000000"
+                                 emptyMessage="No hay ninguna orden activa">
 
-                    </tr>
-                    <tr >                <!--            <center> <p:outputLabel value="Registar Venta"/> </center>  -->
+                        <p:ajax event="rowSelect" update=":form:datosCliente :form:datosCliente2 :form:datosCliente3 :form:datosCliente4 :form:datosCliente5 :form:formPago:datosCliente6" oncomplete="PF('ordenSeleccionada').show()"/>
 
-                        <td>003</td>
-                        <td>001</td>
-                        <td>JUAN</td>
-                        <td>Alexander</td>
-                        <td>$ 44.50</td>
+                        <p:column headerText="ID Orden">		
+                            <h:outputText value="#{reg.idOrden}"/>
+                        </p:column>
+                        <p:column headerText="Mesa">		
+                            <h:outputText value="#{reg.mesa}"/>
+                        </p:column>
+                        <p:column headerText="Mesero">		
+                            <h:outputText value="#{reg.mesero}"/>
+                        </p:column>
+                        <p:column headerText="Cliente">		
+                            <h:outputText value="#{reg.cliente}"/>
+                        </p:column>
+                    </p:dataTable>
 
-                    </tr>
-                    <tr>
-                        <td>004</td>
-                        <td>007</td>
-                        <td>JOSÉ</td>
-                        <td>Erick</td>
-                        <td>$ 14.50</td>
 
-                    </tr>
-                    <tr>
-                        <td>005</td>
-                        <td>002</td>
-                        <td>ALICIA</td>
-                        <td>Josue</td>
-                        <td>$ 10.50</td>
-
-                    </tr>
-                    <tr>
-                        <td>007</td>
-                        <td>010</td>
-                        <td>JOSÉ</td>
-                        <td>Alejandra</td>
-                        <td>$ 23.50</td>
-
-                    </tr>
-                </table>
-                <div>
-                    <p:dialog header="Opciones cuenta" widgetVar="dlg2" modal="true" height="150">
-                        <p:outputLabel value="Nombre Cliente: "/> <p:outputLabel value="Alexander "/><br></br>
-                        <p:outputLabel value="Monto: "/> <p:outputLabel value=" $44.50 "/>
-                        <p:panel  >
-                            <p:commandButton value="Agregar productos" onclick="PF('dialogo').show()"/>
-                            <p:commandButton value="Imprimir cuenta"/>
-                            <p:commandButton value="Modificar cuenta"/>
-                            <p:commandButton value="Cobrar" image="ui-icon-cart" onclick="PF('dialogoDetalles').show();"/>
-
-                        </p:panel>
+                    <p:dialog header="Opciones cuenta" widgetVar="ordenSeleccionada" modal="true" height="220px" resizable="false" showEffect="fade">
+                        <p:outputPanel id="datosCliente">
+                            <h:panelGrid columns="2" style="display: inline-block" cellpadding="5" styleClass="ui-grid">
+                                <p:outputLabel value="ID Orden: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.idOrden}"/>
+                                <p:outputLabel value="Cliente: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.cliente}"/>
+                                <p:outputLabel value="Total: " class="textTitulo"/> <p:outputLabel value="$ #{ordenesActivasView.registro.total}"/>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" style="display: inline-block; margin-left: 80px" cellpadding="5" styleClass="ui-grid">
+                                <p:outputLabel value="Mesa: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.mesa}"/>
+                                <p:outputLabel value="Mesero: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.mesero}"/><br></br>
+                            </h:panelGrid>
+                            <div class="mt-4">
+                                <p:commandButton value="Agregar productos" image="ui-icon-plus" onclick="PF('dialogoAgregar').show()" class="btn btn-primary btnPrincipal"/>
+                                <p:commandButton value="Imprimir cuenta" image="ui-icon-print"  class="btn btn-primary btnPrincipal"/>
+                                <p:commandButton value="Modificar cuenta" image="ui-icon-pencil"  class="btn btn-primary btnPrincipal" onclick="location.href = 'IngresarOrden.jsf?id=#{ordenesActivasView.registro.idOrden}'"/>
+                                <p:commandButton value="Cobrar" image="ui-icon-cart" onclick="PF('dialogoDetalles').show()"  class="btn btn-primary" >
+                                    <p:ajax update=":form:datosCliente3" process="@this" listener="#{ordenesActivasView.mostrarDetalles(ordenesActivasView.registro.idOrden)}"/>
+                                </p:commandButton>
+                            </div>
+                        </p:outputPanel>
                     </p:dialog> 
 
 
-                    <p:dialog header="Efectuar Cobro" widgetVar="dialogoCobro" modal="true" width="500px" height="320px" showEffect="fade" hideEffect="fade">
-                        
-                        <!--  ESTE FORM ESTA REPETIDO???????? -->
-                        <form>
-                            <div class="mb-3">
-                                <label for="txtNombre">Nombre:</label>
-                                <label for="txtNombre">Juan Perez</label>
-                            </div>
-                            <div class="mb-3">
-                                <label for="validationCustom02">Total:</label>
-                                <label for="validationCustom02">$45</label>
-                            </div>
-                            <div class="mb-3">
-                                <label for="validationCustomUsername">Efectivo a recibir:</label>
-                                <div >
-                                    <p:inputText type="number" class="form-control" id="validationCustomUsername" 
-                                                 required="true"/>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label >Cambio</label>
-                                <label >$5.00</label>
-                            </div>
-                            <button class="btn btn-primary" type="submit">OK</button>
-                            <button class="btn btn-primary" type="submit">Cancelar</button>
-
-                        </form>
-                    </p:dialog>
-                    <p:dialog header="Detalles de la cuenta" widgetVar="dialogoDetallesCuenta" modal="true" width="500px" height="320px" showEffect="fade" hideEffect="fade">
-                        <form>
-                            <div class="mb-3">
-                                <label for="txtNombre">Nombre:</label>
-                                <label for="txtNombre">Juan Perez</label>
-                            </div>
-                            <div class="mb-3">
-                                <label for="validationCustom02">Total:</label>
-                                <label for="validationCustom02">$45</label>
-                            </div>
-                            <div class="mb-3">
-                                <label for="validationCustomUsername">Efectivo a recibir:</label>
-                                <div >
-                                    <p:inputText type="number" class="form-control" id="validationCustomUsername" 
-                                                 required="true"/>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label >Cambio</label>
-                                <label >$5.00</label>
-                            </div>
-                            <button class="btn btn-primary" type="submit">OK</button>
-                            <button class="btn btn-primary" type="submit">Cancelar</button>
-
-                        </form>
-                    </p:dialog>
-
-                    <!--<p:commandButton style="font-size: 30" value="+" onclick="location.href = 'IngresarOrden.jsf'" styleClass="btn btn-primary align-middle ml-3"/>-->
-
-                    <p:dialog header="Cuenta Detallada" widgetVar="dialogoDetalles"  modal="true" width="75%" height="480px">
-
-                        <div>
-                            <label>N° Cuenta:</label>   
-                            <label>0021</label>   
-                        </div>
-                          <div>
-                            <label>Cliente:</label>   
-                            <label>Juan Perez</label>   
-                        </div>
-                        
+                    <p:dialog header="Cuenta Detallada" widgetVar="dialogoDetalles"  modal="true" width="75%" height="480px" resizable="false" showEffect="fade">
+                        <p:outputPanel id="datosCliente2">
+                            <h:panelGrid columns="2" style="display: inline-block" cellpadding="5" styleClass="ui-grid">
+                                <p:outputLabel value="ID Orden: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.idOrden}"/>
+                                <p:outputLabel value="Cliente: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.cliente}"/>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" style="display: inline-block; margin-left: 80px" cellpadding="5" styleClass="ui-grid">
+                                <p:outputLabel value="Mesa: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.mesa}"/>
+                                <p:outputLabel value="Mesero: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.mesero}"/>
+                            </h:panelGrid>
+                        </p:outputPanel>
 
                         <div class="container-fluid">
                             <div class="row">
-
                                 <div class="col-12">
-                                    <table class="table table-striped table-hover table-bordered">
-                                        <thead class="table-dark">
-                                            <th>Cantidad</th>
-                                            <th class="text-center">Producto</th>
-                                            <th class="text-center">P/V</th>
-                                            <th class="text-center">Subtotal</th>
-                                        </thead>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Cuba Libre</td>
-                                            <td>$ 2.50</td>
-                                            <td>$ 5.00</td>
-                                        </tr>                                
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Carnitas</td>
-                                            <td>$ 5.00</td>
-                                            <td>$ 10.00</td>
-                                        </tr>                                 
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Pilsener</td>
-                                            <td>$ 1.00</td>
-                                            <td>$ 3.00</td>
-                                        </tr>                               
-                                        <tr>
-                                            <td>1</td>
-                                            <td>soda Fanta</td>
-                                            <td>$ 0.50</td>
-                                            <td>$ 0.50</td>
-                                        </tr>                               
-                                    </table>  
-                                    <p:toolbar id="idToolbar" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
-                                    <f:facet name="right">
-                                    <label>SubTotal:</label>
-                                    <label> $ 18.50 </label>
-                                    </f:facet>
-                                    </p:toolbar>    
-                                </div>
+                                    <p:outputPanel id="datosCliente3">
 
+                                        <p:dataTable var="detalle" value="#{ordenesActivasView.listaDetalles}"
+                                                     class="table table-striped table-bordered table-hover"
+                                                     lazy="true"
+                                                     rows="1000000"
+                                                     emptyMessage="No hay ningun producto en esta orden">
+
+                                            <p:column headerText="Cantidad" >		
+                                                <h:outputText value="#{detalle.cantidad}"/>
+                                            </p:column>
+                                            <p:column headerText="Producto">		
+                                                <h:outputText value="#{detalle.producto.nombre}"/>
+                                            </p:column>
+                                            <p:column headerText="Precio unitario">		
+                                                <h:outputText value="$ #{detalle.producto.precio}"/>
+                                            </p:column>
+                                            <p:column headerText="Subtotal">		
+                                                <h:outputText value="$ #{detalle.producto.precio*detalle.cantidad}"/>
+                                            </p:column>
+                                        </p:dataTable>
+
+                                        <p:toolbar id="idToolbar" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
+                                            <f:facet name="right" >
+                                                <h:panelGrid columns="2" style="display: inline-block" cellpadding="5" styleClass="ui-grid">
+                                                    <p:outputLabel value="Total: " class="textTitulo"/> <p:outputLabel value="$ #{ordenesActivasView.registro.total}"/>
+                                                </h:panelGrid>
+                                            </f:facet>
+                                            <f:facet name="left" >
+                                                <div>
+                                                    <p:commandButton class="ml-3 btn btn-primary" value="Imprimir" image="ui-icon-print"/>
+                                                    <p:commandButton class="ml-3 btn btn-success" image="ui-icon-cart" value="Cobrar" onclick="PF('dialogoCobro').show();"/>
+                                                </div>
+                                            </f:facet>
+                                        </p:toolbar>  
+                                    </p:outputPanel>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                        <p:commandButton class="btn btn-primary" type="submit" value="Imprimir"/>
-                        <p:commandButton class="btn btn-primary" type="submit" image="ui-icon-check" onclick="PF('dialogoDetallesCuenta').show();"/>
                         </div>
                     </p:dialog>
 
-                </div>
 
-                <div align="right">
-                    <p:commandButton style="font-size: 30" value="+" onclick="location.href = 'IngresarOrden.jsf'" 
-                                     styleClass="btn btn-primary align-middle mr-5 mb-2"/>
-                </div>
+                    <p:dialog header="Efectuar Cobro" widgetVar="dialogoCobro" modal="true" width="400px" height="320px" resizable="false" showEffect="fade">
 
-                <p:dialog header="Opciones cuenta" widgetVar="dlg2" modal="true" height="150">
+                        <p:outputPanel id="datosCliente4">
+                            <h:panelGrid columns="2" cellpadding="5" styleClass="ui-grid">
+                                <p:outputLabel value="ID Orden: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.idOrden}"/>
+                                <p:outputLabel value="Cliente: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.cliente}"/>
+                                <p:outputLabel value="Total: " class="textTitulo"/> <p:outputLabel value="$ #{ordenesActivasView.registro.total}"/>
+                            </h:panelGrid>
+                        </p:outputPanel>
 
-                    <p:outputLabel value="Nombre Cliente: "/> <p:outputLabel value="Alexander "/><br></br>
-                    <p:outputLabel value="Monto: "/> <p:outputLabel value=" $44.50 "/>
+                        <h:form id="formPago">
+                            <p:panel id="datosCliente6">
 
-                    <div class="mt-4">
-                        <p:commandButton value="Agregar productos" image="ui-icon-plus" onclick="PF('dialogo2').show()"/>
-                        <p:commandButton value="Imprimir cuenta" image="ui-icon-print"/>
-                        <p:button value="Modificar cuenta" href="IngresarOrden.jsf" image="ui-icon-pencil" />
-                        <p:commandButton value="Cobrar" image="ui-icon-cart" onclick="PF('dialogoDetalles').show()"/>
-                    </div>
+                                <h:panelGrid columns="2" cellpadding="5" styleClass="ui-grid">
+                                    <p:outputLabel for="pagoCliente" value="Efectivo a recibir: $" class="textTitulo"/>
+                                    <p:spinner value="#{ordenesActivasView.valorSpinner}" id="pagoCliente" required="true" min="#{ordenesActivasView.registro.total}" decimalPlaces="2" maxlength="5" stepFactor="0.01" size="12">
+                                        <p:ajax update="ajaxSpinnerValue" process="@this" listener="#{ordenesActivasView.calcularCambio()}"/>
+                                        <p:ajax update="ajaxSpinnerValue" process="@this" event="keyup" listener="#{ordenesActivasView.calcularCambio()}"/>
+                                    </p:spinner>
+                                </h:panelGrid>
 
-                </p:dialog> 
+                                <h:panelGrid columns="2" cellpadding="5" styleClass="ui-grid">
+                                    <p:outputLabel value="Cambio: $" class="textTitulo"/>
+                                    <p:outputLabel id="ajaxSpinnerValue" value="#{ordenesActivasView.cambio}"/>
+                                </h:panelGrid>
 
-                <p:dialog header="Agregar Productos" widgetVar="dialogo2"  modal="true" width="75%" height="500px">
-
-                    <h6>Cliente: Alexander</h6>
-                    <h6>Mesa: 1</h6>
-                    <div class="divSearch">
-                        <p:inputText></p:inputText>
-                        <button class="btn btn-info">Buscar</button>
-                    </div>
-
-                    <div class="container-fluid">
-
-
-                        <div class="row">
-                            <div class="col-2 list-group lista-categoria pr-0">
-                                <a class="list-group-item list-group-item-secondary ">Categoría:</a>
-                                <a class="list-group-item list-group-item-action">Bebidas</a>
-                                <a class="list-group-item list-group-item-action">Entradas</a>
-                                <a class="list-group-item list-group-item-action">Postres</a>
-                                <a class="list-group-item list-group-item-action">Platlillos</a>
-                                <a class="list-group-item list-group-item-action">Bocas</a>
+                            </p:panel>
+                            <div class="mb-3" id="botonesCobro">
+                                <p:commandButton value="Cancelar" icon="ui-icon-close" styleClass="ml-3 btn btn-primary"/>        
+                                <p:commandButton value="OK" type="submit" icon="ui-icon-check" styleClass="ml-3 btn btn-success" onclick="location.href = 'Ordenes.jsf'"/>
                             </div>
+                        </h:form>
+                    </p:dialog>
 
-                            <div class="col-10 pl-3 pr-0">
-                                <table class="table table-striped table-hover table-bordered">
-                                    <thead class="table-dark">
-                                        <th>Nombre</th>
-                                        <th class="text-center">Precio</th>
-                                        <th class="text-center">Cantidad</th>
-                                    </thead>
-                                    <tr>
-                                        <td>Café</td>
-                                        <td class="text-center">$ 0.25</td>
-                                        <td>
-                                            <div class="spinner" >
-                                                <button class="btn btn-outline-info">-</button>
-                                                <label>0</label>
-                                                <button  class="btn btn-outline-info">+</button>
-                                            </div>
-                                        </td>
-                                    </tr>                                
-                                    <tr>
-                                        <td>Cocacola</td>
-                                        <td class="text-center">$ 0.50</td>
-                                        <td>
-                                            <div class="spinner" >
-                                                <button class="btn btn-outline-info">-</button>
-                                                <label>0</label>
-                                                <button class="btn btn-outline-info">+</button>
-                                            </div>
-                                        </td>
-                                    </tr>                                
-                                    <tr>
-                                        <td>Colachampan</td>
-                                        <td class="text-center">$ 0.50</td>
-                                        <td>
-                                            <div class="spinner" >
-                                                <button class="btn btn-outline-info">-</button>
-                                                <label>0</label>
-                                                <button  class="btn btn-outline-info">+</button>
-                                            </div>
-                                        </td>
-                                    </tr>                                
-                                    <tr>
-                                        <td>Seven Up</td>
-                                        <td class="text-center">$ 0.75</td>
-                                        <td>
-                                            <div class="spinner" >
-                                                <button class="btn btn-outline-info">-</button>
-                                                <label>0</label>
-                                                <button class="btn btn-outline-info">+</button>
-                                            </div>
-                                        </td>
-                                    </tr>                                
-                                </table>                   
-                            </div>
-                            <p:toolbar id="idToolbar" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
-                                <f:facet name="right" >
-                                    <button class="btn btn-secondary" type="submit" onclick="location.reload();">Cancelar</button>
-                                    <button class="btn btn-info" type="submit" onclick="location.href='Ordenes.jsf'">OK</button>
-                                </f:facet>
-                            </p:toolbar>
+
+                    <p:dialog header="Agregar Productos" widgetVar="dialogoAgregar" modal="true" width="75%" height="500px" resizable="false" showEffect="fade">
+
+                        <p:outputPanel id="datosCliente5">
+                            <h:panelGrid columns="2" style="display: inline-block" cellpadding="5" styleClass="ui-grid">
+                                <p:outputLabel value="ID Orden: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.idOrden}"/>
+                                <p:outputLabel value="Cliente: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.cliente}"/>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" style="display: inline-block; margin-left: 80px" cellpadding="5" styleClass="ui-grid">
+                                <p:outputLabel value="Mesa: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.mesa}"/>
+                                <p:outputLabel value="Mesero: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.mesero}"/>
+                            </h:panelGrid>
+                        </p:outputPanel>
+
+                        <div class="divSearch">
+                            <p:inputText></p:inputText>
+                            <button class="btn btn-info">Buscar</button>
                         </div>
+
+                        <div class="container-fluid">
+
+
+                            <div class="row">
+                                <div class="col-2 list-group lista-categoria pr-0">
+                                    <a class="list-group-item list-group-item-secondary ">Categoría:</a>
+                                    <a class="list-group-item list-group-item-action">Bebidas</a>
+                                    <a class="list-group-item list-group-item-action">Entradas</a>
+                                    <a class="list-group-item list-group-item-action">Postres</a>
+                                    <a class="list-group-item list-group-item-action">Platlillos</a>
+                                    <a class="list-group-item list-group-item-action">Bocas</a>
+                                </div>
+
+                                <div class="col-10 pl-3 pr-0">
+                                    <table class="table table-striped table-hover table-bordered">
+                                        <thead class="table-dark">
+                                            <th>Nombre</th>
+                                            <th class="text-center">Precio</th>
+                                            <th class="text-center">Cantidad</th>
+                                        </thead>
+                                        <tr>
+                                            <td>Café</td>
+                                            <td class="text-center">$ 0.25</td>
+                                            <td>
+                                                <div class="spinner" >
+                                                    <button class="btn btn-outline-info">-</button>
+                                                    <label>0</label>
+                                                    <button  class="btn btn-outline-info">+</button>
+                                                </div>
+                                            </td>
+                                        </tr>                                
+                                        <tr>
+                                            <td>Cocacola</td>
+                                            <td class="text-center">$ 0.50</td>
+                                            <td>
+                                                <div class="spinner" >
+                                                    <button class="btn btn-outline-info">-</button>
+                                                    <label>0</label>
+                                                    <button class="btn btn-outline-info">+</button>
+                                                </div>
+                                            </td>
+                                        </tr>                                
+                                        <tr>
+                                            <td>Colachampan</td>
+                                            <td class="text-center">$ 0.50</td>
+                                            <td>
+                                                <div class="spinner" >
+                                                    <button class="btn btn-outline-info">-</button>
+                                                    <label>0</label>
+                                                    <button  class="btn btn-outline-info">+</button>
+                                                </div>
+                                            </td>
+                                        </tr>                                
+                                        <tr>
+                                            <td>Seven Up</td>
+                                            <td class="text-center">$ 0.75</td>
+                                            <td>
+                                                <div class="spinner" >
+                                                    <button class="btn btn-outline-info">-</button>
+                                                    <label>0</label>
+                                                    <button class="btn btn-outline-info">+</button>
+                                                </div>
+                                            </td>
+                                        </tr>                                
+                                    </table>                   
+                                </div>
+                                <p:toolbar id="idToolbar2" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
+                                    <f:facet name="right" >
+                                        <p:commandButton onclick="location.href = 'Ordenes.jsf'" value="Cancelar" icon="ui-icon-close" styleClass="ml-3 btn btn-primary"/>
+                                        <p:commandButton value="OK" icon="ui-icon-check" onclick="location.href = 'Ordenes.jsf'" styleClass="ml-3 btn btn-success"/>
+                                    </f:facet>
+                                </p:toolbar>
+                            </div>
+                        </div>
+
+                    </p:dialog>
+
+
+                    <div align="right">
+                        <p:commandButton style="margin-top: 10px" value="Nueva orden" onclick="location.href = 'IngresarOrden.jsf'" 
+                                         styleClass="btn btn-primary align-middle mr-5 mb-2"/>
                     </div>
 
-                </p:dialog>
+
+                </h:form>
+
+
             </div>
         </ui:define>
     </ui:composition>
