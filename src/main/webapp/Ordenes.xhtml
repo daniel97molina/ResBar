@@ -22,15 +22,14 @@
                 </div>
 
                 <h:form id="form">
-                    <p:dataTable var="reg" value="#{ordenesActivasView.modelo}" 
-                                 class="table table-striped table-bordered table-hover"
+                    <p:dataTable var="reg" value="#{ordenesActivasView.modelo}"
                                  selectionMode="single"
                                  selection="#{ordenesActivasView.registro}"
                                  lazy="true"
                                  rows="1000000"
                                  emptyMessage="No hay ninguna orden activa">
 
-                        <p:ajax event="rowSelect" update=":form:datosCliente :form:datosCliente2 :form:datosCliente3 :form:datosCliente4 :form:datosCliente5" oncomplete="PF('ordenSeleccionada').show()"/>
+                        <p:ajax event="rowSelect" update=":form:datosCliente :form:datosCliente2 :form:datosCliente3 :form:datosCliente4 :form:datosCliente5 :form:formPago:datosCliente6" oncomplete="PF('ordenSeleccionada').show()"/>
 
                         <p:column headerText="ID Orden" >		
                             <h:outputText value="#{reg.idOrden}"/>
@@ -47,37 +46,37 @@
                     </p:dataTable>
 
 
-                    <p:dialog header="Opciones cuenta" widgetVar="ordenSeleccionada" modal="true" resizable="false" showEffect="fade" hideEffect="fade">
+                    <p:dialog header="Opciones cuenta" widgetVar="ordenSeleccionada" modal="true" resizable="false" showEffect="fade">
                         <p:outputPanel id="datosCliente">
-                            <p:panelGrid columns="2" style="display: inline-block">
+                            <h:panelGrid columns="2" style="display: inline-block" cellpadding="5" styleClass="ui-grid">
                                 <p:outputLabel value="ID Orden: "/> <p:outputLabel value="#{ordenesActivasView.registro.idOrden}"/>
                                 <p:outputLabel value="Cliente: "/> <p:outputLabel value="#{ordenesActivasView.registro.cliente}"/>
                                 <p:outputLabel value="Total: "/> <p:outputLabel value="#{ordenesActivasView.registro.total}"/>
-                            </p:panelGrid>
-                            <p:panelGrid columns="2" style="display: inline-block; margin-left: 80px">
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" style="display: inline-block; margin-left: 80px" cellpadding="5" styleClass="ui-grid">
                                 <p:outputLabel value="Mesa: "/> <p:outputLabel value="#{ordenesActivasView.registro.mesa}"/>
                                 <p:outputLabel value="Mesero: "/> <p:outputLabel value="#{ordenesActivasView.registro.mesero}"/><br></br>
-                            </p:panelGrid>
+                            </h:panelGrid>
+                            <div class="mt-4">
+                                <p:commandButton value="Agregar productos" image="ui-icon-plus" onclick="PF('dialogoAgregar').show()" class="btn btn-primary"/>
+                                <p:commandButton value="Imprimir cuenta" image="ui-icon-print"  class="btn btn-primary"/>
+                                <p:commandButton value="Modificar cuenta" image="ui-icon-pencil"  class="btn btn-primary" onclick="location.href = 'IngresarOrden.jsf?id=#{ordenesActivasView.registro.idOrden}'"/>
+                                <p:commandButton value="Cobrar" image="ui-icon-cart" onclick="PF('dialogoDetalles').show()"  class="btn btn-primary"/>
+                            </div>
                         </p:outputPanel>
-                        <div class="mt-4">
-                            <p:commandButton value="Agregar productos" image="ui-icon-plus" onclick="PF('dialogoAgregar').show()" class="btn btn-primary"/>
-                            <p:commandButton value="Imprimir cuenta" image="ui-icon-print"  class="btn btn-primary"/>
-                            <p:button value="Modificar cuenta" href="IngresarOrden.jsf" image="ui-icon-pencil"  class="btn btn-primary"/>
-                            <p:commandButton value="Cobrar" image="ui-icon-cart" onclick="PF('dialogoDetalles').show()"  class="btn btn-primary"/>
-                        </div>
                     </p:dialog> 
 
 
-                    <p:dialog header="Cuenta Detallada" widgetVar="dialogoDetalles"  modal="true" width="75%" height="480px" showEffect="fade" hideEffect="fade">
+                    <p:dialog header="Cuenta Detallada" widgetVar="dialogoDetalles"  modal="true" width="75%" height="480px" showEffect="fade">
                         <p:outputPanel id="datosCliente2">
-                            <p:panelGrid columns="2" style="display: inline-block">
+                            <h:panelGrid columns="2" style="display: inline-block" cellpadding="5" styleClass="ui-grid">
                                 <p:outputLabel value="ID Orden: "/> <p:outputLabel value="#{ordenesActivasView.registro.idOrden}"/>
                                 <p:outputLabel value="Cliente: "/> <p:outputLabel value="#{ordenesActivasView.registro.cliente}"/>
-                            </p:panelGrid>
-                            <p:panelGrid columns="2" style="display: inline-block; margin-left: 80px">
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" style="display: inline-block; margin-left: 80px" cellpadding="5" styleClass="ui-grid">
                                 <p:outputLabel value="Mesa: "/> <p:outputLabel value="#{ordenesActivasView.registro.mesa}"/>
                                 <p:outputLabel value="Mesero: "/> <p:outputLabel value="#{ordenesActivasView.registro.mesero}"/>
-                            </p:panelGrid>
+                            </h:panelGrid>
                         </p:outputPanel>
 
                         <div class="container-fluid">
@@ -126,45 +125,53 @@
                     </p:dialog>
 
 
-                    <p:dialog header="Efectuar Cobro" widgetVar="dialogoCobro" modal="true" width="500px" height="320px" showEffect="fade" hideEffect="fade">
+                    <p:dialog header="Efectuar Cobro" widgetVar="dialogoCobro" modal="true" width="500px" height="320px" showEffect="fade">
 
-                        <!--h:form-->
                         <p:outputPanel id="datosCliente4">
-                            <p:panelGrid columns="2">
+                            <h:panelGrid columns="2" cellpadding="5" styleClass="ui-grid">
                                 <p:outputLabel value="ID Orden: "/> <p:outputLabel value="#{ordenesActivasView.registro.idOrden}"/>
                                 <p:outputLabel value="Cliente:  "/> <p:outputLabel value="#{ordenesActivasView.registro.cliente}"/>
                                 <p:outputLabel value="Total:  "/> <p:outputLabel value="#{ordenesActivasView.registro.total}"/>
-                            </p:panelGrid>
+                            </h:panelGrid>
                         </p:outputPanel>
 
-                        <div class="mb-3">
-                            <p:outputLabel value="Efectivo a recibir:"/>
-                            <div >
-                                <p:inputText type="number" class="form-control" id="validationCustomUsername" 
-                                             required="true"/>
+                        <h:form id="formPago">
+                            <p:outputPanel id="datosCliente6">
+                                <div class="mb-3">
+                                    <h:panelGrid columns="2" cellpadding="5" styleClass="ui-grid">
+                                        <p:outputLabel for="pagoCliente" value="Efectivo a recibir: $"/>
+                                        <p:spinner value="#{ordenesActivasView.valorSpinner}" id="pagoCliente" required="true" min="#{ordenesActivasView.registro.total}" decimalPlaces="2" maxlength="5" stepFactor="0.01" >
+                                            <p:ajax update="ajaxSpinnerValue" process="@this" listener="#{ordenesActivasView.calcularCambio()}"/>
+                                            <p:ajax update="ajaxSpinnerValue" process="@this" event="keyup" listener="#{ordenesActivasView.calcularCambio()}"/>
+                                        </p:spinner>
+                                    </h:panelGrid>
+                                </div>
+                                <div class="mb-3">
+                                    <h:panelGrid columns="2" cellpadding="5" styleClass="ui-grid">
+                                        <p:outputLabel value="Cambio: $"/>
+                                        <p:outputLabel id="ajaxSpinnerValue" value="#{ordenesActivasView.cambio}"/>
+                                    </h:panelGrid>
+                                </div>
+                            </p:outputPanel>
+                            <div class="mb-3">
+                                <p:commandButton value="Cancelar" icon="ui-icon-close" styleClass="ml-3 btn btn-primary"/>        
+                                <p:commandButton value="OK" type="submit" icon="ui-icon-check" styleClass="ml-3 btn btn-success" onclick="location.href = 'Ordenes.jsf'"/>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <p:outputLabel value="Cambio:"/>
-                            <p:outputLabel value="CALCULAR ESTE VALOR"/>
-                        </div>
-                        <p:commandButton value="Cancelar" icon="ui-icon-close" styleClass="ml-3 btn btn-primary"/>        
-                        <p:commandButton value="OK" icon="ui-icon-check" styleClass="ml-3 btn btn-success" onclick="location.href = 'Ordenes.jsf'"/>
-                        <!--/h:form-->
+                        </h:form>
                     </p:dialog>
 
 
                     <p:dialog header="Agregar Productos" widgetVar="dialogoAgregar"  modal="true" width="75%" height="500px">
 
                         <p:outputPanel id="datosCliente5">
-                            <p:panelGrid columns="2" style="display: inline-block">
+                            <h:panelGrid columns="2" style="display: inline-block" cellpadding="5" styleClass="ui-grid">
                                 <p:outputLabel value="ID Orden: "/> <p:outputLabel value="#{ordenesActivasView.registro.idOrden}"/>
                                 <p:outputLabel value="Cliente: "/> <p:outputLabel value="#{ordenesActivasView.registro.cliente}"/>
-                            </p:panelGrid>
-                            <p:panelGrid columns="2" style="display: inline-block; margin-left: 80px">
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" style="display: inline-block; margin-left: 80px" cellpadding="5" styleClass="ui-grid">
                                 <p:outputLabel value="Mesa: "/> <p:outputLabel value="#{ordenesActivasView.registro.mesa}"/>
                                 <p:outputLabel value="Mesero: "/> <p:outputLabel value="#{ordenesActivasView.registro.mesero}"/>
-                            </p:panelGrid>
+                            </h:panelGrid>
                         </p:outputPanel>
 
                         <div class="divSearch">
@@ -248,19 +255,15 @@
                         </div>
 
                     </p:dialog>
-
+                    
+                    
+                    <div align="right">
+                        <p:commandButton style="margin-top: 10px" value="Nueva orden" onclick="location.href = 'IngresarOrden.jsf'" 
+                                         styleClass="btn btn-primary align-middle mr-5 mb-2"/>
+                    </div>
 
 
                 </h:form>
-
-
-
-
-
-
-
-
-
 
 
             </div>
