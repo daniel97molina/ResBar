@@ -9,71 +9,45 @@
         <ui:define name="body">
 
 
-            <p:tabView style="border: none;">
-                <p:tab title="Tabuladas">
-                    <div class="text-center col-6 mx-auto mb-3">
-                        <p:calendar id="popup" placeholder="Ingrese la fecha para filtrar"/>
-                    </div>
-                    <table class="table table-striped table-bordered table-hover" onclick="PF('dlg2').show();">
-                        <thead class="table-dark">
-                            <th>ID_cuenta</th>
-                            <th>Cliente</th>
-                            <th>Monto</th>
-                            <th>Tipo de pago</th>
-                        </thead>
-                        <tr>
-                            <td>001</td>
-                            <td>Alicia Hernandez</td>
-                            <td>$23.50</td>
-                            <td>Efectivo</td>
+            <h:form id="mainForm" class="row">
+                <p:tabView style="border: none;">
 
-                        </tr>
-                        <tr>
-                            <td>002</td>
-                            <td>Roberto Sanchez</td>
-                            <td>$31.00</td>
-                            <td>Tarjeta de credito</td>
+                    <p:tab title="Tabuladas">
 
-                        </tr>
-                        <tr >                <!--            <center> <p:outputLabel value="Registar Venta"/> </center>  -->
+                        <div class="text-center col-6 mx-auto mb-3">
+                            <p:growl id="msgs" showDetail="true" />
+                            <p:calendar id="event"  value="#{manejoEstadistica.dia}">
+                            </p:calendar>
+                            <p:commandButton value="Ver ventas" update="msgs" actionListener="#{manejoEstadistica.ventasD}" icon="ui-icon-check" />
+                        </div>
 
-                            <td>003</td>
-                            <td>Christian Herrera</td>
-                            <td>$12.75</td>
-                            <td>Efectivo</td>
+                        <p:dataTable id="estadist"  value="#{manejoEstadistica.ventasDiarias}" var="est" 
+                                     class="able table-striped table-hover table-bordered" selection="#{manejoEstadistica.registroOrdenes}"
+                                     rowKey="#{est.idOrden}" selectionMode="single" scrollable="true" scrollHeight="450">
 
-                        </tr>
-                        <tr>
-                            <td>004</td>
-                            <td>Nelson Gochez</td>
-                            <td>$23.47</td>
-                            <td>Efectivo</td>
+                            <p:column headerText="ID">
+                                <p:outputLabel value="#{est.idOrden}"/>
+                            </p:column>
+                            <p:column headerText="Cliente">
+                                <p:outputLabel value="#{est.cliente}"/>
+                            </p:column>
+                            <p:column headerText="Total">
+                                <p:outputLabel value="#{est.total}"/>
+                            </p:column>
+                            <p:column headerText="Fecha">
+                                <p:outputLabel value="#{est.fecha}"/>
+                            </p:column>
+                        </p:dataTable>
 
-                        </tr>
-                        <tr>
-                            <td>005</td>
-                            <td>Jose Hernandez</td>
-                            <td>$40.00</td>
-                            <td>Tarjeta de credito</td>
-
-                        </tr>
-                        <tr>
-                            <td>007</td>
-                            <td>Lourdes Salazar</td>
-                            <td>$10.50</td>
-                            <td>Efectivo</td>
-
-                        </tr>
-                    </table>
-                </p:tab>
-                <p:tab title="Mensuales">
-                    <p:chart type="line" model="#{chartView.model}" style="height: 400px;"/>
-                </p:tab>
+                    </p:tab>
+                    <p:tab title="Mensuales">
+                        <p:chart type="line" model="#{chartView.model}" style="height: 400px;"/>
+                    </p:tab>
 
 
-            </p:tabView>
+                </p:tabView>
+            </h:form>
         </ui:define>
     </ui:composition>
 
 </html>
-
