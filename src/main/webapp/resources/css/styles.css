@@ -258,3 +258,9 @@ li.ui-corner-top{
 
     border:none !important;
 }
+
+
+/*Nuevos cambios*/
+.textTitulo{
+    font-weight: bold;
+}

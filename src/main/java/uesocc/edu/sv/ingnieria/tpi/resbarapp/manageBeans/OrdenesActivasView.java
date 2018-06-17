@@ -21,6 +21,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import org.primefaces.model.LazyDataModel;
 import sv.edu.uesocc.disenio2018.resbar.backend.controller.ManejadorOrdenes;
+import sv.edu.uesocc.disenio2018.resbar.backend.entities.DetalleOrden;
 import sv.edu.uesocc.disenio2018.resbar.backend.entities.Orden;
 
 /**
@@ -36,7 +37,10 @@ public class OrdenesActivasView implements Serializable {
     private Orden registro;
     private double valorSpinner;
     private double cambio;
+    private double subTotalDetalle;
     private List<Orden> listaOrdenes;
+    private List<DetalleOrden> listaDetalles;
+    private Orden orden;
 
     /**
      * Creates a new instance of OrdenesActivasview
@@ -98,6 +102,11 @@ public class OrdenesActivasView implements Serializable {
     public void buscarOrdenes(String dato) {
         this.setListaOrdenes(ManejadorOrdenes.BuscarActivas(dato));
     }
+    
+    public void mostrarDetalles(int idOrden){
+        this.setOrden(ManejadorOrdenes.Obtener(idOrden));
+        this.setListaDetalles(this.orden.detalle);
+    }
 
     //Getter y Setter
     public double getCambio() {
@@ -140,5 +149,31 @@ public class OrdenesActivasView implements Serializable {
     public void setRegistro(Orden registro) {
         this.registro = registro;
     }
+
+    public List<DetalleOrden> getListaDetalles() {
+        return listaDetalles;
+    }
+
+    public void setListaDetalles(List<DetalleOrden> listaDetalles) {
+        this.listaDetalles = listaDetalles;
+    }
+
+    public Orden getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Orden orden) {
+        this.orden = orden;
+    }
+
+    public double getSubTotalDetalle() {
+        DecimalFormat df = new DecimalFormat("#.00");
+        return Double.parseDouble(df.format(subTotalDetalle));
+    }
+
+    public void setSubTotalDetalle(double subTotalDetalle) {
+        this.subTotalDetalle = subTotalDetalle;
+    }
+    
 
 }
