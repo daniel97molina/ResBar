@@ -41,6 +41,7 @@ public class OrdenesActivasView implements Serializable {
     private List<Orden> listaOrdenes;
     private List<DetalleOrden> listaDetalles;
     private Orden orden;
+    private String dato;
 
     /**
      * Creates a new instance of OrdenesActivasview
@@ -99,13 +100,58 @@ public class OrdenesActivasView implements Serializable {
         this.setCambio(this.valorSpinner - Double.parseDouble(this.getRegistro().getTotal().toString()));
     }
 
-    public void buscarOrdenes(String dato) {
-        this.setListaOrdenes(ManejadorOrdenes.BuscarActivas(dato));
-    }
-    
-    public void mostrarDetalles(int idOrden){
+    public void mostrarDetalles(int idOrden) {
         this.setOrden(ManejadorOrdenes.Obtener(idOrden));
         this.setListaDetalles(this.orden.detalle);
+    }
+
+    //Aun no usada
+    public void buscarOrdenes(final String dato) {
+        //this.setListaOrdenes(ManejadorOrdenes.BuscarActivas(dato));
+        try {
+            this.modelo = new LazyDataModel<Orden>() {
+                @Override
+                public Object getRowKey(Orden object) {
+                    if (object != null) {
+                        return object.getIdOrden();
+                    }
+                    return null;
+                }
+
+                @Override
+                public Orden getRowData(String rowKey) {
+                    if (rowKey != null && !rowKey.isEmpty() && this.getWrappedData() != null) {
+                        try {
+                            Integer buscado = new Integer(rowKey);
+                            for (Orden reg : (List<Orden>) getWrappedData()) {
+                                if (reg.getIdOrden().compareTo(buscado) == 0) {
+                                    return reg;
+                                }
+                            }
+                        } catch (Exception e) {
+                            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+                        }
+                    }
+                    return null;
+                }
+
+                @Override
+                public List<Orden> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+                    List<Orden> salida = new ArrayList();
+                    try {
+                        this.setRowCount(ManejadorOrdenes.BuscarActivas(dato).size());
+                        salida = ManejadorOrdenes.BuscarActivas(dato);
+                    } catch (Exception e) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+                    }
+                    return salida;
+                }
+
+            };
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
+
     }
 
     //Getter y Setter
@@ -166,6 +212,7 @@ public class OrdenesActivasView implements Serializable {
         this.orden = orden;
     }
 
+    //No usado
     public double getSubTotalDetalle() {
         DecimalFormat df = new DecimalFormat("#.00");
         return Double.parseDouble(df.format(subTotalDetalle));
@@ -174,6 +221,14 @@ public class OrdenesActivasView implements Serializable {
     public void setSubTotalDetalle(double subTotalDetalle) {
         this.subTotalDetalle = subTotalDetalle;
     }
-    
 
+    public String getDato() {
+        return dato;
+    }
+
+    public void setDato(String dato) {
+        this.dato = dato;
+    }
+
+    
 }

@@ -14,15 +14,22 @@
         </ui:define>
 
         <ui:define name="titulo">Órdenes</ui:define>
+        
         <ui:define name="body" class="mx-3"> 
             <div id="basic">
                 <div class="divSearch">
-                    <p:inputText/>
-                    <button class="btn btn-info">Buscar</button>
+                    <h:form>
+                        <p:inputText value="#{ordenesActivasView.dato}" placeholder="Escriba su búsqueda"/>
+                        <p:commandButton value="Buscar" class="btn btn-primary btnBuscarOrdenes">
+                            <p:ajax update=":form:tablaOrdenesActivas" listener="#{ordenesActivasView.buscarOrdenes(ordenesActivasView.dato)}"/>
+                        </p:commandButton>
+                    </h:form>
                 </div>
 
                 <h:form id="form">
                     <p:dataTable var="reg" value="#{ordenesActivasView.modelo}"
+                                 class="table estiloHeader"
+                                 id="tablaOrdenesActivas"
                                  selectionMode="single"
                                  selection="#{ordenesActivasView.registro}"
                                  lazy="true"
@@ -31,7 +38,7 @@
 
                         <p:ajax event="rowSelect" update=":form:datosCliente :form:datosCliente2 :form:datosCliente3 :form:datosCliente4 :form:datosCliente5 :form:formPago:datosCliente6" oncomplete="PF('ordenSeleccionada').show()"/>
 
-                        <p:column headerText="ID Orden" >		
+                        <p:column headerText="ID Orden">		
                             <h:outputText value="#{reg.idOrden}"/>
                         </p:column>
                         <p:column headerText="Mesa">		
@@ -58,9 +65,9 @@
                                 <p:outputLabel value="Mesero: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.mesero}"/><br></br>
                             </h:panelGrid>
                             <div class="mt-4">
-                                <p:commandButton value="Agregar productos" image="ui-icon-plus" onclick="PF('dialogoAgregar').show()" class="btn btn-primary"/>
-                                <p:commandButton value="Imprimir cuenta" image="ui-icon-print"  class="btn btn-primary"/>
-                                <p:commandButton value="Modificar cuenta" image="ui-icon-pencil"  class="btn btn-primary" onclick="location.href = 'IngresarOrden.jsf?id=#{ordenesActivasView.registro.idOrden}'"/>
+                                <p:commandButton value="Agregar productos" image="ui-icon-plus" onclick="PF('dialogoAgregar').show()" class="btn btn-primary btnPrincipal"/>
+                                <p:commandButton value="Imprimir cuenta" image="ui-icon-print"  class="btn btn-primary btnPrincipal"/>
+                                <p:commandButton value="Modificar cuenta" image="ui-icon-pencil"  class="btn btn-primary btnPrincipal" onclick="location.href = 'IngresarOrden.jsf?id=#{ordenesActivasView.registro.idOrden}'"/>
                                 <p:commandButton value="Cobrar" image="ui-icon-cart" onclick="PF('dialogoDetalles').show()"  class="btn btn-primary" >
                                     <p:ajax update=":form:datosCliente3" process="@this" listener="#{ordenesActivasView.mostrarDetalles(ordenesActivasView.registro.idOrden)}"/>
                                 </p:commandButton>
@@ -83,7 +90,6 @@
 
                         <div class="container-fluid">
                             <div class="row">
-
                                 <div class="col-12">
                                     <p:outputPanel id="datosCliente3">
 
@@ -110,7 +116,7 @@
                                         <p:toolbar id="idToolbar" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
                                             <f:facet name="right" >
                                                 <h:panelGrid columns="2" style="display: inline-block" cellpadding="5" styleClass="ui-grid">
-                                                    <p:outputLabel value="Total: " class="textTitulo"/> <p:outputLabel value="$ #{ordenesActivasView.registro.total}"/><br></br>
+                                                    <p:outputLabel value="Total: " class="textTitulo"/> <p:outputLabel value="$ #{ordenesActivasView.registro.total}"/>
                                                 </h:panelGrid>
                                             </f:facet>
                                             <f:facet name="left" >
@@ -154,7 +160,7 @@
                                 </h:panelGrid>
 
                             </p:panel>
-                            <div class="mb-3">
+                            <div class="mb-3" id="botonesCobro">
                                 <p:commandButton value="Cancelar" icon="ui-icon-close" styleClass="ml-3 btn btn-primary"/>        
                                 <p:commandButton value="OK" type="submit" icon="ui-icon-check" styleClass="ml-3 btn btn-success" onclick="location.href = 'Ordenes.jsf'"/>
                             </div>

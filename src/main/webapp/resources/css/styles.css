@@ -22,7 +22,7 @@
     height: 50px;
     margin-left: 15px;
     margin-right: 15px;
-    
+
 }
 .header h5{
     position: absolute;
@@ -36,14 +36,14 @@
 }*/
 .headerButton:hover{
     cursor: pointer;
-     -webkit-filter: brightness(120%); /* Safari 6.0 - 9.0 */
+    -webkit-filter: brightness(120%); /* Safari 6.0 - 9.0 */
     filter: brightness(120%);
     transform: scale(1.10,1.10);
 }
 .header{
     box-shadow: rgba(0,0,0,0.2) 0 0 15px ;
     background-color: rgba(233,233,233,0.9);
-    
+
 }
 
 /*h3.text-center{
@@ -55,15 +55,15 @@
     margin-bottom: 12px;
     padding-top: 13px;
     background: #1e5799;
-background: -moz-linear-gradient(left, #1e5799 0%, #e8bd53 51%, #6fce4a 100%);
-background: -webkit-linear-gradient(left, #1e5799 0%,#e8bd53 51%,#6fce4a 100%);
-background: linear-gradient(to right, #1e5799 0%,#e8bd53 51%,#6fce4a 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#6fce4a',GradientType=1 );
+    background: -moz-linear-gradient(left, #1e5799 0%, #e8bd53 51%, #6fce4a 100%);
+    background: -webkit-linear-gradient(left, #1e5799 0%,#e8bd53 51%,#6fce4a 100%);
+    background: linear-gradient(to right, #1e5799 0%,#e8bd53 51%,#6fce4a 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#6fce4a',GradientType=1 );
     color: #fff;
 }
 
 .headerButton:active{
-     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
     transform: scale(1.10,1.10);
 }
@@ -143,7 +143,7 @@ navbar-brand{
     margin-bottom: 20px;
 }
 .ui-widget-overlay{
-    
+
     background: #43505e;
     opacity: 0.85;
 }
@@ -167,7 +167,7 @@ navbar-brand{
     width: 100%;
 }
 .icono img{
-    
+
     width: 20px;
     height: 20px;
     margin-left: 7px;
@@ -190,7 +190,7 @@ body{
     /*background-size: cover;*/
     /*font-family: BlinkMacSystemFont, "Segoe UI","Roboto",  "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";*/
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    
+
 }
 
 html{
@@ -218,15 +218,15 @@ html{
 .ui-dialog-titlebar{
     margin-bottom: 10px;
     color: white;
-   background: #4e83b2;
-background: -moz-linear-gradient(left, #4e83b2 0%, #cecb6f 100%);
-background: -webkit-linear-gradient(left, #4e83b2 0%,#cecb6f 100%);
-background: linear-gradient(to right, #4e83b2 0%,#cecb6f 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e83b2', endColorstr='#cecb6f',GradientType=1 );
+    background: #4e83b2;
+    background: -moz-linear-gradient(left, #4e83b2 0%, #cecb6f 100%);
+    background: -webkit-linear-gradient(left, #4e83b2 0%,#cecb6f 100%);
+    background: linear-gradient(to right, #4e83b2 0%,#cecb6f 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e83b2', endColorstr='#cecb6f',GradientType=1 );
 }
 .comentario textarea{
     width: 100%;
-    
+
 }
 .comentario{
     margin-top: 20px;
@@ -248,7 +248,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e83b2', end
 
 div .hasDatepicker{
     padding: 0 1px !important;
-    
+
 }
 .ui-corner-top > a{
     font-size: 12px !important;
@@ -263,4 +263,24 @@ li.ui-corner-top{
 /*Nuevos cambios*/
 .textTitulo{
     font-weight: bold;
+}
+
+.btnBuscarOrdenes{
+    margin-left: 10px !important;
+}
+
+.btnPrincipal{
+    margin-right: 3px;
+}
+
+#botonesCobro{
+    margin-top: 20px !important;
+}
+.ui-datatable th.ui-state-default{
+    background: #2f2d2d;
+    color: white;
+    padding: 8px;
+}
+.ui-datatable tbody td{
+    padding: 8px;
 }
