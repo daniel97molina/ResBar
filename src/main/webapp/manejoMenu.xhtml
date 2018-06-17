@@ -44,8 +44,9 @@
                     </div>
                     <p:toolbar styleClass="bg-override bg-secundary mt-3 pl-3 col-12" id="toolbar">
                         <f:facet name="left" >
-                            <p:commandButton value="Administrar Categorias" class="btn btn-primary btnAdmin" onclick="PF('modalAdminCategoria').show();"/>
-                            <p:commandButton value="Nuevo Producto" class="btn btn-primary btnAdmin ml-3" onclick="PF('modalNuevoProducto').show();" rendered="#{manejoMenu.mostrar}" actionListener="#{manejoMenu.nuevoProducto}" update=":formNuevoproducto :formModificar :formEP"></p:commandButton>
+                            <p:commandButton value="Nueva Categoria"  actionListener="#{manejoMenu.nuevaCategoria}" class="btn btn-primary btnAdmin" onclick="PF('modalNuevaCategoria').show();" update=":formNC"/>
+                            <p:commandButton value="Administrar Categoria" class="btn btn-primary btnAdmin"  onclick="PF('modalAdminCategoria').show();" rendered="#{manejoMenu.mostrar}"/>
+                            <p:commandButton value="Nuevo Producto" class="btn btn-primary btnAdmin" onclick="PF('modalNuevoProducto').show();" rendered="#{manejoMenu.mostrar}" actionListener="#{manejoMenu.nuevoProducto}" update=":formNuevoproducto :formModificar :formEP"></p:commandButton>
                             <!--<p:commandButton value="Nuevo Item" class="btn btn-primary" onclick="PF('dialogoItems').show();" ></p:commandButton>-->
                         </f:facet>
                     </p:toolbar>
@@ -54,13 +55,13 @@
 
             <!--**********************Administrar categorias****************************-->
 
-            <p:dialog header="Administrar Categorías" widgetVar="modalAdminCategoria" modal="true" height="240">
-                <p:panel >
-                    <p:commandButton value="Nueva categoria" class="botonesModal btn btn-outline-info" onclick="PF('modalNuevaCategoria').show();" actionListener="#{manejoMenu.nuevaCategoria}" />
+            <p:dialog header="Administrar Categoría" widgetVar="modalAdminCategoria" modal="true" height="190">
+                <p:panel>
+                    <!--<p:commandButton value="Nueva categoria" class="botonesModal btn btn-outline-info" onclick="PF('modalNuevaCategoria').show();" />-->
                     <p:commandButton value="Modificar una categoria" class="botonesModal btn btn-outline-info" onclick="PF('modalModificarCategoria').show();"/>
                     <p:commandButton value="Eliminar una categoria" class="botonesModal btn btn-outline-info" onclick="PF('modalEliminarCategoria').show();"/>
                 </p:panel>
-                <h:button value="Cancelar" class="btn btn-secondary mt-3" onclick="PF('modalAdminCategoria').hide();"/>
+                <p:commandButton value="Cancelar" class="btn btn-secondary mt-3" onclick="PF('modalAdminCategoria').hide();"/>
             </p:dialog>
 
 
@@ -69,43 +70,42 @@
                     <h:form id="formNC">
                         <label for="txtNombre1">Nombre:</label>
                         <p:inputText type="text" class="form-control" id="txtNombre1" placeholder="Nombre" required ="true" value="#{manejoMenu.registroCategoria.nombre}"/>
-                        <h:button value="Cancelar" class="btn btn-secondary mt-3" onclick="PF('modalNuevaCategoria').hide();$('#formNC').trigger('reset');"/>
-                        <p:commandButton value="Guardar" class="btn btn-info mt-3" actionListener="#{manejoMenu.guardarCategoria}" update=":mainForm:catgrid" onclick="PF('modalNuevaCategoria').hide();PF('modalAdminCategoria').hide();"/>
+                        <p:commandButton value="Cancelar" class="btn btn-secondary mt-3" onclick="PF('modalNuevaCategoria').hide();$('#formNC').trigger('reset');"/>
+                        <p:commandButton value="Guardar" class="btn btn-info mt-3" actionListener="#{manejoMenu.guardarCategoria}" update=":mainForm" onclick="PF('modalNuevaCategoria').hide();"/>
                     </h:form>
                 </div>
             </p:dialog>
 
-            <p:dialog header="Modificar Categoria" widgetVar="modalModificarCategoria" modal="true" height="210">
+            <p:dialog header="Modificar Categoria" widgetVar="modalModificarCategoria" modal="true" height="200">
                 <h:form id="formMC">
                 <div class="mb-3">
-                    <label for="listCategoria1" >Categoria:</label>
                     
-                    <p:selectOneMenu converter="categoriaConverter" id="listCategoria1" value="#{manejoMenu.registroCategoria}" required="true" class="btn btn-outline-info ml-4">
+                    <!--<p:selectOneMenu converter="categoriaConverter" id="listCategoria1" value="#{manejoMenu.registroCategoria}" required="true" class="btn btn-outline-info ml-4">
                         <f:selectItems value="#{manejoMenu.modeloCategoria}" var="cat" itemLabel="#{cat.nombre}" itemValue="#{cat}" />
-                        </p:selectOneMenu><br/><br/>
-
+                        </p:selectOneMenu><br/><br/>-->
+                    <label for="lblNombre">Nombre: </label><p:outputLabel value="#{manejoMenu.registroCategoria.nombre}"/>
                     <label for="txtNombre2">Nuevo Nombre:</label>
-                    <p:inputText type="text" class="form-control" id="txtNombre2" placeholder="Nuevo Nombre" required ="true" value="#{manejoMenu.registroCategoria.nombre}"/>
+                    <p:inputText type="text" class="form-control" id="txtNombre2" required ="true" value="#{manejoMenu.registroCategoria.nombre}"/>
 
-                    <h:button value="Cancelar" class="btn btn-secondary mt-3" onclick="PF('modalModificarCategoria').hide();$('#formMC').trigger('reset');"/>
-                    <p:commandButton value="Hecho" class="btn btn-info mt-3" update=":mainForm" actionListener="#{manejoMenu.modificarCategoria}" onclick="PF('modalModificarCategoria').hide();PF('modalAdminCategoria').hide()"/>
+                    <p:commandButton value="Cancelar" class="btn btn-secondary mt-3" onclick="PF('modalModificarCategoria').hide();$('#formMC').trigger('reset');"/>
+                    <p:commandButton value="Hecho" class="btn btn-info mt-3"  actionListener="#{manejoMenu.modificarCategoria}" onclick="PF('modalModificarCategoria').hide();PF('modalAdminCategoria').hide()" update=":mainForm"/>
                 </div>
                 </h:form>
             </p:dialog>
 
-            <p:dialog header="Eliminar Categoria" widgetVar="modalEliminarCategoria" modal="true" height="160">
+            <p:dialog header="Eliminar Categoria" widgetVar="modalEliminarCategoria" modal="true" width="290px" height="100px">
                 <h:form id="formEC">
-                <div class="mb-3">
+                <!--<div class="mb-3">
                     <label for="listCategoria2" >Categoria:</label>
                     <p:selectOneMenu converter="categoriaConverter" id="listCategoria2" value="#{manejoMenu.registroCategoria}" required="true" class="btn btn-outline-info ml-4">
                         <f:selectItems value="#{manejoMenu.modeloCategoria}" var="cat" itemLabel="#{cat.nombre}" itemValue="#{cat}" />
                         </p:selectOneMenu><br/>
                     <label class="mt-2">Nota: Se eliminarán los productos de esta categoria.</label><br/>
 
-
-                    <p:commandButton value="Eliminar" class="btn btn-info mt-3" update=":mainForm:catgrid" actionListener="#{manejoMenu.eliminarCategoria}" onclick="PF('modalAdminCategoria').hide();"/>
-                    <h:button value="Cancelar" class="btn btn-secondary mt-3" onclick="PF('modalEliminarCategoria').hide();$('#formEC').trigger('reset');"/>
-                </div>
+                </div>-->
+                    <p:commandButton value="Eliminar" class="btn btn-info mt-3" actionListener="#{manejoMenu.eliminarCategoria}" onclick="PF('modalAdminCategoria').hide();PF('modalEliminarCategoria').hide();" update=":mainForm"/>
+                    <p:commandButton value="Cancelar" class="btn btn-secondary mt-3" onclick="PF('modalEliminarCategoria').hide();$('#formEC').trigger('reset');"/>
+                
                 </h:form>
             </p:dialog>
 
@@ -118,13 +118,13 @@
                     <p:commandButton value="Eliminar" class="botonesModal btn btn-outline-info" onclick="PF('modalEliminarProducto').show();"/>
                 </p:panel>
 
-                <h:button value="Cancelar" class="btn btn-info mt-2" onclick="PF('modalAdminProducto').show();"/>
+                <p:commandButton value="Cancelar" class="btn btn-info mt-2" onclick="PF('modalAdminProducto').hide();"/>
             </p:dialog>
 
-            <p:dialog header="Nuevo producto" widgetVar="modalNuevoProducto" modal="true" width="320px" height="300px">
+            <p:dialog header="Nuevo producto" widgetVar="modalNuevoProducto" modal="true" width="320px" height="310px">
                 <h:form id="formNuevoproducto">
                     <div class="mb-3">
-                        <label for="listCategoria3" >Categoria:</label>
+                        <label for="listCategoria3" >Categoria: </label>
                         <h:outputLabel id="listCategoria3" value="#{manejoMenu.registroCategoria.nombre}"/>
                     </div>
 
@@ -157,12 +157,12 @@
 
 
                     <p:commandButton value="Hecho" class="btn btn-secondary mt-1"   actionListener="#{manejoMenu.guardarProducto}" onclick="PF('modalAdminProducto').hide();PF('modalNuevoProducto').hide();" update=":mainForm:catgrid :mainForm:prodTable" />
-                    <h:button value="Cancelar" class="btn btn-secondary mt-1" onclick="PF('modalNuevoProducto').hide();$('#formNuevoproducto').trigger('reset');"/>
+                    <p:commandButton value="Cancelar" class="btn btn-secondary mt-1" onclick="PF('modalNuevoProducto').hide();$('#formNuevoproducto').trigger('reset');"/>
                 </h:form>
             </p:dialog>
 
 
-            <p:dialog header="Modificar producto" widgetVar="modalModificarProducto" modal="true" width="320px" height="260px">
+            <p:dialog header="Modificar producto" widgetVar="modalModificarProducto" modal="true" width="320px" height="265px">
                 <h:form id="formModificar">
 
                     <div class="mb-3">
@@ -197,15 +197,15 @@
 
 
                     <p:commandButton value="Hecho" class="btn btn-secondary mt-1"  actionListener="#{manejoMenu.modificarProducto}" onclick="PF('modalAdminProductos').hide();PF('modalModificarProducto').hide();" update=":mainForm:catgrid :mainForm:prodTable"/>
-                    <h:button value="Cancelar" class="btn btn-secondary mt-1" onclick="PF('modalModificarProducto').hide();$('#formModificar').trigger('reset');"/>
+                    <p:commandButton value="Cancelar" class="btn btn-secondary mt-1" onclick="PF('modalModificarProducto').hide();$('#formModificar').trigger('reset');"/>
                 </h:form>
             </p:dialog>
 
 
-            <p:dialog header="Eliminar producto" widgetVar="modalEliminarProducto" modal="true" width="270px" height="100px">
+            <p:dialog header="Eliminar producto" widgetVar="modalEliminarProducto" modal="true" width="280px" height="90px">
                 <h:form id="formEP">
                     <p:commandButton value="Aceptar" class="btn btn-info mt-1 mr-2" actionListener="#{manejoMenu.eliminarProducto}" onclick="PF('modalAdminProductos').hide();PF('modalEliminarProducto').hide();" update=":mainForm:catgrid :mainForm:prodTable"/>
-                    <h:button value="Cancelar" class="btn btn-secondary mt-1" onclick="PF('modalEliminarProducto').hide();$('#formEP').trigger('reset');"/>
+                    <p:commandButton value="Cancelar" class="btn btn-secondary mt-1" onclick="PF('modalEliminarProducto').hide();$('#formEP').trigger('reset');"/>
                 </h:form>
             </p:dialog>
 

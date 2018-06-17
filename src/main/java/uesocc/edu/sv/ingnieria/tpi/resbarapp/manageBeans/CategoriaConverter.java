@@ -38,6 +38,7 @@ public class CategoriaConverter implements Converter {
                         }
                     }
                 }
+                System.out.println(categoria.nombre);
                 return categoria;
             } catch (NumberFormatException ne) {
                 throw new ConverterException();

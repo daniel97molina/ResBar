@@ -50,6 +50,7 @@ public class ManejoMenu implements Serializable {
 
     public void guardarCategoria(ActionEvent ae) {
         if (this.registroCategoria != null) {
+            System.out.println("Entro guardar categoria");
             this.mostrar = false;
             this.registroCategoria.idCategoria=ManejadorCategorias.ObtenerId();
             ManejadorCategorias.Insertar(this.registroCategoria);
@@ -74,16 +75,20 @@ public class ManejoMenu implements Serializable {
     }
 
     public void eliminarCategoria(ActionEvent ae) {
+        System.out.println("entro eliminar cat null");
         if (this.registroCategoria != null) {
             this.mostrar = false;
-            
+                        System.out.println("entro eliminar cat no null");
+
             ManejadorCategorias.Eliminar(this.registroCategoria);
         }
     }
 
     public void modificarCategoria(ActionEvent ae) {
+        System.out.println("entro mod cat null");
         if (this.registroCategoria != null) {
             this.mostrar = false;
+                        System.out.println("entro mod cat no null");
 
             ManejadorCategorias.Actualizar(this.registroCategoria);
         }
@@ -98,6 +103,7 @@ public class ManejoMenu implements Serializable {
     public void nuevaCategoria(ActionEvent ae) {
         this.registroCategoria = new Categoria();
         this.mostrar = false;
+        System.out.println("entro nueva cat");
     }
 
     public void nuevoProducto(ActionEvent ae) {
