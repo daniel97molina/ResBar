@@ -8,10 +8,10 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>omega</param-value>
     </context-param>
-<!--    <context-param>
-    <param-name>primefaces.THEME</param-name>
-    <param-value>none</param-value>
-  </context-param>-->
+    <!--<context-param>
+      <param-name>primefaces.THEME</param-name>
+      <param-value>none</param-value>
+    </context-param>-->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -29,4 +29,16 @@
     <welcome-file-list>
         <welcome-file>Ordenes.jsf</welcome-file>
     </welcome-file-list>
+    
+    <filter>
+        <filter-name>cache</filter-name>
+        <filter-class>uesocc.edu.sv.ingnieria.tpi.resbarapp.filter.NoCacheFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>cache</filter-name>
+        <url-pattern>*.jsf</url-pattern>
+    </filter-mapping>
+
+
+
 </web-app>
