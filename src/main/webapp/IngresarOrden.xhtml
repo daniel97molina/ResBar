@@ -47,7 +47,7 @@
 
 
                         <div class="col-8">
-                            <p:dataTable style="width: 100%" id="tabla" value="#{ordenView.orden.detalle}" var="detalle" scrollable="true" scrollHeight="400px" emptyMessage="Orden vacía">
+                            <p:dataTable style="width: 100%" id="tabla" value="#{ordenView.orden.detalle}" var="detalle" scrollable="true" scrollHeight="430px" emptyMessage="Orden vacía">
                                 <p:column headerText="Producto" style="width: 200px">
                                     <h:outputText value="#{detalle.producto.nombre}"/>
                                 </p:column>
@@ -55,17 +55,17 @@
                                     <div class="spinner">
                                         <p:commandButton class="btn btn-outline-info pl-0" style="width: 38px;" update="tabla formulario:botones" 
                                                          value="-" action="#{ordenView.reducirDetalle(detalle.producto.idProducto, ordenView.orden.detalle)}"
-                                                         process="tabla"></p:commandButton>
+                                                         process="tabla formulario:botones"></p:commandButton>
                                         <h:outputText value="#{detalle.cantidad}"/>
                                         <p:commandButton class="btn btn-outline-info ml-3 mr-0 pl-0" style="width: 38px" update="tabla formulario:botones" value="+" 
                                                          actionListener="#{ordenView.agregarDetalle(detalle.producto.idProducto, 1,ordenView.orden.detalle)}"
-                                                         process="tabla"></p:commandButton>
+                                                         process="tabla formulario:botones"></p:commandButton>
                                     </div>
                                 </p:column>
                                 <p:column style="width:25px;text-align: center">
                                     <p:commandButton update="tabla formulario:botones" style="background-color: #ff6666;border: 0;color: white;" icon="ui-icon-closethick" 
                                                      actionListener="#{ordenView.eliminarDetalle(detalle.producto.idProducto, ordenView.orden.detalle)}"
-                                                     process="tabla"/>
+                                                     process="tabla formulario:botones"/>
                                 </p:column>
                             </p:dataTable>
                         </div>

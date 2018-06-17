@@ -53,8 +53,10 @@ public class OrdenView implements Serializable {
                 orden = ManejadorOrdenes.Obtener(id);
                 creandoNuevo = false;
             } catch (Exception e) {
-                orden = new Orden();
                 creandoNuevo = true;
+                orden = new Orden();
+                orden.fecha = new Date();
+                orden.detalle = new ArrayList<>();
             }
         }
     }
@@ -68,29 +70,30 @@ public class OrdenView implements Serializable {
 
         this.calcularTotalLocal();
         try {
-            System.out.println("CREANDO" + creandoNuevo);
+            this.orden.detalle.forEach(d -> {
+                d.orden = this.orden;
+                d.detalleOrdenPK.idOrden = this.orden.idOrden;
+            });
             if (creandoNuevo) {
                 this.orden.idOrden = ManejadorOrdenes.ObtenerId();
-                this.orden.detalle.forEach( d ->{
-                    d.orden = this.orden;
-                    d.detalleOrdenPK.idOrden = this.orden.idOrden;
-                });
+
                 ManejadorOrdenes.Insertar(this.orden);
-                crearMensaje("Exito", "Orden creada",true);
+                crearMensaje("Exito", "Orden creada", true);
             } else {
+
                 ManejadorOrdenes.Actualizar(this.orden);
-                crearMensaje("Exito", "Orden actualizada",true);
+                crearMensaje("Exito", "Orden actualizada", true);
             }
             FacesContext.getCurrentInstance().getExternalContext().redirect("Ordenes.jsf");
         } catch (ErrorAplicacion ea) {
             String[] v = ea.getMessage().split("\\$");
-            if(v.length > 1){
-                crearMensaje("Error", v[1],false);
-            }else{
+            if (v.length > 1) {
+                crearMensaje("Error", v[1], false);
+            } else {
                 crearMensaje("Error", ea.getMessage(), false);
             }
         } catch (Exception e) {
-            crearMensaje("Error", e.getMessage(),false);
+            crearMensaje("Error", e.getMessage(), false);
         }
     }
 
@@ -121,26 +124,30 @@ public class OrdenView implements Serializable {
 
     public void reducirDetalle(int id, List<DetalleOrden> detalles) {
         System.out.println("id" + id);
-        detalles.stream().filter((d) -> (Objects.equals(d.producto.idProducto, id))).forEachOrdered((d) -> {
-            if (d.cantidad.compareTo(BigDecimal.ONE) > 0) {
-                d.cantidad = d.cantidad.subtract(new BigDecimal(1));
-                System.out.println("reduciendo");
-                this.calcularTotalLocal();
-            } else {
-                this.eliminarDetalle(id, detalles);
+        for (DetalleOrden d : detalles) {
+            if (Objects.equals(d.producto.idProducto, id)) {
+                if (d.cantidad.compareTo(BigDecimal.ONE) > 0) {
+                    d.cantidad = d.cantidad.subtract(new BigDecimal(1));
+                    System.out.println("reduciendo");
+                    this.calcularTotalLocal();
+                } else {
+                    detalles.remove(d);
+                }
+                break;
             }
-        });
+        }
         soutDetalle();
     }
 
     public void eliminarDetalle(int id, List<DetalleOrden> detalle) {
-        System.out.println("id eliminar: "+id);
+        System.out.println("id eliminar: " + id);
         for (int i = 0; i < detalle.size(); i++) {
             if (detalle.get(i).producto.idProducto.equals(id)) {
                 detalle.remove(i);
                 break;
             }
         }
+        calcularTotalLocal();
     }
 
     public void agregarDetalle(int id, int cantidad, List<DetalleOrden> detalles) {
@@ -160,7 +167,7 @@ public class OrdenView implements Serializable {
             det.cantidad = new BigDecimal(cantidad);
 
             DetalleOrdenPK dopk = new DetalleOrdenPK();
-            
+
             dopk.idProducto = det.producto.idProducto;
             det.detalleOrdenPK = dopk;
             detalles.add(det);
