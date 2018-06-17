@@ -276,11 +276,12 @@ li.ui-corner-top{
 #botonesCobro{
     margin-top: 20px !important;
 }
-.ui-datatable th.ui-state-default{
+/*.ui-datatable th.ui-state-default{
     background: #2f2d2d;
     color: white;
     padding: 8px;
+    font-weight: bold;
 }
 .ui-datatable tbody td{
     padding: 8px;
-}
+}*/
