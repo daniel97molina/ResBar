@@ -14,20 +14,22 @@
         </ui:define>
 
         <ui:define name="titulo">Órdenes</ui:define>
-        
+
         <ui:define name="body" class="mx-3"> 
             <div id="basic">
                 <div class="divSearch">
                     <h:form>
                         <p:inputText value="#{ordenesActivasView.dato}" placeholder="Escriba su búsqueda"/>
-                        <p:commandButton value="Buscar" class="btn btn-primary btnBuscarOrdenes">
-                            <p:ajax update=":form:tablaOrdenesActivas" listener="#{ordenesActivasView.buscarOrdenes(ordenesActivasView.dato)}"/>
+                        <p:commandButton value="Buscar" class="btn btn-primary btnBuscarOrdenes" update=":form:tablaOrdenesActivas" actionListener="#{ordenesActivasView.buscarOrdenes(ordenesActivasView.dato)}">
+                            <!--p:ajax update=":form:tablaOrdenesActivas" listener="#{ordenesActivasView.buscarOrdenes(ordenesActivasView.dato)}"/-->
                         </p:commandButton>
                     </h:form>
                 </div>
 
                 <h:form id="form">
                     <p:dataTable var="reg" value="#{ordenesActivasView.modelo}"
+                                 scrollHeight="300"
+                                 scrollable="true"
                                  class="table estiloHeader"
                                  id="tablaOrdenesActivas"
                                  selectionMode="single"
@@ -65,8 +67,8 @@
                                 <p:outputLabel value="Mesero: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.mesero}"/><br></br>
                             </h:panelGrid>
                             <div class="mt-4">
-                                <p:commandButton value="Agregar productos" image="ui-icon-plus" onclick="PF('dialogoAgregar').show()" class="btn btn-primary btnPrincipal"/>
-                                <p:commandButton value="Imprimir cuenta" image="ui-icon-print"  class="btn btn-primary btnPrincipal"/>
+                                <p:commandButton value="Agregar productos" image="ui-icon-plus"  onclick="location.href = 'IngresarOrden.jsf?id=#{ordenesActivasView.registro.idOrden}&amp;agregar=true'" class="btn btn-primary btnPrincipal"/>
+                                <p:commandButton value="Imprimir cuenta" image="ui-icon-print" actionListener="#{impresionTiketsView.imprimirCB(ordenesActivasView.registro.idOrden)}" class="btn btn-primary btnPrincipal"/>
                                 <p:commandButton value="Modificar cuenta" image="ui-icon-pencil"  class="btn btn-primary btnPrincipal" onclick="location.href = 'IngresarOrden.jsf?id=#{ordenesActivasView.registro.idOrden}'"/>
                                 <p:commandButton value="Cobrar" image="ui-icon-cart" onclick="PF('dialogoDetalles').show()"  class="btn btn-primary" >
                                     <p:ajax update=":form:datosCliente3" process="@this" listener="#{ordenesActivasView.mostrarDetalles(ordenesActivasView.registro.idOrden)}"/>
@@ -94,6 +96,8 @@
                                     <p:outputPanel id="datosCliente3">
 
                                         <p:dataTable var="detalle" value="#{ordenesActivasView.listaDetalles}"
+                                                     scrollHeight="280"
+                                                     scrollable="true"
                                                      class="table table-striped table-bordered table-hover"
                                                      lazy="true"
                                                      rows="1000000"
@@ -121,7 +125,7 @@
                                             </f:facet>
                                             <f:facet name="left" >
                                                 <div>
-                                                    <p:commandButton class="ml-3 btn btn-primary" value="Imprimir" image="ui-icon-print"/>
+                                                    <p:commandButton class="ml-3 btn btn-primary" value="Imprimir" image="ui-icon-print" actionListener="#{impresionTiketsView.imprimirCB(ordenesActivasView.registro.idOrden)}"/>
                                                     <p:commandButton class="ml-3 btn btn-success" image="ui-icon-cart" value="Cobrar" onclick="PF('dialogoCobro').show();"/>
                                                 </div>
                                             </f:facet>
