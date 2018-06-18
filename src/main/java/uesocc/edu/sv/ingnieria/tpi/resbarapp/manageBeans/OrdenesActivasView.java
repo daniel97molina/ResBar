@@ -230,5 +230,9 @@ public class OrdenesActivasView implements Serializable {
         this.dato = dato;
     }
 
+    public void inhabilitar(Orden orden){
+        
+        
+    }
     
 }

@@ -38,7 +38,7 @@
                                  rows="1000000"
                                  emptyMessage="No hay ninguna orden activa">
 
-                        <p:ajax event="rowSelect" update=":form:datosCliente :form:datosCliente2 :form:datosCliente3 :form:datosCliente4 :form:datosCliente5 :form:formPago:datosCliente6" oncomplete="PF('ordenSeleccionada').show()"/>
+                        <p:ajax event="rowSelect" update=":form:datosCliente :form:datosCliente2 :form:datosCliente3 :form:datosCliente4 :form:formPago:datosCliente6" oncomplete="PF('ordenSeleccionada').show()"/>
 
                         <p:column headerText="ID Orden">		
                             <h:outputText value="#{reg.idOrden}"/>
@@ -163,108 +163,12 @@
                                     <p:outputLabel id="ajaxSpinnerValue" value="#{ordenesActivasView.cambio}"/>
                                 </h:panelGrid>
 
+                                <div class="mb-3" id="botonesCobro">
+                                    <p:commandButton value="Cancelar" icon="ui-icon-close" styleClass="ml-3 btn btn-primary" onclick="location.href = 'Ordenes.jsf'"/>        
+                                    <p:commandButton value="OK" icon="ui-icon-check" styleClass="ml-3 btn btn-success" actionListener="#{ordenesActivasView.inhabilitar(ordenesActivasView.registro)}" update=":form:tablaOrdenesActivas" onclick="location.href = 'Ordenes.jsf'"/>
+                                </div>
                             </p:panel>
-                            <div class="mb-3" id="botonesCobro">
-                                <p:commandButton value="Cancelar" icon="ui-icon-close" styleClass="ml-3 btn btn-primary"/>        
-                                <p:commandButton value="OK" type="submit" icon="ui-icon-check" styleClass="ml-3 btn btn-success" onclick="location.href = 'Ordenes.jsf'"/>
-                            </div>
                         </h:form>
-                    </p:dialog>
-
-
-                    <p:dialog header="Agregar Productos" widgetVar="dialogoAgregar" modal="true" width="75%" height="500px" resizable="false" showEffect="fade">
-
-                        <p:outputPanel id="datosCliente5">
-                            <h:panelGrid columns="2" style="display: inline-block" cellpadding="5" styleClass="ui-grid">
-                                <p:outputLabel value="ID Orden: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.idOrden}"/>
-                                <p:outputLabel value="Cliente: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.cliente}"/>
-                            </h:panelGrid>
-                            <h:panelGrid columns="2" style="display: inline-block; margin-left: 80px" cellpadding="5" styleClass="ui-grid">
-                                <p:outputLabel value="Mesa: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.mesa}"/>
-                                <p:outputLabel value="Mesero: " class="textTitulo"/> <p:outputLabel value="#{ordenesActivasView.registro.mesero}"/>
-                            </h:panelGrid>
-                        </p:outputPanel>
-
-                        <div class="divSearch">
-                            <p:inputText></p:inputText>
-                            <button class="btn btn-info">Buscar</button>
-                        </div>
-
-                        <div class="container-fluid">
-
-
-                            <div class="row">
-                                <div class="col-2 list-group lista-categoria pr-0">
-                                    <a class="list-group-item list-group-item-secondary ">Categoría:</a>
-                                    <a class="list-group-item list-group-item-action">Bebidas</a>
-                                    <a class="list-group-item list-group-item-action">Entradas</a>
-                                    <a class="list-group-item list-group-item-action">Postres</a>
-                                    <a class="list-group-item list-group-item-action">Platlillos</a>
-                                    <a class="list-group-item list-group-item-action">Bocas</a>
-                                </div>
-
-                                <div class="col-10 pl-3 pr-0">
-                                    <table class="table table-striped table-hover table-bordered">
-                                        <thead class="table-dark">
-                                            <th>Nombre</th>
-                                            <th class="text-center">Precio</th>
-                                            <th class="text-center">Cantidad</th>
-                                        </thead>
-                                        <tr>
-                                            <td>Café</td>
-                                            <td class="text-center">$ 0.25</td>
-                                            <td>
-                                                <div class="spinner" >
-                                                    <button class="btn btn-outline-info">-</button>
-                                                    <label>0</label>
-                                                    <button  class="btn btn-outline-info">+</button>
-                                                </div>
-                                            </td>
-                                        </tr>                                
-                                        <tr>
-                                            <td>Cocacola</td>
-                                            <td class="text-center">$ 0.50</td>
-                                            <td>
-                                                <div class="spinner" >
-                                                    <button class="btn btn-outline-info">-</button>
-                                                    <label>0</label>
-                                                    <button class="btn btn-outline-info">+</button>
-                                                </div>
-                                            </td>
-                                        </tr>                                
-                                        <tr>
-                                            <td>Colachampan</td>
-                                            <td class="text-center">$ 0.50</td>
-                                            <td>
-                                                <div class="spinner" >
-                                                    <button class="btn btn-outline-info">-</button>
-                                                    <label>0</label>
-                                                    <button  class="btn btn-outline-info">+</button>
-                                                </div>
-                                            </td>
-                                        </tr>                                
-                                        <tr>
-                                            <td>Seven Up</td>
-                                            <td class="text-center">$ 0.75</td>
-                                            <td>
-                                                <div class="spinner" >
-                                                    <button class="btn btn-outline-info">-</button>
-                                                    <label>0</label>
-                                                    <button class="btn btn-outline-info">+</button>
-                                                </div>
-                                            </td>
-                                        </tr>                                
-                                    </table>                   
-                                </div>
-                                <p:toolbar id="idToolbar2" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
-                                    <f:facet name="right" >
-                                        <p:commandButton onclick="location.href = 'Ordenes.jsf'" value="Cancelar" icon="ui-icon-close" styleClass="ml-3 btn btn-primary"/>
-                                        <p:commandButton value="OK" icon="ui-icon-check" onclick="location.href = 'Ordenes.jsf'" styleClass="ml-3 btn btn-success"/>
-                                    </f:facet>
-                                </p:toolbar>
-                            </div>
-                        </div>
-
                     </p:dialog>
 
 
