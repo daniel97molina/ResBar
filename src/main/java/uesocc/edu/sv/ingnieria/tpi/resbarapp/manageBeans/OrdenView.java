@@ -18,6 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import org.primefaces.PrimeFaces;
 import sv.edu.uesocc.disenio2018.resbar.backend.controller.ManejadorOrdenes;
 import sv.edu.uesocc.disenio2018.resbar.backend.controller.ManejadorProductos;
 import sv.edu.uesocc.disenio2018.resbar.backend.controller.exceptions.ErrorAplicacion;
@@ -34,6 +35,7 @@ import sv.edu.uesocc.disenio2018.resbar.backend.entities.Orden;
 public class OrdenView implements Serializable {
 
     private int id;
+    boolean agregar = false;
     private Orden orden;
     private boolean creandoNuevo = true;
     private List<DetalleOrden> detallesAgregar = new ArrayList<>();
@@ -44,6 +46,10 @@ public class OrdenView implements Serializable {
     @PostConstruct
     protected void init() {
         id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().getOrDefault("id", "0"));
+        agregar = Boolean.parseBoolean(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().getOrDefault("agregar", "false"));
+        if(agregar){
+            PrimeFaces.current().executeScript("PF('dialogo').show();");
+        }
         if (id == 0) {
             creandoNuevo = true;
             orden = new Orden();
@@ -112,6 +118,11 @@ public class OrdenView implements Serializable {
         });
         this.calcularTotalLocal();
         this.detallesAgregar.clear();
+        if(agregar){
+            this.confirmar();
+        }else{
+            PrimeFaces.current().executeScript("PF('dialogo').hide();");
+        }
     }
 
     public int obtenerCantidadAgregar(int idProducto) {
