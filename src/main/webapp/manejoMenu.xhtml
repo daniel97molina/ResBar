@@ -159,8 +159,8 @@
                     </h:panelGrid>
 
 
-                    <p:commandButton value="Hecho" class="btn btn-secondary mt-1" icon="ui-icon-check" actionListener="#{manejoMenu.guardarProducto}" onclick="PF('modalAdminProducto').hide();PF('modalNuevoProducto').hide();" update=":mainForm:catgrid :mainForm:prodTable growl" />
                     <p:commandButton value="Cancelar" icon="ui-icon-close" class="btn btn-secondary mt-1" onclick="PF('modalNuevoProducto').hide();$('#formNuevoproducto').trigger('reset');"/>
+                    <p:commandButton value="Aceptar" class="btn btn-secondary mt-1" icon="ui-icon-check" actionListener="#{manejoMenu.guardarProducto}" onclick="PF('modalAdminProducto').hide();PF('modalNuevoProducto').hide();" update=":mainForm:catgrid :mainForm:prodTable growl" />
                 </h:form>
                 </div>
             </p:dialog>
@@ -202,8 +202,8 @@
 
 
 
-                    <p:commandButton value="Hecho" icon="ui-icon-check" class="btn btn-secondary mt-1"  actionListener="#{manejoMenu.modificarProducto}" onclick="PF('modalAdminProductos').hide();PF('modalModificarProducto').hide();" update=":mainForm:catgrid :mainForm:prodTable growl"/>
                     <p:commandButton value="Cancelar" icon="ui-icon-close" class="btn btn-secondary mt-1" onclick="PF('modalModificarProducto').hide();$('#formModificar').trigger('reset');"/>
+                    <p:commandButton value="Aceptar" icon="ui-icon-check" class="btn btn-secondary mt-1"  actionListener="#{manejoMenu.modificarProducto}" onclick="PF('modalAdminProductos').hide();PF('modalModificarProducto').hide();" update=":mainForm:catgrid :mainForm:prodTable growl"/>
                 </h:form>
                 </div>
             </p:dialog>
