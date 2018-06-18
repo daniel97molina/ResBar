@@ -35,17 +35,20 @@ public class manejoEstadistica implements Serializable {
     public void onDateSelect(SelectEvent event) throws ParseException {
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", dateFormat.format(event.getObject())));
         fechaSeleccionada = dateFormat.format(event.getObject());
         fecha1 = dateFormat.parse(fechaSeleccionada);
-        System.out.println("FECHA1=" + fecha1);
+        fecha1.setHours(0);
+        fecha1.setMinutes(0);
+        fecha1.setSeconds(0);
+       System.out.println("FECHA1=" + fecha1);
         fecha2 = dateFormat.parse(fechaSeleccionada);
         fecha2.setHours(23);
         fecha2.setMinutes(59);
         fecha2.setSeconds(59);
-        System.out.println("fecha2=" + fecha2);
-        historico = ManejadorOrdenes.ObtenerVentas(fecha1,fecha2);
+       System.out.println("fecha2=" + fecha2);
+        historico = ManejadorOrdenes.ObtenerVentas(fecha1, fecha2);
         System.out.println(historico);
     }
 

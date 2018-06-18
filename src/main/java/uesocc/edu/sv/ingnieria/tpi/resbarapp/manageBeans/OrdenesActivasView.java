@@ -231,8 +231,8 @@ public class OrdenesActivasView implements Serializable {
     }
 
     public void inhabilitar(Orden orden){
-        
-        
+        orden.estado = false;
+        ManejadorOrdenes.Actualizar(orden);
     }
     
 }

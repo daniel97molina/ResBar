@@ -55,15 +55,18 @@ public class OrdenView implements Serializable {
             orden = new Orden();
             orden.fecha = new Date();
             orden.detalle = new ArrayList<>();
+            orden.estado = true;
         } else {
             try {
                 orden = ManejadorOrdenes.Obtener(id);
+                orden.estado = true;
                 creandoNuevo = false;
             } catch (Exception e) {
                 creandoNuevo = true;
                 orden = new Orden();
                 orden.fecha = new Date();
                 orden.detalle = new ArrayList<>();
+                orden.estado = true;
             }
         }
     }

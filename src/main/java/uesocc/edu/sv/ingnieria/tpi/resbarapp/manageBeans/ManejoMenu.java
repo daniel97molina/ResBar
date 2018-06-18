@@ -100,7 +100,8 @@ public class ManejoMenu implements Serializable {
         if (this.registroCategoria != null) {
             try {
                 this.mostrar = false;
-
+                this.registroCategoria.productos.clear();
+                ManejadorCategorias.Actualizar(registroCategoria);
                 ManejadorCategorias.Eliminar(this.registroCategoria);
                 this.crearMensaje("Exito", "Categoría eliminada", true);
                 this.modeloCategoria = ManejadorCategorias.Obtener(false);
