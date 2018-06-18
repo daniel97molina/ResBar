@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -70,17 +71,20 @@ public class OrdenView implements Serializable {
 
         this.calcularTotalLocal();
         try {
-            this.orden.detalle.forEach(d -> {
-                d.orden = this.orden;
-                d.detalleOrdenPK.idOrden = this.orden.idOrden;
-            });
+
             if (creandoNuevo) {
                 this.orden.idOrden = ManejadorOrdenes.ObtenerId();
-
+                this.orden.detalle.forEach(d -> {
+                    d.orden = this.orden;
+                    d.detalleOrdenPK.idOrden = this.orden.idOrden;
+                });
                 ManejadorOrdenes.Insertar(this.orden);
                 crearMensaje("Exito", "Orden creada", true);
             } else {
-
+                this.orden.detalle.forEach(d -> {
+                    d.orden = this.orden;
+                    d.detalleOrdenPK.idOrden = this.orden.idOrden;
+                });
                 ManejadorOrdenes.Actualizar(this.orden);
                 crearMensaje("Exito", "Orden actualizada", true);
             }
@@ -93,6 +97,7 @@ public class OrdenView implements Serializable {
                 crearMensaje("Error", ea.getMessage(), false);
             }
         } catch (Exception e) {
+            java.util.logging.Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             crearMensaje("Error", e.getMessage(), false);
         }
     }
