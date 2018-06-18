@@ -6,11 +6,14 @@
 package uesocc.edu.sv.ingnieria.tpi.resbarapp.manageBeans;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import org.primefaces.event.SelectEvent;
@@ -50,65 +53,106 @@ public class ManejoMenu implements Serializable {
 
     public void guardarCategoria(ActionEvent ae) {
         if (this.registroCategoria != null) {
-            System.out.println("Entro guardar categoria");
-            this.mostrar = false;
-            this.registroCategoria.idCategoria=ManejadorCategorias.ObtenerId();
-            ManejadorCategorias.Insertar(this.registroCategoria);
+            try {
+                this.mostrar = false;
+                this.registroCategoria.idCategoria = ManejadorCategorias.ObtenerId();
+                ManejadorCategorias.Insertar(this.registroCategoria);
+                this.crearMensaje("Exito", "Categoria guardada", true);
+                this.modeloCategoria = ManejadorCategorias.Obtener(false);
+
+            } catch (Exception e) {
+                this.crearMensaje("Error", e.getMessage(), false);
+
+            }
         }
     }
 
     public void guardarProducto(ActionEvent ae) {
         if (this.registroProducto != null && this.registroCategoria != null) {
-            this.registroProducto.categoria = this.registroCategoria;
-            this.registroProducto.idProducto = ManejadorProductos.ObtenerID();
-            ManejadorProductos.Insertar(this.registroProducto);
-            this.modeloProducto = ManejadorProductos.ObtenerxCategoria(this.registroCategoria.getIdCategoria());
+            try {
+                this.registroProducto.categoria = this.registroCategoria;
+                this.registroProducto.idProducto = ManejadorProductos.ObtenerID();
+                ManejadorProductos.Insertar(this.registroProducto);
+                this.crearMensaje("Exito", "Producto guardado", true);
+
+                this.modeloProducto = ManejadorProductos.ObtenerxCategoria(this.registroCategoria.getIdCategoria());
+            } catch (Exception e) {
+                this.crearMensaje("Error", e.getMessage(), false);
+
+            }
         }
     }
 
     public void eliminarProducto(ActionEvent ae) {
         if (this.registroProducto != null) {
-            ManejadorProductos.Eliminar(this.registroProducto);
-            this.modeloProducto = ManejadorProductos.ObtenerxCategoria(this.registroCategoria.getIdCategoria());
+            try {
+                ManejadorProductos.Eliminar(this.registroProducto);
+                this.crearMensaje("Exito", "Producto eliminado", true);
+                this.modeloProducto = ManejadorProductos.ObtenerxCategoria(this.registroCategoria.getIdCategoria());
+            } catch (Exception e) {
+                this.crearMensaje("Error", e.getMessage(), false);
 
+            }
         }
     }
 
     public void eliminarCategoria(ActionEvent ae) {
-        System.out.println("entro eliminar cat null");
         if (this.registroCategoria != null) {
-            this.mostrar = false;
-                        System.out.println("entro eliminar cat no null");
+            try {
+                this.mostrar = false;
 
-            ManejadorCategorias.Eliminar(this.registroCategoria);
+                ManejadorCategorias.Eliminar(this.registroCategoria);
+                this.crearMensaje("Exito", "Categoría eliminada", true);
+                this.modeloCategoria = ManejadorCategorias.Obtener(false);
+                this.registroCategoria=new Categoria();
+                this.modeloProducto=Collections.EMPTY_LIST;
+            } catch (Exception e) {
+                this.crearMensaje("Error", e.getMessage(), false);
+
+            }
         }
     }
 
     public void modificarCategoria(ActionEvent ae) {
-        System.out.println("entro mod cat null");
-        if (this.registroCategoria != null) {
-            this.mostrar = false;
-                        System.out.println("entro mod cat no null");
 
-            ManejadorCategorias.Actualizar(this.registroCategoria);
+        if (this.registroCategoria != null) {
+            try {
+                this.mostrar = false;
+                System.out.println("entro mod cat no null");
+                ManejadorCategorias.Actualizar(this.registroCategoria);
+                this.crearMensaje("Exito", "Categoría actualizada", true);
+
+            } catch (Exception e) {
+                this.crearMensaje("Error", e.getMessage(), false);
+
+            }
         }
     }
 
     public void modificarProducto(ActionEvent ae) {
         if (this.registroProducto != null) {
-            ManejadorProductos.Actualizar(this.registroProducto);
+            try {
+                ManejadorProductos.Actualizar(this.registroProducto);
+                this.crearMensaje("Exito", "Producto actualizado", true);
+            } catch (Exception e) {
+                this.crearMensaje("Error", e.getMessage(), false);
+
+            }
         }
     }
 
     public void nuevaCategoria(ActionEvent ae) {
         this.registroCategoria = new Categoria();
         this.mostrar = false;
-        System.out.println("entro nueva cat");
     }
 
     public void nuevoProducto(ActionEvent ae) {
         this.registroProducto = new Producto();
-        System.out.println("entre nuevo prod :" + this.registroProducto);
+    }
+
+    private void crearMensaje(String header, String message, boolean exito) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(exito ? FacesMessage.SEVERITY_INFO : FacesMessage.SEVERITY_ERROR, header, message));
+
     }
 
     public Categoria getRegistroCategoria() {
