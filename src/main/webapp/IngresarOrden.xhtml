@@ -47,7 +47,7 @@
 
 
                         <div class="col-8">
-                            <p:dataTable style="width: 100%" id="tabla" value="#{ordenView.orden.detalle}" var="detalle" scrollable="true" scrollHeight="430px" emptyMessage="Orden vacía">
+                            <p:dataTable style="width: 100%" id="tabla" value="#{ordenView.orden.detalle}" var="detalle" scrollable="true" scrollHeight="400" emptyMessage="Orden vacía">
                                 <p:column headerText="Producto" style="width: 200px">
                                     <h:outputText value="#{detalle.producto.nombre}"/>
                                 </p:column>
@@ -88,14 +88,14 @@
                 </h:form>
             </div>
 
-            <p:dialog header="Agregar Productos" widgetVar="dialogo"  modal="true" width="75%" height="480px">
+            <p:dialog header="Agregar Productos" widgetVar="dialogo" id="dialogo" modal="true" width="75%" height="480px">
 
                 <div class="container-fluid">
 
                     <h:form id="formProductos" class="row">
 
                         <p:dataTable id="catgrid" var="cat" value="#{manejoMenu.modeloCategoria}" class="col-2 list-group lista-categoria pr-0" 
-                                     selectionMode="single" selection="#{manejoMenu.registroCategoria}"
+                                     selectionMode="single" scrollHeight="400" scrollable="true" selection="#{manejoMenu.registroCategoria}"
                                      rowKey="#{cat.idCategoria}">
                             <p:ajax update="formProductos:prodTable" event="rowSelect" listener="#{manejoMenu.filtroCategoria}"/>
                             <p:column headerText="Categorías">
@@ -126,7 +126,7 @@
                                     <p:commandButton class="btn btn-secondary" actionListener="#{ordenView.confirmarAgregarProductos()}" update=":formulario:tabla :formulario:botones" 
                                                      onclick="PF('dialogo').hide();" value="Agregar" ></p:commandButton>
                                     <p:commandButton class="btn btn-info" actionListener="#{ordenView.cancelarAgregarProductos()}" update=":formulario:tabla :formulario:botones" 
-                                                     onclick="PF('dialogo').hide();" value="Cancelar"></p:commandButton>
+                                                     value="Cancelar"></p:commandButton>
                                 </f:facet>
                             </p:toolbar>
 
