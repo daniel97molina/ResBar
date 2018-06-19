@@ -15,13 +15,13 @@
                             <p:ajax event="dateSelect" listener="#{manejoEstadistica.onDateSelect}" update="tblVentas" />
                         </p:calendar>
                         <h:outputText id="msgs" value="#{manejoEstadistica.date1}">
-                            <f:convertDateTime pattern="yyyy/MM/dd" />
+                            <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
                         </h:outputText>
                         </div>
                     </h:form>
                     <h:form id="tblVentas" class="row">
                         <p:dataTable id="prodTable"  value="#{manejoEstadistica.historico}" var="est" 
-                                     emptyMessage="No se registraron ventas el dia seleccionado" scrollable="true" scrollHeight="100px">
+                                     emptyMessage="No se registraron ventas el dia seleccionado" scrollable="true" scrollHeight="400">
                             <p:column headerText="ID">
                                 <p:outputLabel value="#{est.idOrden}"/>
                             </p:column>

@@ -27,8 +27,6 @@ import uesocc.edu.sv.ingenieria.dsi.resbarapp.impresora.PrinterService;
 public class ImpresionTiketsView {
 
     PrinterService printerService = new PrinterService();
-    ManejadorOrdenes mo = new ManejadorOrdenes();
-    ManejadorParametros parametros = new ManejadorParametros();
     Orden o = new Orden();
     String impresionC = "\t\tCocina\n";
     String impresionB = "\t\tBebida\n";
@@ -40,7 +38,7 @@ public class ImpresionTiketsView {
 
         byte[] cutP = new byte[]{0x1d, 'V', 1};
 
-        nueva = mo.Obtener(idOrden);
+        nueva = ManejadorOrdenes.Obtener(idOrden);
         List<DetalleOrden> det = new ArrayList<DetalleOrden>();
         det = nueva.detalle;
 
@@ -68,7 +66,7 @@ public class ImpresionTiketsView {
 //        impresionC += " Boquitas :\t\t\t2\n";
         impresionC += "------------------------------------------------\n";
         impresionC += "Comentarios:" + nueva.comentario + "\n\n\n";
-        impresionC += "total: $ " + nueva.total + "\n";
+//        impresionC += "Total: $ " + nueva.total + "\n";
         impresionC += "------------------------------------------------\n\n\n\n\n";
 
         printerService.printString("POS-80C", impresionC);
@@ -77,17 +75,20 @@ public class ImpresionTiketsView {
         impresionB += "------------------------------------------------\n";
         impresionB += "Cliente:" + nueva.cliente + "\t\tFecha: " + nueva.fecha + "\n";
         impresionB += "# de ticket:" + nueva.idOrden + "\t\t\tMesa:" + nueva.mesa + "\n";
+
+//        Calendar calendar = Calendar.getInstance(nueva.fecha.setTime());
+//        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss").format(nueva.fecha);
         //impresionB += "Hora:12:45\n";
         impresionB += "------------------------------------------------\n";
         impresionB += " Concepto:\t\t\t Cantidad\n";
-//        for (DetalleOrden detalleOrden : cocina) {
-//            impresionC += "*" + detalleOrden.producto.nombre + "\t " + detalleOrden.cantidad + "\n";
-//        }
+        for (DetalleOrden detalleOrden : cocina) {
+            impresionC += "*" + detalleOrden.producto.nombre + "\t " + detalleOrden.cantidad + "\n";
+        }
         //impresionB += " Coca-cola:\t\t\t2\n";
         //impresionB += " Boquitas :\t\t\t2\n";
         impresionB += "------------------------------------------------\n";
         impresionB += "Comentarios:" + nueva.comentario + " \n\n\n";
-        impresionB += "total: $ " + nueva.total + "\n";
+//        impresionB += "Total: $ " + nueva.total + "\n";
         impresionB += "------------------------------------------------\n\n\n\n\n";
 
         printerService.printString("POS-80C", impresionB);
@@ -95,10 +96,10 @@ public class ImpresionTiketsView {
     }
 
     public void imprimirP(int idOrden) {
-        List<Parametro> datos = parametros.Obtener();
+        List<Parametro> datos = ManejadorParametros.Obtener();
         List<DetalleOrden> det = new ArrayList<DetalleOrden>();
         det = nueva.detalle;
-        
+
         impresionP += "------------------------------------------------\n";
         for (Parametro dato : datos) {
             impresionP += dato.valor + "\n";
@@ -118,7 +119,7 @@ public class ImpresionTiketsView {
 //        impresionP += " Boquitas: \t\t2\t$4.50\n";
         impresionP += "------------------------------------------------\n";
 //        impresionP += "total $:6.50\n";
-        impresionP += "" + nueva.total;
+        impresionP += "Total: $" + nueva.total;
         impresionP += "------------------------------------------------\n\n\n\n\n";
 
         byte[] cutP = new byte[]{0x1d, 'V', 1};

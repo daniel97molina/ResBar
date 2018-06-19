@@ -25,7 +25,6 @@ import sv.edu.uesocc.disenio2018.resbar.backend.entities.Orden;
 @Named(value = "manejoEstadistica")
 @ViewScoped
 public class manejoEstadistica implements Serializable {
-   ManejadorOrdenes manejadorOrden= new ManejadorOrdenes();
     private List<Orden> historico;
     private Date date1;
     private Date fecha1;
@@ -35,7 +34,7 @@ public class manejoEstadistica implements Serializable {
     public void onDateSelect(SelectEvent event) throws ParseException {
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", dateFormat.format(event.getObject())));
         fechaSeleccionada = dateFormat.format(event.getObject());
         fecha1 = dateFormat.parse(fechaSeleccionada);
