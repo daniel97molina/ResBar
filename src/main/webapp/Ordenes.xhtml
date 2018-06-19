@@ -68,7 +68,7 @@
                             </h:panelGrid>
                             <div class="mt-4">
                                 <p:commandButton value="Agregar productos" image="ui-icon-plus"  onclick="location.href = 'IngresarOrden.jsf?id=#{ordenesActivasView.registro.idOrden}&amp;agregar=true'" class="btn btn-primary btnPrincipal"/>
-                                <p:commandButton value="Imprimir cuenta" image="ui-icon-print" actionListener="#{impresionTiketsView.imprimirCB(ordenesActivasView.registro.idOrden)}" class="btn btn-primary btnPrincipal"/>
+                                <p:commandButton value="Imprimir cuenta" image="ui-icon-print" actionListener="#{impresionTiketsView.imprimirP(ordenesActivasView.registro.idOrden)}" class="btn btn-primary btnPrincipal"/>
                                 <p:commandButton value="Modificar cuenta" image="ui-icon-pencil"  class="btn btn-primary btnPrincipal" onclick="location.href = 'IngresarOrden.jsf?id=#{ordenesActivasView.registro.idOrden}'"/>
                                 <p:commandButton value="Cobrar" image="ui-icon-cart" onclick="PF('dialogoDetalles').show()"  class="btn btn-primary" >
                                     <p:ajax update=":form:datosCliente3" process="@this" listener="#{ordenesActivasView.mostrarDetalles(ordenesActivasView.registro.idOrden)}"/>
@@ -125,7 +125,7 @@
                                             </f:facet>
                                             <f:facet name="left" >
                                                 <div>
-                                                    <p:commandButton class="ml-3 btn btn-primary" value="Imprimir" image="ui-icon-print" actionListener="#{impresionTiketsView.imprimirCB(ordenesActivasView.registro.idOrden)}"/>
+                                                    <p:commandButton class="ml-3 btn btn-primary" value="Imprimir" image="ui-icon-print" actionListener="#{impresionTiketsView.imprimirP(ordenesActivasView.registro.idOrden)}"/>
                                                     <p:commandButton class="ml-3 btn btn-success" image="ui-icon-cart" value="Cobrar" onclick="PF('dialogoCobro').show();"/>
                                                 </div>
                                             </f:facet>

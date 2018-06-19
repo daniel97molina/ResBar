@@ -80,7 +80,9 @@ public class OrdenView implements Serializable {
 
         this.calcularTotalLocal();
         try {
-
+            this.orden.fecha.setHours(0);
+            this.orden.fecha.setMinutes(0);
+            this.orden.fecha.setSeconds(0);
             if (creandoNuevo) {
                 this.orden.idOrden = ManejadorOrdenes.ObtenerId();
                 this.orden.detalle.forEach(d -> {
@@ -109,6 +111,8 @@ public class OrdenView implements Serializable {
             java.util.logging.Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             crearMensaje("Error", e.getMessage(), false);
         }
+        ImpresionTiketsView imp = new ImpresionTiketsView();
+        imp.imprimirCB(this.orden.idOrden);
     }
 
     public void confirmarAgregarProductos() {

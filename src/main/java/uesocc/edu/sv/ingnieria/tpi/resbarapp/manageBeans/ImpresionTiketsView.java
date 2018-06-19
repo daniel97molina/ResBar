@@ -27,8 +27,8 @@ import uesocc.edu.sv.ingenieria.dsi.resbarapp.impresora.PrinterService;
 public class ImpresionTiketsView {
 
     PrinterService printerService = new PrinterService();
-    ManejadorOrdenes mo = new ManejadorOrdenes();
-    ManejadorParametros parametros = new ManejadorParametros();
+    //ManejadorOrdenes mo = new ManejadorOrdenes();
+    //ManejadorParametros parametros = new ManejadorParametros();
     Orden o = new Orden();
     String impresionC = "\t\tCocina\n";
     String impresionB = "\t\tBebida\n";
@@ -40,8 +40,8 @@ public class ImpresionTiketsView {
 
         byte[] cutP = new byte[]{0x1d, 'V', 1};
 
-        nueva = mo.Obtener(idOrden);
-        List<DetalleOrden> det = new ArrayList<DetalleOrden>();
+        nueva = ManejadorOrdenes.Obtener(idOrden);
+        List<DetalleOrden> det = new ArrayList<>();
         det = nueva.detalle;
 
         List<DetalleOrden> bebida = new ArrayList<>();
@@ -80,9 +80,9 @@ public class ImpresionTiketsView {
         //impresionB += "Hora:12:45\n";
         impresionB += "------------------------------------------------\n";
         impresionB += " Concepto:\t\t\t Cantidad\n";
-//        for (DetalleOrden detalleOrden : cocina) {
-//            impresionC += "*" + detalleOrden.producto.nombre + "\t " + detalleOrden.cantidad + "\n";
-//        }
+        for (DetalleOrden detalleOrden : cocina) {
+            impresionC += "*" + detalleOrden.producto.nombre + "\t " + detalleOrden.cantidad + "\n";
+        }
         //impresionB += " Coca-cola:\t\t\t2\n";
         //impresionB += " Boquitas :\t\t\t2\n";
         impresionB += "------------------------------------------------\n";
@@ -95,8 +95,8 @@ public class ImpresionTiketsView {
     }
 
     public void imprimirP(int idOrden) {
-        List<Parametro> datos = parametros.Obtener();
-        List<DetalleOrden> det = new ArrayList<DetalleOrden>();
+        List<Parametro> datos = ManejadorParametros.Obtener();
+        List<DetalleOrden> det = new ArrayList<>();
         det = nueva.detalle;
         
         impresionP += "------------------------------------------------\n";
