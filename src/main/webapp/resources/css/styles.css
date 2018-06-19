@@ -285,3 +285,8 @@ li.ui-corner-top{
 .ui-datatable tbody td{
     padding: 8px;
 }*/
+
+
+#btnInfo{
+    border-radius: 15px;
+}

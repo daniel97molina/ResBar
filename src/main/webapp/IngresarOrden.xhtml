@@ -75,7 +75,7 @@
                         <p:toolbar id="botones" styleClass="bg-override bg-secundary mt-3 pl-3 col-12" >
                             <f:facet name="right" >
                                 <p:commandButton icon="ui-icon-plus" value="Agregar Productos" update=":formProductos:prodTable" onclick="PF('dialogo').show();" styleClass="ml-3 btn btn-success "></p:commandButton>
-                                <p:commandButton icon="ui-icon-close" value="Cancelar" action="Ordenes.jsf?faces-redirect=true" styleClass="ml-3 btn btn-secondary "></p:commandButton>
+                                <p:commandButton icon="ui-icon-close" value="Cancelar" styleClass="ml-3 btn btn-secondary" onclick="location.href = 'Ordenes.jsf'"></p:commandButton>
                                 <p:commandButton icon="ui-icon-check" value="Confirmar" actionListener="#{ordenView.confirmar()}" update="formulario:grid growl" styleClass="ml-3 btn btn-primary "></p:commandButton>
                             </f:facet>
                             <f:facet name="left" >
@@ -125,7 +125,7 @@
                                 <f:facet name="right" >
                                     
                                     <p:commandButton class="btn btn-info" actionListener="#{ordenView.cancelarAgregarProductos()}" update=":formulario:tabla :formulario:botones" 
-                                                     value="Cancelar"></p:commandButton>
+                                                     value="Cancelar" onclick="PF('dialogo').hide();"></p:commandButton>
                                     <p:commandButton class="btn btn-secondary" actionListener="#{ordenView.confirmarAgregarProductos()}" update=":formulario:tabla :formulario:botones" 
                                                      onclick="PF('dialogo').hide();" value="Agregar" ></p:commandButton>
                                 </f:facet>

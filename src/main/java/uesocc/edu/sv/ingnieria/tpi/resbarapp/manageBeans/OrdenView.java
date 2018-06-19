@@ -5,6 +5,7 @@
  */
 package uesocc.edu.sv.ingnieria.tpi.resbarapp.manageBeans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -47,7 +49,7 @@ public class OrdenView implements Serializable {
     protected void init() {
         id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().getOrDefault("id", "0"));
         agregar = Boolean.parseBoolean(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().getOrDefault("agregar", "false"));
-        if(agregar){
+        if (agregar) {
             PrimeFaces.current().executeScript("PF('dialogo').show();");
         }
         if (id == 0) {
@@ -109,6 +111,10 @@ public class OrdenView implements Serializable {
             java.util.logging.Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
             crearMensaje("Error", e.getMessage(), false);
         }
+        if (!agregar) {
+            ImpresionTiketsView imp = new ImpresionTiketsView();
+            imp.imprimirCB(this.orden.idOrden, this.orden.detalle);
+        }
     }
 
     public void confirmarAgregarProductos() {
@@ -120,10 +126,14 @@ public class OrdenView implements Serializable {
             System.out.println("id:" + d.producto.idProducto + "nombre:" + d.producto.nombre);
         });
         this.calcularTotalLocal();
+        if (agregar) {
+            ImpresionTiketsView imp = new ImpresionTiketsView();
+            imp.imprimirCB(this.orden.idOrden, this.detallesAgregar);
+        }
         this.detallesAgregar.clear();
-        if(agregar){
+        if (agregar) {
             this.confirmar();
-        }else{
+        } else {
             PrimeFaces.current().executeScript("PF('dialogo').hide();");
         }
     }
@@ -139,6 +149,13 @@ public class OrdenView implements Serializable {
 
     public void cancelarAgregarProductos() {
         this.detallesAgregar.clear();
+        if (agregar) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("Ordenes.jsf");
+            } catch (IOException ex) {
+                Logger.getLogger(OrdenView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     public void reducirDetalle(int id, List<DetalleOrden> detalles) {
@@ -199,7 +216,7 @@ public class OrdenView implements Serializable {
     private void calcularTotalLocal() {
         BigDecimal dec = new BigDecimal(BigInteger.ZERO);
         for (DetalleOrden d : this.orden.detalle) {
-            dec = d.cantidad.add(dec);
+            dec = d.cantidad.multiply(d.producto.precio).add(dec);
         }
         this.orden.setTotal(dec);
     }

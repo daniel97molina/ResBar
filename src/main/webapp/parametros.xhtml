@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="resources/layout.xhtml">
+
+        <ui:define name="meta">
+            <!--Para el inicio en moviles y tablets-->
+            <link rel="manifest" href="resources/manifest.json"/>
+        </ui:define>
+
+        <ui:define name="titulo">Información de la empresa</ui:define>
+
+        <ui:define name="body" class="mx-3"> 
+            <div id="basic">
+                <h:panelGrid columns="2" style="display: inline-block; font-size: 20px; margin-left: 40px" cellpadding="10" styleClass="ui-grid">
+                    <p:outputLabel value="Empresa: " class="textTitulo"/> <p:outputLabel value="#{parametrosView.nombre.valor}"/>
+                    <p:outputLabel value="Dirección: " class="textTitulo"/> <p:outputLabel value="#{parametrosView.direccion.valor}"/>
+                    <p:outputLabel value="Teléfonos: " class="textTitulo"/> <p:outputLabel value="#{parametrosView.telefono.valor}"/>
+                    <p:outputLabel value="NIT: " class="textTitulo"/> <p:outputLabel value="#{parametrosView.nit.valor}"/>
+                    <p:outputLabel value="NRC: " class="textTitulo"/> <p:outputLabel value="#{parametrosView.nrc.valor}"/>
+                    <p:outputLabel value="Giro: " class="textTitulo"/> <p:outputLabel value="#{parametrosView.giro.valor}"/>
+                    <p:outputLabel value="Email: " class="textTitulo"/> <p:outputLabel value="#{parametrosView.email.valor}"/>
+                </h:panelGrid>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+

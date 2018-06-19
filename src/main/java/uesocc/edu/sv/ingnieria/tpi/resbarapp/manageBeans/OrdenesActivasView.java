@@ -233,6 +233,8 @@ public class OrdenesActivasView implements Serializable {
     public void inhabilitar(Orden orden){
         orden.estado = false;
         ManejadorOrdenes.Actualizar(orden);
+        ImpresionTiketsView impTicket = new ImpresionTiketsView();
+        impTicket.imprimirP(this.registro,this.valorSpinner);
     }
     
 }
